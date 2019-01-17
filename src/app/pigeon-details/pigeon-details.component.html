@@ -2,29 +2,29 @@
   <div class="container">
     <div class="details">
       <div class="entry">
-        <span>Colour: </span>
+        <span>Colour: {{selectedPigeon.color}}</span>
       </div>
       <div class="entry">
-        <span>Sex: </span>
+        <span>Sex: {{selectedPigeon.sex}}</span>
       </div>
       <div class="entry">
-        <span>Strain: </span>
+        <span>Strain: {{selectedPigeon.strain}}</span>
       </div>
       <div class="entry">
-        <span>Loft: </span>
+        <span>Loft: {{selectedPigeon.loft}}</span>
       </div>
       <div class="entry">
-        <span>Sire: </span>
+        <span>Sire: {{selectedPigeon.sire}}</span>
       </div>
       <div class="entry">
-        <span>Dam: </span>
+        <span>Dam: {{selectedPigeon.dam}}</span>
       </div>
       <div class="entry">
-        <span>Comments: </span>
+        <span>Comments: {{selectedPigeon.comments}}</span>
       </div>
     </div>
     <div class="image">
-      <img src="../../assets/billy.jpg">
+      <img src="../../assets/{{selectedPigeon.name}}.jpg" alt="">
     </div>
   </div>
 </mat-card>

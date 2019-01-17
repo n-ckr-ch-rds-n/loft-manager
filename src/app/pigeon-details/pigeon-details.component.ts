@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Pigeon} from '../pigeon';
 
 @Component({
   selector: 'app-pigeon-details',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pigeon-details.component.scss']
 })
 export class PigeonDetailsComponent implements OnInit {
-  pigeon: Pigeon;
+  @Input()
+  selectedPigeon: Pigeon;
 
   constructor() { }
 

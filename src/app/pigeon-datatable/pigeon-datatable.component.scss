@@ -1,3 +1,18 @@
+.data-container {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 15px;
+}
+
+.pigeon-table {
+  width: 50%;
+}
+
+.pigeon-details {
+  width: 50%;
+}
+
 table {
   width: 95%;
   margin: 0 auto 0 auto;
