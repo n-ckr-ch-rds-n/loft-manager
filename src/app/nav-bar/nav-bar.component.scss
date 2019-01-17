@@ -1,9 +1,15 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: baseline;
+  position: fixed;
+}
+
 .option-container {
   text-align: center;
   width: 12.5vw;
-  height: 10vh;
-  line-height: 1;
-  padding: 8px;
+  margin: auto;
 }
 
 .option-container:hover {
@@ -16,5 +22,7 @@
 }
 
 .icon {
+  position:relative;
+  top: 10px;
   height: 20px;
 }

@@ -9,6 +9,10 @@ export class NavBarComponent implements OnInit {
 
   constructor() { }
 
+  select(event) {
+    console.log(event);
+  }
+
   ngOnInit() {
   }
 

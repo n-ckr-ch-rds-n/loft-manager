@@ -20,7 +20,7 @@ const pigeons: Pigeon[] = [
 export class PigeonDatatableComponent implements OnInit {
   columnsToDisplay: string[] = ['bandNo', 'year', 'name'];
   dataSource = new MatTableDataSource(pigeons);
-  selectedPigeon: Pigeon;
+  selectedPigeon: Pigeon = pigeons[0];
 
   @ViewChild(MatSort) sort: MatSort;
 
