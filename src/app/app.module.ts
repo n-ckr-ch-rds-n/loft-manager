@@ -5,16 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatToolbar, MatTableModule, MatSortModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatToolbar,
+  MatTableModule, MatSortModule, MatCardModule } from '@angular/material';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PigeonDatatableComponent } from './pigeon-datatable/pigeon-datatable.component';
+import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     MatToolbar,
-    PigeonDatatableComponent
+    PigeonDatatableComponent,
+    PigeonDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { PigeonDatatableComponent } from './pigeon-datatable/pigeon-datatable.co
     MatButtonModule,
     MatCheckboxModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
