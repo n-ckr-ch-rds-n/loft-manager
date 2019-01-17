@@ -5,11 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatToolbar,
-  MatTableModule, MatSortModule, MatCardModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatToolbar,
+  MatTableModule,
+  MatSortModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatOptionModule,
+  MatSelectModule, MatInputModule
+} from '@angular/material';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PigeonDatatableComponent } from './pigeon-datatable/pigeon-datatable.component';
 import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.component';
+import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +29,10 @@ import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.componen
     NavBarComponent,
     MatToolbar,
     PigeonDatatableComponent,
-    PigeonDetailsComponent
+    PigeonDetailsComponent,
+    AddPigeonComponent
   ],
+  entryComponents: [AddPigeonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,9 +41,16 @@ import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.componen
     MatCheckboxModule,
     MatTableModule,
     MatSortModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
