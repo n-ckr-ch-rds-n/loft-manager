@@ -1,0 +1,19 @@
+.option-container {
+  text-align: center;
+  width: 12.5vw;
+  line-height: 1;
+  padding: 8px;
+}
+
+.option-container:hover {
+  background-color: darkgrey;
+  cursor: pointer;
+}
+
+.option {
+  font-size: medium;
+}
+
+.icon {
+  height: 20px;
+}
