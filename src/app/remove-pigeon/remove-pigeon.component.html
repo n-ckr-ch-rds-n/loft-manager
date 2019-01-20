@@ -1,12 +1,17 @@
 <h1 mat-dialog-title>Remove Pigeon</h1>
 <div mat-dialog-content>
-  <p>
-    Are you sure you want to remove {{data.selectedPigeon.name}} ({{data.selectedPigeon.bandNo}}) from the database?
-  </p>
-
+  <div class="remove_warning">
+    <img class="warning" src="../../assets/warning.png">
+    <p>
+      Are you sure you want to remove {{data.selectedPigeon.name}} ({{data.selectedPigeon.bandNo}}) from the database?
+    </p>
+  </div>
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="'Pigeons!'" cdkFocusInitial>Remove</button>
+<div class="buttons">
+  <div mat-dialog-actions>
+    <button mat-flat-button color="accent" (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="'Pigeons!'" cdkFocusInitial>Remove</button>
+  </div>
 </div>
+

@@ -1,0 +1,28 @@
+.mat-dialog-title {
+  text-align: center;
+}
+
+.remove_warning {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+
+.warning {
+  width: 15%;
+  margin-right: 20px;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.mat-dialog-actions {
+  display: inline-block;
+}
+
+.mat-flat-button {
+  margin: 10px;
+}

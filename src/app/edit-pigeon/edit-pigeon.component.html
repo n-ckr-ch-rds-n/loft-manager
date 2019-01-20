@@ -1,22 +1,24 @@
-<h1 mat-dialog-title>Add Pigeon</h1>
+<h1 mat-dialog-title>Edit Pigeon</h1>
 <div mat-dialog-content>
+
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Name">
+      <input matInput placeholder="Name">{{data.selectedPigeon.name}}
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
+      {{data.selectedPigeon.bandNo}}
     </mat-form-field>
   </div>
 
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Colour">
+      <input matInput placeholder="Colour">{{data.selectedPigeon.color}}
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="Sex">
+      <mat-select [value]="data.selectedPigeon.sex" placeholder="Sex">
         <mat-option value="cock">Cock</mat-option>
         <mat-option value="henn">Hen</mat-option>
       </mat-select>
@@ -25,32 +27,31 @@
 
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Strain">
+      <input matInput placeholder="Strain">{{data.selectedPigeon.strain}}
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Loft">
-    </mat-form-field>
-  </div>
-
-  <div class="form-row">
-    <mat-form-field>
-      <input matInput placeholder="Sire">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Dam">
+      <input matInput placeholder="Loft">{{data.selectedPigeon.loft}}
     </mat-form-field>
   </div>
 
   <div class="form-row">
     <mat-form-field>
-      <textarea matInput placeholder="Comments"></textarea>
+      <input matInput placeholder="Sire">{{data.selectedPigeon.sire}}
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Dam">{{data.selectedPigeon.sire}}
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <mat-form-field>
+      <textarea matInput placeholder="Comments"></textarea>{{data.selectedPigeon.comments}}
     </mat-form-field>
   </div>
 
 </div>
-
 <div class="buttons">
   <div mat-dialog-actions>
     <button mat-flat-button color="accent" (click)="onNoClick()">Cancel</button>

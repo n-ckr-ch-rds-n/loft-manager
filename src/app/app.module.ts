@@ -23,6 +23,7 @@ import { PigeonDatatableComponent } from './pigeon-datatable/pigeon-datatable.co
 import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.component';
 import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
 import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
+import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,14 @@ import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
     PigeonDatatableComponent,
     PigeonDetailsComponent,
     AddPigeonComponent,
-    RemovePigeonComponent
+    RemovePigeonComponent,
+    EditPigeonComponent
   ],
-  entryComponents: [AddPigeonComponent, RemovePigeonComponent],
+  entryComponents: [
+    AddPigeonComponent,
+    RemovePigeonComponent,
+    EditPigeonComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
