@@ -8,11 +8,14 @@ import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+  navBarOptions = {
+    add: AddPigeonComponent
+  };
 
   constructor(public dialog: MatDialog) { }
 
   select(eventType) {
-    const dialogRef = this.dialog.open(AddPigeonComponent, {
+    const dialogRef = this.dialog.open(this.navBarOptions[eventType], {
       width: 'auto',
     });
 
