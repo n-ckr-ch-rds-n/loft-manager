@@ -3,6 +3,10 @@ mat-card {
   margin: 0 auto 0 auto;
 }
 
+.mat-card {
+  box-shadow: none;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -11,6 +15,7 @@ mat-card {
 
 .details {
   width: 100%;
+  box-shadow: none;
 }
 .entry {
   margin-bottom: 10px;

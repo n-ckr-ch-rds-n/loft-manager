@@ -6,7 +6,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Band Number">
+      <input matInput placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
     </mat-form-field>
   </div>
 
@@ -17,8 +17,8 @@
 
     <mat-form-field>
       <mat-select placeholder="Sex">
-        <mat-option value="sex">Cock</mat-option>
-        <mat-option value="sex">Hen</mat-option>
+        <mat-option value="cock">Cock</mat-option>
+        <mat-option value="henn">Hen</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
