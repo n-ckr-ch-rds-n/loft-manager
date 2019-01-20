@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
+import {RemovePigeonComponent} from '../remove-pigeon/remove-pigeon.component';
+import {Pigeon} from '../pigeon';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,14 +11,19 @@ import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 })
 export class NavBarComponent implements OnInit {
   navBarOptions = {
-    add: AddPigeonComponent
+    add: AddPigeonComponent,
+    remove: RemovePigeonComponent
   };
+
+  @Input()
+  selectedPigeon: Pigeon;
 
   constructor(public dialog: MatDialog) { }
 
-  select(eventType) {
+  select(eventType, selectedPigeon: Pigeon) {
     const dialogRef = this.dialog.open(this.navBarOptions[eventType], {
       width: 'auto',
+      data: { selectedPigeon: this.selectedPigeon }
     });
 
     dialogRef.afterClosed().subscribe(result => {

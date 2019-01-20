@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Remove Pigeon</h1>
+<div mat-dialog-content>
+  <p>
+    Are you sure you want to remove {{data.selectedPigeon.name}} ({{data.selectedPigeon.bandNo}}) from the database?
+  </p>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="'Pigeons!'" cdkFocusInitial>Remove</button>
+</div>

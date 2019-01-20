@@ -22,6 +22,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PigeonDatatableComponent } from './pigeon-datatable/pigeon-datatable.component';
 import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.component';
 import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
+import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
     MatToolbar,
     PigeonDatatableComponent,
     PigeonDetailsComponent,
-    AddPigeonComponent
+    AddPigeonComponent,
+    RemovePigeonComponent
   ],
-  entryComponents: [AddPigeonComponent],
+  entryComponents: [AddPigeonComponent, RemovePigeonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
