@@ -26,7 +26,6 @@ export interface AllPigeonsQueryResponse {
   loading: boolean;
 }
 
-
 export const CREATE_PIGEON_MUTATION = gql`
   mutation CreatePigeonMutation(
   $active: Boolean,
@@ -75,6 +74,60 @@ export const CREATE_PIGEON_MUTATION = gql`
 `;
 
 export interface CreatePigeonMutationResponse {
+  createPigeon: Pigeon;
+  loading: boolean;
+}
+
+export const UPDATE_PIGEON_MUTATION = gql`
+  mutation UpdatePigeonMutation(
+  $id: ID!
+  $active: Boolean,
+  $bandNo: String!,
+  $color: String,
+  $comments: String,
+  $dam: String,
+  $imageUrl: String,
+  $loft: String,
+  $name: String,
+  $sex: String,
+  $sire: String,
+  $strain: String,
+  $year: Int
+  ) {
+    updatePigeon(
+      id: $id,
+      active: $active,
+      bandNo: $bandNo
+      color: $color
+      comments: $comments,
+      dam: $dam,
+      imageUrl: $imageUrl,
+      loft: $loft,
+      name: $name,
+      sex: $sex,
+      sire: $sire,
+      strain: $strain,
+      year: $year
+    )
+    {
+      id
+      active
+      bandNo
+      color
+      comments
+      dam
+      imageUrl
+      loft
+      name
+      sex
+      sire
+      strain
+      year
+    }
+  }
+`;
+
+export interface UpdatePigeonMutationResponse {
   createPigeon: Pigeon;
   loading: boolean;
 }
