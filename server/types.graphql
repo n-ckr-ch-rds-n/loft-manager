@@ -1,0 +1,28 @@
+# The following types define the data model of the example service
+# based on which the GraphQL API is generated
+
+type User @model {
+  id: ID! @isUnique
+  name: String
+  dateOfBirth: DateTime
+
+  # Uncomment below - you can declare relations between models like this
+
+  # posts: [Post!]! @relation(name: "UserPosts")
+}
+
+type Pigeon @model {
+  id: ID! @isUnique
+  bandNo: String!
+  year: Int!
+  name: String!
+  color: String!
+  sex: String!
+  strain: String!
+  loft: String!
+  sire: String!
+  dam: String!
+  active: Boolean!
+  comments: String!
+  imageUrl: String
+}
