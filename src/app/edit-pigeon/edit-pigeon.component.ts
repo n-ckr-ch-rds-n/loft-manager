@@ -17,4 +17,7 @@ export class EditPigeonComponent {
     this.dialogRef.close();
   }
 
+  editPigeon() {
+    console.log(this.data.selectedPigeon);
+  }
 }

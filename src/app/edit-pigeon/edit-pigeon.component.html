@@ -3,22 +3,21 @@
 
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Name">{{data.selectedPigeon.name}}
+      <input matInput [(ngModel)]="data.selectedPigeon.name" placeholder="Name">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
-      {{data.selectedPigeon.bandNo}}
+      <input matInput [(ngModel)]="data.selectedPigeon.bandNo" placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
     </mat-form-field>
   </div>
 
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Colour">{{data.selectedPigeon.color}}
+      <input matInput [(ngModel)]="data.selectedPigeon.color" placeholder="Colour">
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select [value]="data.selectedPigeon.sex" placeholder="Sex">
+      <mat-select [(ngModel)]="data.selectedPigeon.sex" placeholder="Sex">
         <mat-option value="cock">Cock</mat-option>
         <mat-option value="henn">Hen</mat-option>
       </mat-select>
@@ -27,27 +26,27 @@
 
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Strain">{{data.selectedPigeon.strain}}
+      <input matInput [(ngModel)]="data.selectedPigeon.strain" placeholder="Strain">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Loft">{{data.selectedPigeon.loft}}
-    </mat-form-field>
-  </div>
-
-  <div class="form-row">
-    <mat-form-field>
-      <input matInput placeholder="Sire">{{data.selectedPigeon.sire}}
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Dam">{{data.selectedPigeon.sire}}
+      <input matInput [(ngModel)]="data.selectedPigeon.loft" placeholder="Loft">
     </mat-form-field>
   </div>
 
   <div class="form-row">
     <mat-form-field>
-      <textarea matInput placeholder="Comments"></textarea>{{data.selectedPigeon.comments}}
+      <input matInput [(ngModel)]="data.selectedPigeon.sire" placeholder="Sire">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.selectedPigeon.dam" placeholder="Dam">
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="data.selectedPigeon.comments" placeholder="Comments"></textarea>
     </mat-form-field>
   </div>
 
@@ -55,6 +54,6 @@
 <div class="buttons">
   <div mat-dialog-actions>
     <button mat-flat-button color="accent" (click)="onNoClick()">Cancel</button>
-    <button mat-flat-button color="primary" [mat-dialog-close]="'Pigeons!'" cdkFocusInitial>Save</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="'Pigeons!'" (click)="editPigeon()" cdkFocusInitial>Save</button>
   </div>
 </div>
