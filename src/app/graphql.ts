@@ -78,3 +78,19 @@ export interface CreatePigeonMutationResponse {
   createPigeon: Pigeon;
   loading: boolean;
 }
+
+export const DELETE_PIGEON_MUTATION = gql`
+  mutation DeletePigeonMutation(
+    $id: ID!
+  ) {
+    deletePigeon(
+      id: $id
+    ) {
+      name
+    }
+  }
+`;
+
+export interface DeletePigeonMutationResponse {
+  deletePigeon: string;
+}

@@ -1,4 +1,5 @@
 export class Pigeon {
+  id: string;
   bandNo: string;
   year: number;
   name: string;

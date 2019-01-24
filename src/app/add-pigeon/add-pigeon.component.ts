@@ -10,6 +10,7 @@ import {CREATE_PIGEON_MUTATION, CreatePigeonMutationResponse} from '../graphql';
   templateUrl: './add-pigeon.component.html',
   styleUrls: ['./add-pigeon.component.scss']
 })
+
 export class AddPigeonComponent {
   pigeon: Pigeon = defaultPigeon;
 
@@ -29,8 +30,7 @@ export class AddPigeonComponent {
         ...this.pigeon
       }
     }).subscribe(response => {
-
+      this.pigeon = defaultPigeon;
     });
-    this.pigeon = defaultPigeon;
   }
 }
