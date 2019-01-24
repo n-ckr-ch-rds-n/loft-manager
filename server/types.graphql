@@ -14,15 +14,15 @@ type User @model {
 type Pigeon @model {
   id: ID! @isUnique
   bandNo: String!
-  year: Int!
-  name: String!
-  color: String!
-  sex: String!
-  strain: String!
-  loft: String!
-  sire: String!
-  dam: String!
-  active: Boolean!
-  comments: String!
+  year: Int
+  name: String
+  color: String
+  sex: String
+  strain: String
+  loft: String
+  sire: String
+  dam: String
+  active: Boolean
+  comments: String
   imageUrl: String
 }

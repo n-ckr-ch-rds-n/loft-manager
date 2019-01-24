@@ -24,6 +24,8 @@ import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.componen
 import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
 import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
 import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
+import {GraphQLModule} from './apollo.config';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
   ],
   imports: [
     BrowserModule,
+    GraphQLModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -54,7 +57,8 @@ import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

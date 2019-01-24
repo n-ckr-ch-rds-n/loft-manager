@@ -2,21 +2,21 @@
 <div mat-dialog-content>
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Name">
+      <input matInput [(ngModel)]="pigeon.name" placeholder="Name">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
+      <input matInput [(ngModel)]="pigeon.bandNo" placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
     </mat-form-field>
   </div>
 
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Colour">
+      <input matInput [(ngModel)]="pigeon.color" placeholder="Colour">
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="Sex">
+      <mat-select [(ngModel)]="pigeon.sex" placeholder="Sex">
         <mat-option value="cock">Cock</mat-option>
         <mat-option value="henn">Hen</mat-option>
       </mat-select>
@@ -25,27 +25,27 @@
 
   <div class="form-row">
     <mat-form-field>
-      <input matInput placeholder="Strain">
+      <input matInput [(ngModel)]="pigeon.strain" placeholder="Strain">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Loft">
-    </mat-form-field>
-  </div>
-
-  <div class="form-row">
-    <mat-form-field>
-      <input matInput placeholder="Sire">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Dam">
+      <input matInput [(ngModel)]="pigeon.loft" placeholder="Loft">
     </mat-form-field>
   </div>
 
   <div class="form-row">
     <mat-form-field>
-      <textarea matInput placeholder="Comments"></textarea>
+      <input matInput [(ngModel)]="pigeon.sire" placeholder="Sire">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="pigeon.dam" placeholder="Dam">
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="pigeon.comments" placeholder="Comments"></textarea>
     </mat-form-field>
   </div>
 
@@ -54,6 +54,6 @@
 <div class="buttons">
   <div mat-dialog-actions>
     <button mat-flat-button color="accent" (click)="onNoClick()">Cancel</button>
-    <button mat-flat-button color="primary" [mat-dialog-close]="'Pigeons!'" cdkFocusInitial>Save</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="'Pigeons!'" (click)="savePigeon()" cdkFocusInitial>Save</button>
   </div>
 </div>

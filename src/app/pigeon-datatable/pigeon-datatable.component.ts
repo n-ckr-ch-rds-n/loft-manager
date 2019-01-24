@@ -2,14 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import {Pigeon} from '../pigeon';
 
-const pigeons: Pigeon[] = [
-  {bandNo: '123/2018', year: 2018, name: 'Billy', color: 'blue',
-    sex: 'cock', strain: 'alabaster', loft: 'Greenaway', sire: '145',
-    dam: 'trew', active: true, comments: 'yo yo this is a cool pigeon'},
-  {bandNo: '123/2018', year: 2018, name: 'Abe', color: 'blue',
-    sex: 'cock', strain: 'alabaster', loft: 'Parkins', sire: '145',
-    dam: 'trew', active: true, comments: 'abe is cool too'},
-];
+import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
+import {Apollo} from 'apollo-angular';
 
 @Component({
   selector: 'app-pigeon-datatable',
@@ -18,20 +12,30 @@ const pigeons: Pigeon[] = [
 })
 
 export class PigeonDatatableComponent implements OnInit {
-  columnsToDisplay: string[] = ['bandNo', 'year', 'name'];
-  dataSource = new MatTableDataSource(pigeons);
-  selectedPigeon: Pigeon = pigeons[0];
+  columnsToDisplay: Array<keyof Pigeon> = ['bandNo', 'year', 'name'];
+  allPigeons: Pigeon[] = [];
+  dataSource: MatTableDataSource<Pigeon>;
+  selectedPigeon: Pigeon;
+  loading = true;
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(private apollo: Apollo) { }
 
   select(selectedPigeon: Pigeon) {
     this.selectedPigeon = selectedPigeon;
   }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.apollo.watchQuery<AllPigeonsQueryResponse>({
+      query: ALL_PIGEONS_QUERY
+    }).valueChanges.subscribe((response) => {
+      this.allPigeons = response.data.allPigeons;
+      this.dataSource = new MatTableDataSource(this.allPigeons);
+      this.loading = response.data.loading;
+      this.selectedPigeon = this.allPigeons[0];
+      this.dataSource.sort = this.sort;
+    });
   }
 
 }

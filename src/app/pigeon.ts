@@ -1,4 +1,4 @@
-export interface Pigeon {
+export class Pigeon {
   bandNo: string;
   year: number;
   name: string;
@@ -10,4 +10,5 @@ export interface Pigeon {
   dam: string;
   active: boolean;
   comments: string;
+  imageUrl: string;
 }

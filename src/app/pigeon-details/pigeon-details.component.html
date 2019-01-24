@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="selectedPigeon">
   <div class="container">
     <div class="details">
       <div class="entry">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="image">
-      <img src="../../assets/{{selectedPigeon.name}}.jpg" alt="">
+      <img src="../../assets/Billy.jpg" alt="">
     </div>
   </div>
 </mat-card>

@@ -12,7 +12,7 @@ import {EditPigeonComponent} from '../edit-pigeon/edit-pigeon.component';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  navBarOptions = {
+  navBarOptions: Record<string, any> = {
     [NavbarEvent.add]: AddPigeonComponent,
     [NavbarEvent.remove]: RemovePigeonComponent,
     [NavbarEvent.edit]: EditPigeonComponent
