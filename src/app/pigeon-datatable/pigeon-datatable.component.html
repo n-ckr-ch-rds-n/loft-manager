@@ -12,10 +12,14 @@
       </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let pigeon"> {{pigeon.name}}</td>
+        <td mat-cell *matCellDef="let pigeon">
+          {{pigeon.name}}
+        </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr class="pigeon" mat-row *matRowDef="let selectedPigeon; columns: columnsToDisplay" (click)="select(selectedPigeon)"></tr>
+      <tr #row class="pigeon" mat-row *matRowDef="let pigeon; columns: columnsToDisplay; let entry"
+          [ngClass]="{'selected-pigeon': pigeon.selected, 'unselected-pigeon': !pigeon.selected}"
+          (click)="select(pigeon)"></tr>
     </table>
   </div>
   <div class="pigeon-details">

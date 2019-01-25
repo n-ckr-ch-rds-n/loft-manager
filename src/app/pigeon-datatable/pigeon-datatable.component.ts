@@ -5,6 +5,10 @@ import {Pigeon} from '../pigeon';
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
 
+export interface SelectablePigeon extends Pigeon {
+  selected: boolean;
+}
+
 @Component({
   selector: 'app-pigeon-datatable',
   templateUrl: './pigeon-datatable.component.html',
@@ -15,15 +19,18 @@ export class PigeonDatatableComponent implements OnInit {
   columnsToDisplay: Array<keyof Pigeon> = ['bandNo', 'year', 'name'];
   allPigeons: Pigeon[] = [];
   dataSource: MatTableDataSource<Pigeon>;
-  selectedPigeon: Pigeon;
+  selectedPigeon: SelectablePigeon;
   loading = true;
+  selectablePigeons: SelectablePigeon[];
 
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private apollo: Apollo) { }
 
-  select(selectedPigeon: Pigeon) {
+  select(selectedPigeon: SelectablePigeon) {
+    this.selectedPigeon.selected = false;
     this.selectedPigeon = selectedPigeon;
+    this.selectedPigeon.selected = true;
   }
 
   ngOnInit() {
@@ -31,9 +38,11 @@ export class PigeonDatatableComponent implements OnInit {
       query: ALL_PIGEONS_QUERY
     }).valueChanges.subscribe((response) => {
       this.allPigeons = response.data.allPigeons;
-      this.dataSource = new MatTableDataSource(this.allPigeons);
+      this.selectablePigeons = [...this.allPigeons].map(pigeon => ({...pigeon, selected: false}));
+      this.dataSource = new MatTableDataSource(this.selectablePigeons);
       this.loading = response.data.loading;
-      this.selectedPigeon = this.allPigeons[0];
+      this.selectedPigeon = this.selectablePigeons[0];
+      this.selectedPigeon.selected = true;
       this.dataSource.sort = this.sort;
     });
   }

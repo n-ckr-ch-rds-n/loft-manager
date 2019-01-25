@@ -29,7 +29,7 @@ export class AddPigeonComponent {
       variables: {
         ...this.pigeon
       }
-    }).subscribe<CreatePigeonMutationResponse>(response => {
+    }).subscribe(response => {
       this.pigeon = defaultPigeon;
     });
   }

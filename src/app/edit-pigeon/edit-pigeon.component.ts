@@ -26,7 +26,7 @@ export class EditPigeonComponent {
       variables: {
         ...this.data.selectedPigeon
       }
-    }).subscribe<UpdatePigeonMutationResponse>(response => {
+    }).subscribe(response => {
       console.log(`${response.data.updatePigeon.name} updated!`);
     });
   }
