@@ -4,6 +4,7 @@ import {Pigeon} from '../pigeon';
 
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
+import {Router} from '@angular/router';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -25,12 +26,14 @@ export class PigeonDatatableComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo,
+              public router: Router) { }
 
   select(selectedPigeon: SelectablePigeon) {
     this.selectedPigeon.selected = false;
     this.selectedPigeon = selectedPigeon;
     this.selectedPigeon.selected = true;
+    this.router.navigate([`/pigeon/{${this.selectedPigeon.id}`]);
   }
 
   ngOnInit() {
