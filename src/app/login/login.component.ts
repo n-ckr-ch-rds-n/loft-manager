@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Apollo} from 'apollo-angular';
 import {CREATE_USER_MUTATION} from '../graphql';
+import {AuthService} from '../services/auth.service';
 // import {AUTH_TOKEN, USER_ID} from '../constants';
 
 export enum UserDetails {
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   name = '';
 
   constructor(private router: Router,
-              private apollo: Apollo) {
+              private apollo: Apollo,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
       this.addToLocalStorage(result.data.createUser.id);
       console.log(`${result.data.createUser.name} is signed up`);
     });
+    this.auth.login();
   }
 
   addToLocalStorage(id: string) {

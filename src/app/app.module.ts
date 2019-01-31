@@ -27,6 +27,7 @@ import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
 import {GraphQLModule} from './apollo.config';
 import {FormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { LoginComponent } from './login/login.component';
     FormsModule
   ],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
