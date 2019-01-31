@@ -26,6 +26,7 @@ import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
 import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
 import {GraphQLModule} from './apollo.config';
 import {FormsModule} from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {FormsModule} from '@angular/forms';
     PigeonDetailsComponent,
     AddPigeonComponent,
     RemovePigeonComponent,
-    EditPigeonComponent
+    EditPigeonComponent,
+    LoginComponent
   ],
   entryComponents: [
     AddPigeonComponent,
