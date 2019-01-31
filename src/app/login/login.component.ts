@@ -5,6 +5,10 @@ import {Apollo} from 'apollo-angular';
 import {CREATE_USER_MUTATION} from '../graphql';
 // import {AUTH_TOKEN, USER_ID} from '../constants';
 
+export enum UserDetails {
+  Id = 'user_id'
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,8 +41,13 @@ export class LoginComponent implements OnInit {
         name: this.name
       }
     }).subscribe((result) => {
-      console.log(result);
+      this.addToLocalStorage(result.data.createUser.id);
+      console.log(`${result.data.createUser.name} is signed up`);
     });
+  }
+
+  addToLocalStorage(id: string) {
+    localStorage.setItem(UserDetails.Id, id);
   }
 
   // confirm() {
