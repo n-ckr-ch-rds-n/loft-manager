@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private apollo: Apollo,
               private auth: AuthService) {
+    auth.handleAuthentication();
   }
 
   ngOnInit() {
@@ -52,49 +53,5 @@ export class LoginComponent implements OnInit {
   addToLocalStorage(id: string) {
     localStorage.setItem(UserDetails.Id, id);
   }
-
-  // confirm() {
-  //   if (this.login) {
-  //     this.apollo.mutate<SigninUserMutationResponse>({
-  //       mutation: SIGNIN_USER_MUTATION,
-  //       variables: {
-  //         email: this.email,
-  //         password: this.password,
-  //         name: this.name
-  //       }
-  //     }).subscribe((result) => {
-  //       const id = result.data.signinUser.user.id;
-  //       const token = result.data.signinUser.token;
-  //       this.saveUserData(id, token);
-  //
-  //       this.router.navigate(['/pigeon']);
-  //     }, (error) => {
-  //       alert(error);
-  //     });
-  //   } else {
-  //     this.apollo.mutate<CreateUserMutationResponse>({
-  //       mutation: CREATE_USER_MUTATION,
-  //       variables: {
-  //         name: this.name,
-  //         email: this.email,
-  //         password: this.password
-  //       }
-  //     }).subscribe((result) => {
-  //       const id = result.data.signinUser.user.id;
-  //       const token = result.data.signinUser.token;
-  //       this.saveUserData(id, token);
-  //
-  //       this.router.navigate(['/pigeon']);
-  //     }, (error) => {
-  //       alert(error);
-  //     });
-  //   }
-  // }
-
-  // saveUserData(id: string, token: string): void {
-  //   localStorage.setItem(USER_ID, id);
-  //   localStorage.setItem(AUTH_TOKEN, token);
-  //   this.authService.setUserId(id);
-  // }
 
 }

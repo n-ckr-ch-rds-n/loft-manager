@@ -5,6 +5,7 @@ import {Pigeon} from '../pigeon';
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -27,7 +28,8 @@ export class PigeonDatatableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private apollo: Apollo,
-              public router: Router) { }
+              public router: Router,
+              private auth: AuthService) { }
 
   select(selectedPigeon: SelectablePigeon) {
     this.selectedPigeon.selected = false;
@@ -37,6 +39,7 @@ export class PigeonDatatableComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.auth.isAuthenticated());
     this.apollo.watchQuery<AllPigeonsQueryResponse>({
       query: ALL_PIGEONS_QUERY
     }).valueChanges.subscribe((response) => {
