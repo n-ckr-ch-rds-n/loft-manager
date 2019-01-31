@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import {Pigeon} from './pigeon';
+import {User} from './user';
 
 export const ALL_PIGEONS_QUERY = gql`
   query AllPigeonsQuery {
@@ -146,4 +147,22 @@ export const DELETE_PIGEON_MUTATION = gql`
 
 export interface DeletePigeonMutationResponse {
   deletePigeon: string;
+}
+
+export const CREATE_USER_MUTATION = gql`
+  mutation CreateUserMutation(
+    $name: String!
+  ) {
+    createUser(
+      name: $name
+    ) {
+      id
+      name
+    }
+  }
+`;
+
+export interface CreateUserMutationResponse {
+  createUser: User;
+  loading: boolean;
 }

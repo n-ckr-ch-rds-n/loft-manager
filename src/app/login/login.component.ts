@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 import {Apollo} from 'apollo-angular';
+import {CREATE_USER_MUTATION} from '../graphql';
 // import {AUTH_TOKEN, USER_ID} from '../constants';
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   password = '';
   name = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private apollo: Apollo) {
   }
 
   ngOnInit() {
@@ -29,7 +31,14 @@ export class LoginComponent implements OnInit {
   }
 
   signUpUser() {
-    console.log('user signed up');
+    this.apollo.mutate({
+      mutation: CREATE_USER_MUTATION,
+      variables: {
+        name: this.name
+      }
+    }).subscribe((result) => {
+      console.log(result);
+    });
   }
 
   // confirm() {
