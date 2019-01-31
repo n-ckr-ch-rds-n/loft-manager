@@ -1,6 +1,6 @@
 <h4 class="login-or-signup">{{login ? "Log in" : "Sign up"}}</h4>
 <div class="login-form">
-  <mat-form-field>
+  <mat-form-field *ngIf="!login">
     <input matInput [(ngModel)]="name" placeholder="Name">
   </mat-form-field>
   <mat-form-field>

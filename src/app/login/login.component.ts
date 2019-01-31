@@ -10,7 +10,7 @@ import {Apollo} from 'apollo-angular';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  login = true;
+  login = false;
   email = '';
   password = '';
   name = '';
