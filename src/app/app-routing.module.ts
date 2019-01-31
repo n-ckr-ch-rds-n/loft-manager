@@ -9,6 +9,10 @@ const routes: Routes = [
     component: PigeonDatatableComponent
   },
   {
+    path: 'pigeon',
+    component: PigeonDatatableComponent
+  },
+  {
     path: 'login',
     component: LoginComponent
   }
