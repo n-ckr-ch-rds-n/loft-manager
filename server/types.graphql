@@ -4,7 +4,7 @@
 type User @model {
   id: ID! @isUnique
   name: String
-  dateOfBirth: DateTime
+  pigeons: [Pigeon!]! @relation(name: "UserPigeons")
 
   # Uncomment below - you can declare relations between models like this
 
@@ -25,4 +25,5 @@ type Pigeon @model {
   active: Boolean
   comments: String
   imageUrl: String
+  user: User @relation(name: "UserPigeons")
 }

@@ -22,8 +22,14 @@ export class LoginComponent implements OnInit {
   }
 
   confirm() {
-    console.log(this.email + this.password + this.name);
+    if (!this.login) {
+      this.signUpUser();
+    }
     this.router.navigate(['pigeon']);
+  }
+
+  signUpUser() {
+    console.log('user signed up');
   }
 
   // confirm() {
