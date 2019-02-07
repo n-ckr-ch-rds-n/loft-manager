@@ -1,10 +1,7 @@
-<h1 mat-dialog-title>Profile</h1>
+<h1 mat-dialog-title>{{data.selectedPigeon.name}}</h1>
 <div mat-dialog-content>
   <div class="container">
     <div class="details">
-      <div class="entry">
-        <span>Name: {{data.selectedPigeon.name}}</span>
-      </div>
       <div class="entry">
         <span>Colour: {{data.selectedPigeon.color}}</span>
       </div>
@@ -33,7 +30,7 @@
   </div>
 </div>
 <div class="button-container">
-  <button mat-stroked-button color="accent" (click)="onNoClick()">Cancel</button>
-  <button mat-stroked-button color="primary">Update</button>
-  <button mat-stroked-button color="warn">Delete</button>
+  <button mat-stroked-button color="accent" (click)="onNoClick()">Exit</button>
+  <button mat-stroked-button color="primary" (click)="select('edit')">Update</button>
+  <button mat-stroked-button color="warn" (click)="select('remove')">Delete</button>
 </div>

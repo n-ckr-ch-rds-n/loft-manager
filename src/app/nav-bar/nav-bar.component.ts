@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 import {RemovePigeonComponent} from '../remove-pigeon/remove-pigeon.component';
 import {Pigeon} from '../pigeon';
-import {NavbarEvent} from '../navbar.event';
+import {NavEvent} from '../nav.event';
 import {EditPigeonComponent} from '../edit-pigeon/edit-pigeon.component';
 import {AuthService} from '../services/auth.service';
 
@@ -14,9 +14,9 @@ import {AuthService} from '../services/auth.service';
 })
 export class NavBarComponent implements OnInit {
   navBarOptions: Record<string, any> = {
-    [NavbarEvent.add]: AddPigeonComponent,
-    [NavbarEvent.remove]: RemovePigeonComponent,
-    [NavbarEvent.edit]: EditPigeonComponent
+    [NavEvent.add]: AddPigeonComponent,
+    [NavEvent.remove]: RemovePigeonComponent,
+    [NavEvent.edit]: EditPigeonComponent
   };
 
   @Input()
@@ -25,7 +25,7 @@ export class NavBarComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private auth: AuthService) { }
 
-  select(eventType: NavbarEvent) {
+  select(eventType: NavEvent) {
     const dialogRef = this.dialog.open(this.navBarOptions[eventType], {
       width: 'auto',
       data: { selectedPigeon: this.selectedPigeon }
