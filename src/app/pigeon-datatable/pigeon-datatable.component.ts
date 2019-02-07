@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {Pigeon} from '../pigeon';
-
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
-import {NavbarEvent} from '../navbar.event';
 import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
+import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -63,4 +62,12 @@ export class PigeonDatatableComponent implements OnInit {
     });
   }
 
+  addPigeon() {
+    const dialogRef = this.dialog.open(AddPigeonComponent, {
+      width: 'auto',
+      data: { selectedPigeon: this.selectedPigeon }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {});
+  }
 }

@@ -1,6 +1,7 @@
 <app-nav-bar [selectedPigeon]="selectedPigeon"></app-nav-bar>
 <div class="data-container">
   <div class="pigeon-table">
+    <button mat-flat-button color="primary" class="add-pigeon" (click)="addPigeon()">Add Pigeon</button>
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
       <ng-container matColumnDef="bandNo">
         <th mat-header-cell *matHeaderCellDef> Band no. </th>
