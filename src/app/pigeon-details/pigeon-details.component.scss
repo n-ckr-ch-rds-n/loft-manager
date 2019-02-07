@@ -25,3 +25,9 @@ img {
   width: 95%;
   margin: 0 auto 0 auto;
 }
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
