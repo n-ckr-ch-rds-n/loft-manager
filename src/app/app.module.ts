@@ -44,7 +44,8 @@ import {AuthService} from './services/auth.service';
   entryComponents: [
     AddPigeonComponent,
     RemovePigeonComponent,
-    EditPigeonComponent
+    EditPigeonComponent,
+    PigeonDetailsComponent
   ],
   imports: [
     BrowserModule,

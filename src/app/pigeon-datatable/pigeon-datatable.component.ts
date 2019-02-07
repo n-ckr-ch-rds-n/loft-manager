@@ -1,11 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {Pigeon} from '../pigeon';
 
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
+import {NavbarEvent} from '../navbar.event';
+import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -29,7 +31,8 @@ export class PigeonDatatableComponent implements OnInit {
 
   constructor(private apollo: Apollo,
               public router: Router,
-              public auth: AuthService) {
+              private auth: AuthService,
+              public dialog: MatDialog) {
     auth.handleAuthentication();
   }
 
@@ -38,6 +41,12 @@ export class PigeonDatatableComponent implements OnInit {
     this.selectedPigeon = selectedPigeon;
     this.selectedPigeon.selected = true;
     this.router.navigate([`/pigeon/{${this.selectedPigeon.id}`]);
+    const dialogRef = this.dialog.open(PigeonDetailsComponent, {
+      width: 'auto',
+      data: { selectedPigeon: this.selectedPigeon }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   ngOnInit() {
