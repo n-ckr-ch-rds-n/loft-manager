@@ -29,7 +29,9 @@ export class PigeonDatatableComponent implements OnInit {
 
   constructor(private apollo: Apollo,
               public router: Router,
-              private auth: AuthService) { }
+              private auth: AuthService) {
+    auth.handleAuthentication();
+  }
 
   select(selectedPigeon: SelectablePigeon) {
     this.selectedPigeon.selected = false;
@@ -39,7 +41,6 @@ export class PigeonDatatableComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.auth.isAuthenticated());
     this.apollo.watchQuery<AllPigeonsQueryResponse>({
       query: ALL_PIGEONS_QUERY
     }).valueChanges.subscribe((response) => {

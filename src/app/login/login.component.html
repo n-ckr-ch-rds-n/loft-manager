@@ -1,17 +1,11 @@
-<h4 class="login-or-signup">{{login ? "Log in" : "Sign up"}}</h4>
-<div class="login-form">
-  <mat-form-field *ngIf="!login">
-    <input matInput [(ngModel)]="name" placeholder="Name">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [(ngModel)]="email" placeholder="Email">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [(ngModel)]="password" placeholder="Password">
-  </mat-form-field>
-</div>
-<div class="login">
-  <button mat-flat-button color="primary" (click)="confirm()">
-    {{login ? "Log in" : "Create account"}}
-  </button>
-</div>
+<button mat-flat-button color="primary"
+        *ngIf="!auth.isAuthenticated()"
+        (click)="auth.login()" type="button">
+  Log In
+</button>
+
+<button mat-flat-button color="primary"
+        *ngIf="auth.isAuthenticated()"
+        (click)="auth.logout()" type="button">
+  Log Out
+</button>
