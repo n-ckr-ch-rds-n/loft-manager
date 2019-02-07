@@ -18,7 +18,7 @@ export interface SelectablePigeon extends Pigeon {
 })
 
 export class PigeonDatatableComponent implements OnInit {
-  columnsToDisplay: Array<keyof Pigeon> = ['bandNo', 'year', 'name'];
+  columnsToDisplay: Array<keyof Pigeon> = ['bandNo', 'year', 'name', 'color', 'sex', 'strain', 'loft', 'sire', 'dam'];
   allPigeons: Pigeon[] = [];
   dataSource: MatTableDataSource<Pigeon>;
   selectedPigeon: SelectablePigeon;

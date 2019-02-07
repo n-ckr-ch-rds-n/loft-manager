@@ -6,7 +6,7 @@
 }
 
 .pigeon-table {
-  width: 50%;
+  width: 100%;
 }
 
 .pigeon-details {
@@ -26,7 +26,7 @@ table {
 }
 
 .selected-pigeon {
-  background-color: darkgrey;
+  background-color: lightgrey;
 }
 
 .unselected-pigeon {
@@ -35,4 +35,13 @@ table {
 
 .mat-row:nth-child(odd){
   background-color: rgba(144, 195, 244, 0.12);
+}
+
+.mat-row:nth-child(odd).selected-pigeon{
+  background-color: lightgrey;
+}
+
+.mat-row:nth-child(odd):hover{
+  background-color: lightgrey;
+  cursor: pointer;
 }
