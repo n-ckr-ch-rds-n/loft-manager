@@ -70,4 +70,8 @@ export class PigeonDatatableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {});
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

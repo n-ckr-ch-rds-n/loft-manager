@@ -1,6 +1,9 @@
 <app-nav-bar></app-nav-bar>
 <div class="data-container">
   <div class="pigeon-table">
+    <mat-form-field class="search-field">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
     <button mat-flat-button color="primary" class="add-pigeon" (click)="addPigeon()">Add Pigeon</button>
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
       <ng-container matColumnDef="bandNo">
