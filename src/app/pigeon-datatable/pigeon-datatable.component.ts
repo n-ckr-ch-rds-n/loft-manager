@@ -29,7 +29,7 @@ export class PigeonDatatableComponent implements OnInit {
 
   constructor(private apollo: Apollo,
               public router: Router,
-              private auth: AuthService) {
+              public auth: AuthService) {
     auth.handleAuthentication();
   }
 

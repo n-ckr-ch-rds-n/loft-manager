@@ -1,9 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import {defaultPigeon} from '../default.pigeon';
 import {Apollo} from 'apollo-angular';
-import {CREATE_PIGEON_MUTATION, CreatePigeonMutationResponse} from '../graphql';
+import {CREATE_PIGEON_MUTATION} from '../graphql';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-add-pigeon',
@@ -16,20 +17,21 @@ export class AddPigeonComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,
-    public apollo: Apollo) {}
+    public apollo: Apollo,
+    private auth: AuthService) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+    console.log(this.auth.isAuthenticated());
   }
 
   savePigeon() {
-    console.log(this.pigeon);
     this.apollo.mutate({
       mutation: CREATE_PIGEON_MUTATION,
       variables: {
         ...this.pigeon
       }
-    }).subscribe(response => {
+    }).subscribe(() => {
       this.pigeon = defaultPigeon;
     });
   }

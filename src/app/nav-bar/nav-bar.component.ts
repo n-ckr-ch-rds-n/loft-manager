@@ -5,6 +5,7 @@ import {RemovePigeonComponent} from '../remove-pigeon/remove-pigeon.component';
 import {Pigeon} from '../pigeon';
 import {NavbarEvent} from '../navbar.event';
 import {EditPigeonComponent} from '../edit-pigeon/edit-pigeon.component';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,7 +22,8 @@ export class NavBarComponent implements OnInit {
   @Input()
   selectedPigeon: Pigeon;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+              private auth: AuthService) { }
 
   select(eventType: NavbarEvent) {
     const dialogRef = this.dialog.open(this.navBarOptions[eventType], {
@@ -29,8 +31,11 @@ export class NavBarComponent implements OnInit {
       data: { selectedPigeon: this.selectedPigeon }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    dialogRef.afterClosed().subscribe(() => {});
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
+import {AUTH_CONFIG} from '../auth0-variables';
 
 @Injectable()
 export class AuthService {
@@ -10,10 +11,10 @@ export class AuthService {
   private _expiresAt: number;
 
   auth0 = new auth0.WebAuth({
-    clientID: '50_eCAWYM0eDxZWfN3oAVKAatyl3XguG',
-    domain: 'loft-manager.eu.auth0.com',
+    clientID: AUTH_CONFIG.clientID,
+    domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
-    redirectUri: 'http://localhost:4200/pigeon',
+    redirectUri: AUTH_CONFIG.callbackURL,
     scope: 'openid'
   });
 
@@ -38,7 +39,6 @@ export class AuthService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        // window.location.hash = '';
         this.localLogin(authResult);
         this.router.navigate(['/pigeon']);
       } else if (err) {
@@ -56,6 +56,11 @@ export class AuthService {
     this._accessToken = authResult.accessToken;
     this._idToken = authResult.idToken;
     this._expiresAt = expiresAt;
+    console.log('Access token: ' + this._accessToken);
+    console.log('Id token: ' + this._idToken);
+    console.log('Expires at: '  + this._expiresAt);
+    console.log('Local storage login: ' + localStorage.isLoggedIn);
+    console.log('Authenticated: ' + this.isAuthenticated());
   }
 
   public renewTokens(): void {
@@ -70,19 +75,14 @@ export class AuthService {
   }
 
   public logout(): void {
-    // Remove tokens and expiry time
     this._accessToken = '';
     this._idToken = '';
     this._expiresAt = 0;
-    // Remove isLoggedIn flag from localStorage
     localStorage.removeItem('isLoggedIn');
-    // Go back to the home route
     this.router.navigate(['/login']);
   }
 
   public isAuthenticated(): boolean {
-    // Check whether the current time is past the
-    // access token's expiry time
     return new Date().getTime() < this._expiresAt;
   }
 
