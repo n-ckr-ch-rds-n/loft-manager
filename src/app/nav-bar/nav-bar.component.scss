@@ -1,28 +1,31 @@
-.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: baseline;
-  position: fixed;
+.mat-toolbar {
+  width: 100%;
+  background-color: rgba(255, 64, 129, 0.53);
 }
 
-.option-container {
-  text-align: center;
-  width: 12.5vw;
-  margin: auto;
-}
-
-.option-container:hover {
-  background-color: darkgrey;
-  cursor: pointer;
+.logo {
+  height: 25px;
 }
 
 .option {
-  font-size: medium;
+  color: white;
 }
 
-.icon {
-  position:relative;
-  top: 10px;
-  height: 20px;
+.quit {
+  position: absolute;
+  right: calc(0vw + 25px)
+}
+
+.quit:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.title {
+  position: absolute;
+  left: calc(0vw + 60px);
+}
+
+.title:hover {
+  cursor: default;
 }
