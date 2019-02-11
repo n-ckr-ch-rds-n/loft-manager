@@ -1,12 +1,13 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "My Graphcool Service",
+  "description": "Loft Manager",
   "dependencies": {
     "@types/bcryptjs": "^2.4.1",
     "@types/validator": "^6.3.0",
     "bcryptjs": "^2.4.3",
     "graphcool-lib": "^0.1.0",
+    "graphql": "^14.1.1",
     "graphql-request": "^1.4.0",
     "jsonwebtoken": "^8.4.0",
     "jwks-rsa": "^1.4.0",

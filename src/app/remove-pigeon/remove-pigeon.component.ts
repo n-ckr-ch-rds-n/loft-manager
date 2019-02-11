@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Pigeon} from '../pigeon';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Apollo} from 'apollo-angular';
@@ -27,7 +27,7 @@ export class RemovePigeonComponent {
         id: this.data.selectedPigeon.id
       }
     }).subscribe(response => {
-      console.log(`${response.data.deletePigeon.name} removed!`);
+      console.log(response);
     });
   }
 }

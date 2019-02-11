@@ -2,7 +2,7 @@ import {Component, Inject } from '@angular/core';
 import {Pigeon} from '../pigeon';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Apollo} from 'apollo-angular';
-import {UPDATE_PIGEON_MUTATION, UpdatePigeonMutationResponse} from '../graphql';
+import {UPDATE_PIGEON_MUTATION} from '../graphql';
 
 @Component({
   selector: 'app-edit-pigeon',
@@ -27,7 +27,7 @@ export class EditPigeonComponent {
         ...this.data.selectedPigeon
       }
     }).subscribe(response => {
-      console.log(`${response.data.updatePigeon.name} updated!`);
+      console.log(response);
     });
   }
 }

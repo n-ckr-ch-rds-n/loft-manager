@@ -31,9 +31,9 @@ const verifyToken = token =>
         signingKey,
         {
           algorithms: ['RS256'],
-          ignoreExpiration: false,
-          issuer: `https://loft-manager.eu.auth0.com`,
-          audience: `50_eCAWYM0eDxZWfN3oAVKAatyl3XguG`,
+          ignoreExpiration: true,
+          issuer: 'https://loft-manager.eu.auth0.com/',
+          audience: '50_eCAWYM0eDxZWfN3oAVKAatyl3XguG',
         },
         (err, decoded) => {
           if (err) return reject(err);
