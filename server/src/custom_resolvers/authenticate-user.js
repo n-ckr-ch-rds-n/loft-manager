@@ -4,7 +4,6 @@ const fromEvent = require('graphcool-lib').fromEvent;
 
 const verifyToken = token =>
   new Promise((resolve, reject) => {
-    // Decode the JWT Token
     const decoded = jwt.decode(token, { complete: true });
     if (!decoded || !decoded.header || !decoded.header.kid) {
       reject('Unable to retrieve key identifier from token');
@@ -19,13 +18,11 @@ const verifyToken = token =>
       jwksUri: `https://loft-manager.eu.auth0.com/.well-known/jwks.json`,
     });
 
-    // Retrieve the JKWS's signing key using the decode token's key identifier (kid)
     jkwsClient.getSigningKey(decoded.header.kid, (err, key) => {
       if (err) return reject(err);
 
       const signingKey = key.publicKey || key.rsaPublicKey;
 
-      // Validate the token against the JKWS's signing key
       jwt.verify(
         token,
         signingKey,
@@ -43,7 +40,6 @@ const verifyToken = token =>
     });
   });
 
-//Retrieves the Graphcool user record using the Auth0 user id
 const getGraphcoolUser = (auth0UserId, api) =>
   api
     .request(
@@ -58,7 +54,6 @@ const getGraphcoolUser = (auth0UserId, api) =>
     )
     .then(queryResult => queryResult.User);
 
-//Creates a new User record.
 const createGraphCoolUser = (auth0UserId, api) =>
   api
     .request(
@@ -79,14 +74,12 @@ export default async event => {
 
   try {
     const { idToken } = event.data;
-    console.log(event.data);
     const graphcool = fromEvent(event);
     const api = graphcool.api('simple/v1');
 
     const decodedToken = await verifyToken(idToken);
     let graphCoolUser = await getGraphcoolUser(decodedToken.sub, api);
 
-    //If the user doesn't exist, a new record is created.
     if (graphCoolUser === null) {
       graphCoolUser = await createGraphCoolUser(
         decodedToken.sub,
@@ -94,7 +87,6 @@ export default async event => {
       );
     }
 
-    // custom exp does not work yet, see https://github.com/graphcool/graphcool-lib/issues/19
     const token = await graphcool.generateNodeToken(
       graphCoolUser.id,
       'User',

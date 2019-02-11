@@ -44,7 +44,8 @@ export class AuthService {
     this.apollo.mutate({
       mutation: AUTHENTICATE_USER_MUTATION,
       variables: {idToken: idToken}
-    }).subscribe(() => {
+    }).subscribe(response => {
+      console.log(response);
     });
   }
 
@@ -62,18 +63,11 @@ export class AuthService {
   }
 
   private localLogin(authResult): void {
-    // Set isLoggedIn flag in localStorage
     localStorage.setItem('isLoggedIn', 'true');
-    // Set the time that the access token will expire at
     const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
     this._accessToken = authResult.accessToken;
     this._idToken = authResult.idToken;
     this._expiresAt = expiresAt;
-    // console.log('Access token: ' + this._accessToken);
-    // console.log('Id token: ' + this._idToken);
-    // console.log('Expires at: '  + this._expiresAt);
-    // console.log('Local storage login: ' + localStorage.isLoggedIn);
-    // console.log('Authenticated: ' + this.isAuthenticated());
   }
 
   public renewTokens(): void {
