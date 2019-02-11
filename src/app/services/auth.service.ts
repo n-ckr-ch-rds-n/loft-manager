@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import {AUTH_CONFIG} from '../auth0-variables';
+import {Apollo} from 'apollo-angular';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,8 @@ export class AuthService {
     scope: 'openid'
   });
 
-  constructor(public router: Router) {
+  constructor(public router: Router,
+              public apollo: Apollo) {
     this._idToken = '';
     this._accessToken = '';
     this._expiresAt = 0;
@@ -36,10 +38,15 @@ export class AuthService {
     this.auth0.authorize();
   }
 
+  public authenticateWithGraphcool(idToken: string) {
+    console.log('Inside the authenticate function. Id token: ' + idToken);
+  }
+
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.localLogin(authResult);
+        this.authenticateWithGraphcool(authResult.idToken);
         this.router.navigate(['/pigeon']);
       } else if (err) {
         this.router.navigate(['/login']);
