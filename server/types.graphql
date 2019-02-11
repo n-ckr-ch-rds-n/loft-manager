@@ -27,3 +27,12 @@ type Pigeon @model {
   imageUrl: String
   user: User @relation(name: "UserPigeons")
 }
+
+type AuthenticatedUser @model {
+  id: String! @isUnique
+  token: String!
+}
+
+extend type Mutation {
+  authenticateUser(idToken: String!): AuthenticatedUser!
+}
