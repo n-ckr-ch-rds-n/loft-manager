@@ -38,9 +38,9 @@ functions:
   authenticate:
     handler:
       code:
-        src: resolvers/authenticate-user.js
+        src: ./src/custom_resolvers/authenticate-user.js
         environment:
           AUTH0_DOMAIN: 'loft-manager.eu.auth0.com'
           AUTH0_CLIENT_ID: '50_eCAWYM0eDxZWfN3oAVKAatyl3XguG'
     type: resolver
-    schema: resolvers/authenticate-user.js
+    schema: ./src/custom_resolvers/authenticate-user.graphql
