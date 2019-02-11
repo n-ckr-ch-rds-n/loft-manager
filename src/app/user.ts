@@ -2,6 +2,6 @@ import {Pigeon} from './pigeon';
 
 export interface User {
   id: string;
-  name: string;
+  auth0UserId: string;
   pigeons: Pigeon[];
 }

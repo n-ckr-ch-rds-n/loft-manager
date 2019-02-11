@@ -166,3 +166,16 @@ export interface CreateUserMutationResponse {
   createUser: User;
   loading: boolean;
 }
+
+export const AUTHENTICATE_USER_MUTATION = gql`
+  mutation AuthenticateUserMutation(
+    $idToken: String!
+  ) {
+    authenticateUser(
+      idToken: $idToken
+    ) {
+      id
+      token
+    }
+  }
+`;
