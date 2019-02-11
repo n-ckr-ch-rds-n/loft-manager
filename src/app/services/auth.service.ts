@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import {AUTH_CONFIG} from '../auth0-variables';
 import {Apollo} from 'apollo-angular';
+import {AUTHENTICATE_USER_MUTATION} from '../graphql';
 
 @Injectable()
 export class AuthService {
@@ -40,6 +41,11 @@ export class AuthService {
 
   public authenticateWithGraphcool(idToken: string) {
     console.log('Inside the authenticate function. Id token: ' + idToken);
+    this.apollo.mutate({
+      mutation: AUTHENTICATE_USER_MUTATION,
+      variables: {idToken: idToken}
+    }).subscribe(() => {
+    });
   }
 
   public handleAuthentication(): void {
@@ -63,11 +69,11 @@ export class AuthService {
     this._accessToken = authResult.accessToken;
     this._idToken = authResult.idToken;
     this._expiresAt = expiresAt;
-    console.log('Access token: ' + this._accessToken);
-    console.log('Id token: ' + this._idToken);
-    console.log('Expires at: '  + this._expiresAt);
-    console.log('Local storage login: ' + localStorage.isLoggedIn);
-    console.log('Authenticated: ' + this.isAuthenticated());
+    // console.log('Access token: ' + this._accessToken);
+    // console.log('Id token: ' + this._idToken);
+    // console.log('Expires at: '  + this._expiresAt);
+    // console.log('Local storage login: ' + localStorage.isLoggedIn);
+    // console.log('Authenticated: ' + this.isAuthenticated());
   }
 
   public renewTokens(): void {
