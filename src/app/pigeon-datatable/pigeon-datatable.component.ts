@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
@@ -27,6 +27,7 @@ export class PigeonDatatableComponent implements OnInit {
   selectablePigeons: SelectablePigeon[];
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private apollo: Apollo,
               public router: Router,
@@ -59,6 +60,7 @@ export class PigeonDatatableComponent implements OnInit {
       this.selectedPigeon = this.selectablePigeons[0];
       this.selectedPigeon.selected = true;
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
   }
 

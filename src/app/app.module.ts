@@ -16,7 +16,7 @@ import {
   MatFormFieldModule,
   MAT_DIALOG_DEFAULT_OPTIONS,
   MatOptionModule,
-  MatSelectModule, MatInputModule
+  MatSelectModule, MatInputModule, MatPaginatorModule
 } from '@angular/material';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PigeonDatatableComponent } from './pigeon-datatable/pigeon-datatable.component';
@@ -56,6 +56,7 @@ import {AuthService} from './services/auth.service';
     MatCheckboxModule,
     MatTableModule,
     MatSortModule,
+    MatPaginatorModule,
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,
