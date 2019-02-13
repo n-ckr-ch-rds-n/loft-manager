@@ -3,7 +3,12 @@ import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import {AUTH_CONFIG} from '../auth0-variables';
 import {Apollo} from 'apollo-angular';
-import {AUTHENTICATE_USER_MUTATION} from '../graphql';
+import {AUTHENTICATE_USER_MUTATION, AuthenticateUserMutationResponse} from '../graphql';
+
+export interface AuthenticatedUser {
+  id: string;
+  token: string;
+}
 
 @Injectable()
 export class AuthService {
@@ -11,6 +16,7 @@ export class AuthService {
   private _idToken: string;
   private _accessToken: string;
   private _expiresAt: number;
+  private _authenticatedUser: AuthenticatedUser;
 
   auth0 = new auth0.WebAuth({
     clientID: AUTH_CONFIG.clientID,
@@ -35,17 +41,21 @@ export class AuthService {
     return this._idToken;
   }
 
+  get authenticatedUser(): AuthenticatedUser {
+    return this._authenticatedUser;
+  }
+
   public login(): void {
     this.auth0.authorize();
   }
 
   public authenticateWithGraphcool(idToken: string) {
-    console.log('Inside the authenticate function. Id token: ' + idToken);
-    this.apollo.mutate({
+    this.apollo.mutate<AuthenticateUserMutationResponse>({
       mutation: AUTHENTICATE_USER_MUTATION,
       variables: {idToken: idToken}
     }).subscribe(response => {
-      console.log(response);
+      this._authenticatedUser = response.data.authenticateUser;
+      localStorage.setItem('userToken', this._authenticatedUser.token);
     });
   }
 
@@ -86,6 +96,7 @@ export class AuthService {
     this._idToken = '';
     this._expiresAt = 0;
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userToken');
     this.router.navigate(['/login']);
   }
 

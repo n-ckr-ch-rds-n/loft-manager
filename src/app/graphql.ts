@@ -179,3 +179,7 @@ export const AUTHENTICATE_USER_MUTATION = gql`
     }
   }
 `;
+
+export interface AuthenticateUserMutationResponse {
+  authenticateUser: {id: string; token: string; };
+}
