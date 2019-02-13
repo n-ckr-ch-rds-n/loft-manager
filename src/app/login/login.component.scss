@@ -1,8 +1,14 @@
+@font-face {
+  font-family: FatWandals;
+  src: url(../../assets/fat_wandals/FatWandalsAlt_PERSONAL.ttf);
+}
+
 .container {
   background: black url("../../assets/pigeons.jpg") no-repeat;
   background-size: 100%;
   width: 100vw;
   height: 800px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 170vh) {
@@ -10,11 +16,34 @@
     background: black url("../../assets/pigeons.jpg") no-repeat;
     background-size: 100%;
     width: 1200px;
+    text-align: center;
   }
 }
 
 .login-button {
   position: absolute;
-  top: 50vh;
+  top: 80vh;
   right: calc(50vw - 22px);
+}
+
+@media only screen and (max-height: 600px and (max-width: 600px)) {
+  .login-button {
+    position: absolute;
+    top: 400px;
+  }
+}
+
+.login-header {
+  width: 100vw;
+  position: fixed;
+  top: 20vh;
+  font-size: 12vw;
+  font-family: FatWandals;
+  color: deeppink;
+}
+
+@media only screen and (max-width: 900px) {
+  .login-header {
+    font-size: 90px;
+  }
 }
