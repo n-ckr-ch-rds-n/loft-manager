@@ -1,12 +1,20 @@
 .container {
-  background: url("../../assets/pigeons.jpg") no-repeat;
+  background: black url("../../assets/pigeons.jpg") no-repeat;
   background-size: 100%;
-  text-align: center;
   width: 100vw;
   height: 800px;
 }
 
+@media only screen and (max-width: 170vh) {
+  .container {
+    background: black url("../../assets/pigeons.jpg") no-repeat;
+    background-size: 100%;
+    width: 1200px;
+  }
+}
+
 .login-button {
-  position: fixed;
+  position: absolute;
   top: 50vh;
+  right: calc(50vw - 22px);
 }
