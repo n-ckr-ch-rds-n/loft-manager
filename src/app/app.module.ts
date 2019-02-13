@@ -28,6 +28,7 @@ import {GraphQLModule} from './apollo.config';
 import {FormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import {AuthService} from './services/auth.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {AuthService} from './services/auth.service';
     AddPigeonComponent,
     RemovePigeonComponent,
     EditPigeonComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent
   ],
   entryComponents: [
     AddPigeonComponent,
