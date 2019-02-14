@@ -4,46 +4,37 @@
 }
 
 .container {
-  background: black url("../../assets/pigeons.jpg") no-repeat;
-  background-size: 100%;
-  width: 100vw;
-  height: 800px;
-  text-align: center;
+  background: black url("../../assets/pigeons.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
 }
 
-@media only screen and (max-width: 170vh) {
-  .container {
-    background: black url("../../assets/pigeons.jpg") no-repeat;
-    background-size: 100%;
-    width: 1200px;
-    text-align: center;
-  }
-}
+//.login-button {
+//  position: absolute;
+//  top: 400px;
+//  right: calc(50vw - 22px);
+//}
 
-.login-button {
-  position: absolute;
-  top: 80vh;
-  right: calc(50vw - 22px);
-}
-
-@media only screen and (max-height: 600px and (max-width: 600px)) {
-  .login-button {
-    position: absolute;
-    top: 400px;
-  }
-}
-
-.login-header {
-  width: 100vw;
-  position: fixed;
-  top: 20vh;
-  font-size: 12vw;
-  font-family: FatWandals;
-  color: deeppink;
-}
-
-@media only screen and (max-width: 900px) {
-  .login-header {
-    font-size: 90px;
-  }
-}
+//@media only screen and (max-height: 600px and (max-width: 600px)) {
+  //.login-button {
+  //  position: absolute;
+  //  top: 400px;
+  //}
+//}
+//
+//.login-header {
+//  width: 100vw;
+//  padding-top: 50px;
+//  font-size: 12vw;
+//  font-family: FatWandals;
+//  color: rgba(255, 64, 129, 0.53);
+//}
+//
+//@media only screen and (max-width: 900px) {
+//  .login-header {
+//    font-size: 90px;
+//  }
+//}
