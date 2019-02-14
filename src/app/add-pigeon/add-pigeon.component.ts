@@ -21,15 +21,16 @@ export class AddPigeonComponent {
     private auth: AuthService) {}
 
   onNoClick(): void {
+    console.log(this.auth.authenticatedUser);
     this.dialogRef.close();
-    console.log(this.auth.isAuthenticated());
   }
 
   savePigeon() {
     this.apollo.mutate({
       mutation: CREATE_PIGEON_MUTATION,
       variables: {
-        ...this.pigeon
+        ...this.pigeon,
+        userId: this.auth.authenticatedUser.id
       }
     }).subscribe(() => {
       this.pigeon = defaultPigeon;
