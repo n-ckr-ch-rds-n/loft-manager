@@ -10,31 +10,19 @@
   -o-background-size: cover;
   background-size: cover;
   min-height: 100vh;
+  text-align: center;
 }
 
-//.login-button {
-//  position: absolute;
-//  top: 400px;
-//  right: calc(50vw - 22px);
-//}
+.login-header {
+  width: 100%;
+  padding-top: 50px;
+  font-size: 15vw;
+  font-family: FatWandals;
+  color: rgba(255, 64, 129, 0.53);
+}
 
-//@media only screen and (max-height: 600px and (max-width: 600px)) {
-  //.login-button {
-  //  position: absolute;
-  //  top: 400px;
-  //}
-//}
-//
-//.login-header {
-//  width: 100vw;
-//  padding-top: 50px;
-//  font-size: 12vw;
-//  font-family: FatWandals;
-//  color: rgba(255, 64, 129, 0.53);
-//}
-//
-//@media only screen and (max-width: 900px) {
-//  .login-header {
-//    font-size: 90px;
-//  }
-//}
+.login-button {
+  position: relative;
+  top: 100px;
+}
+
