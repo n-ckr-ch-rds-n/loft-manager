@@ -49,7 +49,7 @@ export class AuthService {
     this.auth0.authorize();
   }
 
-  public async authenticateWithGraphcool(idToken: string) {
+  public authenticateWithGraphcool(idToken: string) {
     this.apollo.mutate<AuthenticateUserMutationResponse>({
       mutation: AUTHENTICATE_USER_MUTATION,
       variables: {idToken: idToken}
@@ -60,7 +60,7 @@ export class AuthService {
     });
   }
 
-  public async handleAuthentication(): void {
+  public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.localLogin(authResult);
