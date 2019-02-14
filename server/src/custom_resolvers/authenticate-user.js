@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const jwkRsa = require('jwks-rsa');
 const fromEvent = require('graphcool-lib').fromEvent;
@@ -15,7 +16,7 @@ const verifyToken = token =>
     }
     const jkwsClient = jwkRsa({
       cache: true,
-      jwksUri: `https://loft-manager.eu.auth0.com/.well-known/jwks.json`,
+      jwksUri: `${process.env.AUTH0_DOMAIN}.well-known/jwks.json`,
     });
 
     jkwsClient.getSigningKey(decoded.header.kid, (err, key) => {
@@ -29,8 +30,8 @@ const verifyToken = token =>
         {
           algorithms: ['RS256'],
           ignoreExpiration: true,
-          issuer: 'https://loft-manager.eu.auth0.com/',
-          audience: '50_eCAWYM0eDxZWfN3oAVKAatyl3XguG',
+          issuer: process.env.AUTH0_DOMAIN,
+          audience: process.env.AUTH0_CLIENT_ID,
         },
         (err, decoded) => {
           if (err) return reject(err);
