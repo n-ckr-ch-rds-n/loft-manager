@@ -65,7 +65,7 @@ export class DatatableComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.selectablePigeons);
       this.loading = response.data.loading;
       this.selectedPigeon = this.selectablePigeons[0];
-      this.selectedPigeon.selected = true;
+      if (this.selectedPigeon) {this.selectedPigeon.selected = true; }
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
