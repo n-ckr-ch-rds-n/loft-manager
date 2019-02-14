@@ -3,8 +3,8 @@ import {Pigeon} from './pigeon';
 import {User} from './user';
 
 export const ALL_PIGEONS_QUERY = gql`
-  query AllPigeonsQuery {
-    allPigeons {
+  query AllPigeonsQuery($userId: ID) {
+    allPigeons(filter: {user: {id: $userId}}) {
       active
       bandNo
       color

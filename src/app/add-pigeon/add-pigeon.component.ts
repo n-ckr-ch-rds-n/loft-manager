@@ -21,7 +21,6 @@ export class AddPigeonComponent {
     private auth: AuthService) {}
 
   onNoClick(): void {
-    console.log(this.auth.authenticatedUser);
     this.dialogRef.close();
   }
 

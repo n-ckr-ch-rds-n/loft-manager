@@ -49,7 +49,7 @@ export class PigeonDatatableComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {});
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.apollo.watchQuery<AllPigeonsQueryResponse>({
       query: ALL_PIGEONS_QUERY
     }).valueChanges.subscribe((response) => {

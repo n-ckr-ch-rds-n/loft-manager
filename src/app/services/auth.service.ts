@@ -49,17 +49,18 @@ export class AuthService {
     this.auth0.authorize();
   }
 
-  public authenticateWithGraphcool(idToken: string) {
+  public async authenticateWithGraphcool(idToken: string) {
     this.apollo.mutate<AuthenticateUserMutationResponse>({
       mutation: AUTHENTICATE_USER_MUTATION,
       variables: {idToken: idToken}
     }).subscribe(response => {
       this._authenticatedUser = response.data.authenticateUser;
       localStorage.setItem('userToken', this._authenticatedUser.token);
+      localStorage.setItem('userId', this._authenticatedUser.id);
     });
   }
 
-  public handleAuthentication(): void {
+  public async handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.localLogin(authResult);
@@ -72,7 +73,7 @@ export class AuthService {
     });
   }
 
-  private localLogin(authResult): void {
+  private async localLogin(authResult): void {
     localStorage.setItem('isLoggedIn', 'true');
     const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
     this._accessToken = authResult.accessToken;
