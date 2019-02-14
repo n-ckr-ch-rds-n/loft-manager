@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {PigeonDatatableComponent} from './pigeon-datatable/pigeon-datatable.component';
+import {HomeScreenComponent} from './home-screen/home-screen.component';
 import {LoginComponent} from './login/login.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
     path: 'pigeon/:id',
-    component: PigeonDatatableComponent
+    component: HomeScreenComponent
   },
   {
     path: 'pigeon',
-    component: PigeonDatatableComponent
+    component: HomeScreenComponent
   },
   {
     path: 'login',

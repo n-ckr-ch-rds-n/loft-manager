@@ -19,7 +19,7 @@ import {
   MatSelectModule, MatInputModule, MatPaginatorModule
 } from '@angular/material';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { PigeonDatatableComponent } from './pigeon-datatable/pigeon-datatable.component';
+import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.component';
 import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
 import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
@@ -29,19 +29,21 @@ import {FormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import {AuthService} from './services/auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DatatableComponent } from './datatable/datatable.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     MatToolbar,
-    PigeonDatatableComponent,
+    HomeScreenComponent,
     PigeonDetailsComponent,
     AddPigeonComponent,
     RemovePigeonComponent,
     EditPigeonComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DatatableComponent
   ],
   entryComponents: [
     AddPigeonComponent,

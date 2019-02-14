@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PigeonDatatableComponent } from './pigeon-datatable.component';
+import { DatatableComponent } from './datatable.component';
 
-describe('PigeonDatatableComponent', () => {
-  let component: PigeonDatatableComponent;
-  let fixture: ComponentFixture<PigeonDatatableComponent>;
+describe('DatatableComponent', () => {
+  let component: DatatableComponent;
+  let fixture: ComponentFixture<DatatableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PigeonDatatableComponent ]
+      declarations: [ DatatableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PigeonDatatableComponent);
+    fixture = TestBed.createComponent(DatatableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

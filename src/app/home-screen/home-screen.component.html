@@ -1,0 +1,8 @@
+<div *ngIf="auth.authenticatedUser; else loading">
+  <app-nav-bar></app-nav-bar>
+  <app-datatable [user]="auth.authenticatedUser"></app-datatable>
+</div>
+
+<ng-template #loading>
+  Loading....
+</ng-template>

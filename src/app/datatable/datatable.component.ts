@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Router} from '@angular/router';
-import {AuthService} from '../services/auth.service';
+import {AuthenticatedUser, AuthService} from '../services/auth.service';
 import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 
@@ -13,18 +13,21 @@ export interface SelectablePigeon extends Pigeon {
 }
 
 @Component({
-  selector: 'app-pigeon-datatable',
-  templateUrl: './pigeon-datatable.component.html',
-  styleUrls: ['./pigeon-datatable.component.scss']
+  selector: 'app-datatable',
+  templateUrl: './datatable.component.html',
+  styleUrls: ['./datatable.component.scss']
 })
 
-export class PigeonDatatableComponent implements OnInit {
+export class DatatableComponent implements OnInit {
   columnsToDisplay: Array<keyof Pigeon> = ['bandNo', 'year', 'name', 'color', 'sex', 'strain', 'loft', 'sire', 'dam'];
   allPigeons: Pigeon[] = [];
   dataSource: MatTableDataSource<Pigeon>;
   selectedPigeon: SelectablePigeon;
   loading = true;
   selectablePigeons: SelectablePigeon[];
+
+  @Input()
+  user: AuthenticatedUser;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -50,8 +53,12 @@ export class PigeonDatatableComponent implements OnInit {
   }
 
   async ngOnInit() {
+    console.log(this.user);
     this.apollo.watchQuery<AllPigeonsQueryResponse>({
-      query: ALL_PIGEONS_QUERY
+      query: ALL_PIGEONS_QUERY,
+      variables: {
+        userId: this.user.id
+      }
     }).valueChanges.subscribe((response) => {
       this.allPigeons = response.data.allPigeons;
       this.selectablePigeons = [...this.allPigeons].map(pigeon => ({...pigeon, selected: false}));
