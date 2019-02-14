@@ -4,9 +4,9 @@ import {Pigeon} from '../pigeon';
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Router} from '@angular/router';
-import {AuthenticatedUser, AuthService} from '../services/auth.service';
 import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
+import {AuthenticatedUser} from '../services/authenticated.user';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -34,9 +34,7 @@ export class DatatableComponent implements OnInit {
 
   constructor(private apollo: Apollo,
               public router: Router,
-              private auth: AuthService,
               public dialog: MatDialog) {
-    auth.handleAuthentication();
   }
 
   select(selectedPigeon: SelectablePigeon) {

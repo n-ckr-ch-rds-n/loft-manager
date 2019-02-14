@@ -5,11 +5,6 @@ import {AUTH_CONFIG} from '../auth0-variables';
 import {Apollo} from 'apollo-angular';
 import {AUTHENTICATE_USER_MUTATION, AuthenticateUserMutationResponse} from '../graphql';
 
-export interface AuthenticatedUser {
-  id: string;
-  token: string;
-}
-
 @Injectable()
 export class AuthService {
 
