@@ -27,6 +27,34 @@ export interface AllPigeonsQueryResponse {
   loading: boolean;
 }
 
+export const NEW_PIGEON_SUBSCRIPTION = gql`
+  subscription {
+    Link(filter: {
+      mutation_in: [CREATED]
+  }) {
+    node {
+      id
+      active
+      bandNo
+      color
+      comments
+      dam
+      imageUrl
+      loft
+      name
+      sex
+      sire
+      strain
+      year
+    }
+  }
+}
+`;
+
+export interface NewPigeonSubscriptionResponse {
+  node: Pigeon;
+}
+
 export const CREATE_PIGEON_MUTATION = gql`
   mutation CreatePigeonMutation(
   $active: Boolean,
