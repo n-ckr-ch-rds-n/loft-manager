@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Pigeon} from '../pigeon';
-import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse} from '../graphql';
+import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse, NEW_PIGEON_SUBSCRIPTION} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Router} from '@angular/router';
 import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
@@ -51,12 +51,26 @@ export class DatatableComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.apollo.watchQuery<AllPigeonsQueryResponse>({
+    const allPigeonsQuery = this.apollo.watchQuery<AllPigeonsQueryResponse>({
       query: ALL_PIGEONS_QUERY,
       variables: {
         userId: this.user.id
       }
-    }).valueChanges.subscribe((response) => {
+    });
+    allPigeonsQuery.subscribeToMore({
+      document: NEW_PIGEON_SUBSCRIPTION,
+      updateQuery: (previous, { subscriptionData }) => {
+        const newAllPigeons = [
+          subscriptionData.data.Pigeon.node,
+          ...previous.allPigeons
+        ];
+        return {
+          ...previous,
+          allPigeons: newAllPigeons
+        };
+      }
+    });
+    allPigeonsQuery.valueChanges.subscribe((response) => {
       this.allPigeons = response.data.allPigeons;
       this.selectablePigeons = [...this.allPigeons].map(pigeon => ({...pigeon, selected: false}));
       this.dataSource = new MatTableDataSource(this.selectablePigeons);

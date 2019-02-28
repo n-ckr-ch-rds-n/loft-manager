@@ -29,7 +29,7 @@ export interface AllPigeonsQueryResponse {
 
 export const NEW_PIGEON_SUBSCRIPTION = gql`
   subscription {
-    Link(filter: {
+    Pigeon(filter: {
       mutation_in: [CREATED]
   }) {
     node {
