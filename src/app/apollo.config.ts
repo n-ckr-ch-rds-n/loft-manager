@@ -5,6 +5,7 @@ import {HttpLink, HttpLinkModule} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {getOperationAST} from '../../node_modules/graphql';
 import {ApolloLink} from 'apollo-link';
+import {WebSocketLink} from 'apollo-link-ws';
 
 @NgModule({
   exports: [
@@ -16,21 +17,33 @@ import {ApolloLink} from 'apollo-link';
 
 export class GraphQLModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
-    const uri = 'https://api.graph.cool/simple/v1/cjrahl4l55q080115r0djemfn';
-    const http = httpLink.create({ uri });
+    const token = localStorage.getItem('userToken');
+    const authorization = token ? `Bearer ${token}` : null;
+    const headers = new HttpHeaders();
+    headers.append('Authorization', authorization);
 
-    const middleware = new ApolloLink((operation, forward) => {
-      const token = localStorage.getItem('userToken');
-      if (token) {
-        operation.setContext({
-          headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
-        });
+    const uri = 'https://api.graph.cool/simple/v1/cjrahl4l55q080115r0djemfn';
+    const http = httpLink.create({ uri, headers });
+
+    const ws = new WebSocketLink({
+      uri: 'wss://subscriptions.graph.cool/v1/cjrahl4l55q080115r0djemfn',
+      options: {
+        reconnect: true,
+        connectionParams: {
+          authToken: token
+        }
       }
-      return forward(operation);
-    });
+    })
 
     apollo.create({
-      link: middleware.concat(http),
+      link: ApolloLink.split(
+        operation => {
+          const operationAST = getOperationAST(operation.query, operation.operationName);
+          return !!operationAST && operationAST.operation === 'subscription';
+        },
+        ws,
+        http,
+      ),
       cache: new InMemoryCache()
     });
 
