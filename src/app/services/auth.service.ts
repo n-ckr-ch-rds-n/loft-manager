@@ -4,6 +4,7 @@ import * as auth0 from 'auth0-js';
 import {AUTH_CONFIG} from '../auth0-variables';
 import {Apollo} from 'apollo-angular';
 import {AUTHENTICATE_USER_MUTATION, AuthenticateUserMutationResponse} from '../graphql';
+import {AuthenticatedUser} from './authenticated.user';
 
 @Injectable()
 export class AuthService {
@@ -68,7 +69,7 @@ export class AuthService {
     });
   }
 
-  private async localLogin(authResult): void {
+  private async localLogin(authResult): Promise<void> {
     localStorage.setItem('isLoggedIn', 'true');
     const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
     this._accessToken = authResult.accessToken;
