@@ -30,25 +30,26 @@ export interface AllPigeonsQueryResponse {
 export const NEW_PIGEON_SUBSCRIPTION = gql`
   subscription {
     Pigeon(filter: {
-      mutation_in: [CREATED]
-  }) {
-    node {
-      id
-      active
-      bandNo
-      color
-      comments
-      dam
-      imageUrl
-      loft
-      name
-      sex
-      sire
-      strain
-      year
+      mutation_in: [CREATED, UPDATED, DELETED]
+    }) {
+      mutation
+      node {
+        id
+        active
+        bandNo
+        color
+        comments
+        dam
+        imageUrl
+        loft
+        name
+        sex
+        sire
+        strain
+        year
+      }
     }
   }
-}
 `;
 
 export interface NewPigeonSubscriptionResponse {
@@ -165,7 +166,7 @@ export interface UpdatePigeonMutationResponse {
 
 export const DELETE_PIGEON_MUTATION = gql`
   mutation DeletePigeonMutation(
-    $id: ID!
+  $id: ID!
   ) {
     deletePigeon(
       id: $id
@@ -181,7 +182,7 @@ export interface DeletePigeonMutationResponse {
 
 export const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation(
-    $name: String!
+  $name: String!
   ) {
     createUser(
       name: $name
@@ -199,7 +200,7 @@ export interface CreateUserMutationResponse {
 
 export const AUTHENTICATE_USER_MUTATION = gql`
   mutation AuthenticateUserMutation(
-    $idToken: String!
+  $idToken: String!
   ) {
     authenticateUser(
       idToken: $idToken

@@ -60,6 +60,9 @@ export class DatatableComponent implements OnInit {
     allPigeonsQuery.subscribeToMore({
       document: NEW_PIGEON_SUBSCRIPTION,
       updateQuery: (previous, { subscriptionData }) => {
+        if (subscriptionData.data.mutation === 'DELETED') {
+          return {allPigeons: this.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id)};
+        }
         const newAllPigeons = [
           subscriptionData.data.Pigeon.node,
           ...previous.allPigeons
