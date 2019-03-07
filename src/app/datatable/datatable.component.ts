@@ -60,17 +60,19 @@ export class DatatableComponent implements OnInit {
     allPigeonsQuery.subscribeToMore({
       document: NEW_PIGEON_SUBSCRIPTION,
       updateQuery: (previous, { subscriptionData }) => {
-        if (subscriptionData.data.mutation === 'DELETED') {
-          return {allPigeons: this.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id)};
+        if (subscriptionData.data.Pigeon.mutation === 'DELETED') {
+          return {
+            allPigeons: previous.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id)
+          };
         }
-        const newAllPigeons = [
-          subscriptionData.data.Pigeon.node,
-          ...previous.allPigeons
-        ];
-        return {
-          ...previous,
-          allPigeons: newAllPigeons
-        };
+        // const newAllPigeons = [
+        //   subscriptionData.data.Pigeon.node,
+        //   ...previous.allPigeons
+        // ];
+        // return {
+        //   ...previous,
+        //   allPigeons: newAllPigeons
+        // };
       }
     });
     allPigeonsQuery.valueChanges.subscribe((response) => {
@@ -88,7 +90,6 @@ export class DatatableComponent implements OnInit {
   addPigeon() {
     const dialogRef = this.dialog.open(AddPigeonComponent, {
       width: 'auto',
-      data: { selectedPigeon: this.selectedPigeon }
     });
 
     dialogRef.afterClosed().subscribe(() => {});

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import {defaultPigeon} from '../default.pigeon';
@@ -12,13 +12,18 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./add-pigeon.component.scss']
 })
 
-export class AddPigeonComponent {
-  pigeon: Pigeon = defaultPigeon;
+export class AddPigeonComponent implements OnInit {
+  pigeon: Pigeon;
 
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,
     public apollo: Apollo,
-    private auth: AuthService) {}
+    private auth: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.pigeon = defaultPigeon;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
