@@ -39,7 +39,7 @@ export class DatatableComponent implements OnInit {
   }
 
   select(selectedPigeon: SelectablePigeon) {
-    this.selectedPigeon.selected = false;
+    if (this.selectedPigeon) { this.selectedPigeon.selected = false; }
     this.selectedPigeon = selectedPigeon;
     this.selectedPigeon.selected = true;
     this.router.navigate([`/pigeon/{${this.selectedPigeon.id}`]);
@@ -64,20 +64,15 @@ export class DatatableComponent implements OnInit {
       updateQuery: (previous, { subscriptionData }) => {
         const mutationType = subscriptionData.data.Pigeon.mutation;
         if (mutationType === MutationType.Deleted) {
-          return { allPigeons: previous.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id) };
+          return { allPigeons: this.selectedPigeon
+              ? previous.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id)
+              : previous.allPigeons};
         } else if (mutationType === MutationType.Created) {
-          return { allPigeons: [...previous.allPigeons, subscriptionData.data.Pigeon.node] };
-        } else if (mutationType === MutationType.Updated) {
-
+          const newPigeon = subscriptionData.data.Pigeon.node;
+          return previous.allPigeons.find(pigeon => pigeon.id === newPigeon.id)
+            ? {allPigeons : previous.allPigeons}
+            : { allPigeons: [...previous.allPigeons, newPigeon] };
         }
-        // const newAllPigeons = [
-        //   subscriptionData.data.Pigeon.node,
-        //   ...previous.allPigeons
-        // ];
-        // return {
-        //   ...previous,
-        //   allPigeons: newAllPigeons
-        // };
       }
     });
 
@@ -86,11 +81,10 @@ export class DatatableComponent implements OnInit {
       this.selectablePigeons = [...this.allPigeons].map(pigeon => ({...pigeon, selected: false}));
       this.dataSource = new MatTableDataSource(this.selectablePigeons);
       this.loading = response.data.loading;
-      this.selectedPigeon = this.selectablePigeons[0];
-      if (this.selectedPigeon) {this.selectedPigeon.selected = true; }
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+
   }
 
   addPigeon() {
