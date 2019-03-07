@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 import {AuthenticatedUser} from '../services/authenticated.user';
+import {MutationType} from './mutation.type';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -57,13 +58,17 @@ export class DatatableComponent implements OnInit {
         userId: this.user.id
       }
     });
+
     allPigeonsQuery.subscribeToMore({
       document: NEW_PIGEON_SUBSCRIPTION,
       updateQuery: (previous, { subscriptionData }) => {
-        if (subscriptionData.data.Pigeon.mutation === 'DELETED') {
-          return {
-            allPigeons: previous.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id)
-          };
+        const mutationType = subscriptionData.data.Pigeon.mutation;
+        if (mutationType === MutationType.Deleted) {
+          return { allPigeons: previous.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id) };
+        } else if (mutationType === MutationType.Created) {
+          return { allPigeons: [...previous.allPigeons, subscriptionData.data.Pigeon.node] };
+        } else if (mutationType === MutationType.Updated) {
+
         }
         // const newAllPigeons = [
         //   subscriptionData.data.Pigeon.node,
@@ -75,6 +80,7 @@ export class DatatableComponent implements OnInit {
         // };
       }
     });
+
     allPigeonsQuery.valueChanges.subscribe((response) => {
       this.allPigeons = response.data.allPigeons;
       this.selectablePigeons = [...this.allPigeons].map(pigeon => ({...pigeon, selected: false}));
