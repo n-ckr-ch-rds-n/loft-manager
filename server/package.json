@@ -12,6 +12,7 @@
     "graphql-request": "^1.4.0",
     "jsonwebtoken": "^8.4.0",
     "jwks-rsa": "^1.4.0",
+    "lodash": "^4.17.11",
     "validator": "^9.0.0"
   }
 }

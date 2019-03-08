@@ -8,6 +8,7 @@ import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 import {AuthenticatedUser} from '../services/authenticated.user';
 import {MutationType} from './mutation.type';
+import {startCase} from 'lodash';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -97,5 +98,9 @@ export class DatatableComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  toColumnTitle(column: string): string {
+    return startCase(column);
   }
 }

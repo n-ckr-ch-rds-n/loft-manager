@@ -5,55 +5,11 @@
     </mat-form-field>
     <button mat-flat-button color="primary" class="add-pigeon" (click)="addPigeon()">Add Pigeon</button>
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-      <ng-container matColumnDef="bandNo">
-        <th mat-header-cell *matHeaderCellDef> Band no. </th>
-        <td mat-cell *matCellDef="let pigeon"> {{pigeon.bandNo}}</td>
-      </ng-container>
-      <ng-container matColumnDef="year">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
-        <td mat-cell *matCellDef="let pigeon"> {{pigeon.year}}</td>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td mat-cell *matCellDef="let pigeon">
-          {{pigeon.name}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="color">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Colour </th>
-        <td mat-cell *matCellDef="let pigeon">
-          {{pigeon.color}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="sex">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sex </th>
-        <td mat-cell *matCellDef="let pigeon">
-          {{pigeon.sex}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="strain">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Strain </th>
-        <td mat-cell *matCellDef="let pigeon">
-          {{pigeon.strain}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="loft">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Loft </th>
-        <td mat-cell *matCellDef="let pigeon">
-          {{pigeon.loft}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="sire">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sire </th>
-        <td mat-cell *matCellDef="let pigeon">
-          {{pigeon.sire}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="dam">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Dam </th>
-        <td mat-cell *matCellDef="let pigeon">
-          {{pigeon.dam}}
-        </td>
+      <ng-container *ngFor="let column of columnsToDisplay">
+        <ng-container matColumnDef="{{column}}">
+          <th mat-header-cell *matHeaderCellDef> {{toColumnTitle(column)}} </th>
+          <td mat-cell *matCellDef="let pigeon"> {{pigeon[column]}}</td>
+        </ng-container>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr #row class="pigeon" mat-row *matRowDef="let pigeon; columns: columnsToDisplay;"
