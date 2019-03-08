@@ -45,7 +45,7 @@ export class DatatableComponent implements OnInit {
     this.selectedPigeon.selected = true;
     this.router.navigate([`/pigeon/{${this.selectedPigeon.id}`]);
     const dialogRef = this.dialog.open(PigeonDetailsComponent, {
-      width: 'auto',
+      width: '600px',
       data: { selectedPigeon: this.selectedPigeon }
     });
 

@@ -26,8 +26,6 @@ export class EditPigeonComponent {
       variables: {
         ...this.data.selectedPigeon
       }
-    }).subscribe(response => {
-      console.log(response);
-    });
+    }).subscribe();
   }
 }
