@@ -11,6 +11,10 @@ export interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
 
+export interface ImageUploadResponse {
+  url: string;
+}
+
 @Component({
   selector: 'app-add-pigeon',
   templateUrl: './add-pigeon.component.html',
@@ -21,6 +25,7 @@ export class AddPigeonComponent implements OnInit {
   pigeon: Pigeon;
   imageSrc: string;
   imageFile: File;
+  imageUrl: string;
 
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,
@@ -64,11 +69,10 @@ export class AddPigeonComponent implements OnInit {
   uploadImage(imageFile: File) {
     const uploadData = new FormData();
     uploadData.append('data', imageFile, imageFile.name, );
-    this.http.post('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData, {
-      reportProgress: true,
-      observe: 'events'
-    }).subscribe(event => {
-        console.log(event);
+    this.http.post<ImageUploadResponse>('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData)
+      .subscribe(response => {
+        this.imageUrl = response.url;
+        console.log(this.imageUrl);
       });
   }
 }
