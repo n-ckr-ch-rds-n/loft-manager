@@ -42,10 +42,15 @@ export class AddPigeonComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  savePigeon() {
+  async savePigeon(): Promise<void> {
     if (this.imageFile) {
-      this.uploadImage(this.imageFile);
+      await this.uploadImage(this.imageFile);
+    } else {
+      this.addPigeonToDataBase();
     }
+  }
+
+  addPigeonToDataBase() {
     this.apollo.mutate({
       mutation: CREATE_PIGEON_MUTATION,
       variables: {
@@ -59,7 +64,7 @@ export class AddPigeonComponent implements OnInit {
     });
   }
 
-  onFileChanged(event: HTMLInputEvent) {
+  onFileChanged(event: HTMLInputEvent): void {
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];
       const reader = new FileReader();
@@ -68,13 +73,13 @@ export class AddPigeonComponent implements OnInit {
     }
   }
 
-  uploadImage(imageFile: File) {
+  async uploadImage(imageFile: File): Promise<void> {
     const uploadData = new FormData();
     uploadData.append('data', imageFile, imageFile.name, );
     this.http.post<ImageUploadResponse>('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData)
       .subscribe(response => {
         this.imageUrl = response.url;
-        console.log(this.imageUrl);
+        this.addPigeonToDataBase();
       });
   }
 }
