@@ -50,8 +50,8 @@
 
     <div class="image-preview">
       <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-      <img id="preview" [src]="imageSrc || 'http://via.placeholder.com/180'" alt="your image" />
-      <button mat-button color="primary" (click)="fileInput.click()">Select Image</button>
+      <img id="preview" [src]="imageSrc || '../../assets/placeholder.gif'" alt="your image" />
+      <button mat-button color="primary" (click)="fileInput.click()">Add an Image</button>
     </div>
 
   </div>
