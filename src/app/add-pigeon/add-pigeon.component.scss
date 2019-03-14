@@ -28,4 +28,10 @@
 .image-preview {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+#preview {
+  margin-left: 10px;
+  max-width: 180px;
 }
