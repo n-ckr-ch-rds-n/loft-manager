@@ -7,7 +7,7 @@
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
       <ng-container *ngFor="let column of columnsToDisplay">
         <ng-container matColumnDef="{{column}}">
-          <th mat-header-cell *matHeaderCellDef> {{toColumnTitle(column)}} </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{toColumnTitle(column)}} </th>
           <td mat-cell *matCellDef="let pigeon"> {{pigeon[column]}}</td>
         </ng-container>
       </ng-container>
