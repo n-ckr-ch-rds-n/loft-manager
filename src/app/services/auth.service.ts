@@ -69,7 +69,7 @@ export class AuthService {
     });
   }
 
-  private async localLogin(authResult): Promise<void> {
+  private localLogin(authResult): void {
     localStorage.setItem('isLoggedIn', 'true');
     const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
     this._accessToken = authResult.accessToken;
