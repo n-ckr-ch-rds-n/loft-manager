@@ -67,8 +67,7 @@ export class AddPigeonComponent implements OnInit {
     this.http.post('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData, {
       reportProgress: true,
       observe: 'events'
-    })
-      .subscribe(event => {
+    }).subscribe(event => {
         console.log(event);
       });
   }
