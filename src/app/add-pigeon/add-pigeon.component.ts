@@ -5,6 +5,7 @@ import {defaultPigeon} from '../default.pigeon';
 import {Apollo} from 'apollo-angular';
 import {CREATE_PIGEON_MUTATION} from '../graphql';
 import {AuthService} from '../services/auth.service';
+import {HttpClient} from '@angular/common/http';
 
 export interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -24,7 +25,8 @@ export class AddPigeonComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,
     public apollo: Apollo,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -60,6 +62,14 @@ export class AddPigeonComponent implements OnInit {
   }
 
   uploadImage(imageFile: File) {
-    console.log('File: ' + imageFile.name);
+    const uploadData = new FormData();
+    uploadData.append('data', imageFile, imageFile.name, );
+    this.http.post('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData, {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(event => {
+        console.log(event);
+      });
   }
 }
