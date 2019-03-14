@@ -19,6 +19,7 @@ export interface HTMLInputEvent extends Event {
 export class AddPigeonComponent implements OnInit {
   pigeon: Pigeon;
   imageSrc: string;
+  imageFile: File;
 
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,
@@ -35,27 +36,30 @@ export class AddPigeonComponent implements OnInit {
   }
 
   savePigeon() {
-    this.apollo.mutate({
-      mutation: CREATE_PIGEON_MUTATION,
-      variables: {
-        ...this.pigeon,
-        userId: this.auth.authenticatedUser.id
-      }
-    }).subscribe(() => {
-      this.pigeon = defaultPigeon;
-    });
+    if (this.imageFile) {
+      this.uploadImage(this.imageFile);
+    }
+    // this.apollo.mutate({
+    //   mutation: CREATE_PIGEON_MUTATION,
+    //   variables: {
+    //     ...this.pigeon,
+    //     userId: this.auth.authenticatedUser.id
+    //   }
+    // }).subscribe(() => {
+    //   this.pigeon = defaultPigeon;
+    // });
   }
 
   onFileChanged(event: HTMLInputEvent) {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
+      this.imageFile = event.target.files[0];
       const reader = new FileReader();
       reader.onload = () => this.imageSrc = reader.result as string;
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.imageFile);
     }
   }
 
-  onUpload() {
-    console.log('uploading...');
+  uploadImage(imageFile: File) {
+    console.log('File: ' + imageFile.name);
   }
 }
