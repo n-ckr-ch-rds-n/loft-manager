@@ -46,15 +46,17 @@ export class AddPigeonComponent implements OnInit {
     if (this.imageFile) {
       this.uploadImage(this.imageFile);
     }
-    // this.apollo.mutate({
-    //   mutation: CREATE_PIGEON_MUTATION,
-    //   variables: {
-    //     ...this.pigeon,
-    //     userId: this.auth.authenticatedUser.id
-    //   }
-    // }).subscribe(() => {
-    //   this.pigeon = defaultPigeon;
-    // });
+    this.apollo.mutate({
+      mutation: CREATE_PIGEON_MUTATION,
+      variables: {
+        ...this.pigeon,
+        userId: this.auth.authenticatedUser.id,
+        imageUrl: this.imageUrl || ''
+      }
+    }).subscribe((response) => {
+      console.log(response);
+      this.pigeon = defaultPigeon;
+    });
   }
 
   onFileChanged(event: HTMLInputEvent) {

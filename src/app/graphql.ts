@@ -84,7 +84,7 @@ export const CREATE_PIGEON_MUTATION = gql`
       sex: $sex,
       sire: $sire,
       strain: $strain,
-      year: $year
+      year: $year,
       userId: $userId
     )
     {
