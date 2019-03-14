@@ -48,9 +48,9 @@
       <textarea matInput [(ngModel)]="pigeon.comments" placeholder="Comments"></textarea>
     </mat-form-field>
 
-    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
     <button mat-button color="primary" (click)="fileInput.click()">Select Image</button>
-    <button mat-button color="warn" (click)="onUpload()">Upload</button>
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+    <img id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" />
   </div>
 
 </div>

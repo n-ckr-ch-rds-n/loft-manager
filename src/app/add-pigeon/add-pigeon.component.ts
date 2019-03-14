@@ -6,6 +6,10 @@ import {Apollo} from 'apollo-angular';
 import {CREATE_PIGEON_MUTATION} from '../graphql';
 import {AuthService} from '../services/auth.service';
 
+export interface HTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
+
 @Component({
   selector: 'app-add-pigeon',
   templateUrl: './add-pigeon.component.html',
@@ -14,6 +18,7 @@ import {AuthService} from '../services/auth.service';
 
 export class AddPigeonComponent implements OnInit {
   pigeon: Pigeon;
+  imageSrc: string;
 
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,
@@ -41,8 +46,13 @@ export class AddPigeonComponent implements OnInit {
     });
   }
 
-  onFileChanged($event: Event) {
-    console.log($event);
+  onFileChanged(event: HTMLInputEvent) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => this.imageSrc = reader.result as string;
+      reader.readAsDataURL(file);
+    }
   }
 
   onUpload() {
