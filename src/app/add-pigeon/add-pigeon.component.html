@@ -47,6 +47,10 @@
     <mat-form-field>
       <textarea matInput [(ngModel)]="pigeon.comments" placeholder="Comments"></textarea>
     </mat-form-field>
+
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+    <button mat-button color="primary" (click)="fileInput.click()">Select Image</button>
+    <button mat-button color="warn" (click)="onUpload()">Upload</button>
   </div>
 
 </div>

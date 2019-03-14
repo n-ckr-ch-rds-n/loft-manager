@@ -40,4 +40,12 @@ export class AddPigeonComponent implements OnInit {
       this.pigeon = defaultPigeon;
     });
   }
+
+  onFileChanged($event: Event) {
+    console.log($event);
+  }
+
+  onUpload() {
+    console.log('uploading...');
+  }
 }
