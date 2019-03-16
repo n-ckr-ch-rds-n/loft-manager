@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DatatableComponent } from './datatable/datatable.component';
 import { LoadingComponent } from './loading/loading.component';
 import {SlickCarouselModule} from 'ngx-slick-carousel';
+import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 
 @NgModule({
   declarations: [
@@ -46,13 +47,15 @@ import {SlickCarouselModule} from 'ngx-slick-carousel';
     LoginComponent,
     PageNotFoundComponent,
     DatatableComponent,
-    LoadingComponent
+    LoadingComponent,
+    ImageCarouselComponent
   ],
   entryComponents: [
     AddPigeonComponent,
     RemovePigeonComponent,
     EditPigeonComponent,
-    PigeonDetailsComponent
+    PigeonDetailsComponent,
+    ImageCarouselComponent
   ],
   imports: [
     BrowserModule,
