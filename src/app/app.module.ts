@@ -30,6 +30,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthService} from './services/auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DatatableComponent } from './datatable/datatable.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DatatableComponent } from './datatable/datatable.component';
     EditPigeonComponent,
     LoginComponent,
     PageNotFoundComponent,
-    DatatableComponent
+    DatatableComponent,
+    LoadingComponent
   ],
   entryComponents: [
     AddPigeonComponent,
