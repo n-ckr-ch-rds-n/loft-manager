@@ -47,10 +47,24 @@ export class ImageCarouselComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.imageUrls.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
   }
 
   save(): void {
     this.dialogRef.close();
+  }
+
+  toIImage(imageUrl: string): IImage {
+    return {
+      url: imageUrl,
+      backgroundSize: 'contain',
+      backgroundPosition: 'center',
+      clickAction: this.openOptionsDialog
+    };
+  }
+
+  openOptionsDialog() {
+    console.log('Opened options dialog');
   }
 
 }
