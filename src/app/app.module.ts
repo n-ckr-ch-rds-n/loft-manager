@@ -31,6 +31,7 @@ import {AuthService} from './services/auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { LoadingComponent } from './loading/loading.component';
+import {SlickCarouselModule} from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { LoadingComponent } from './loading/loading.component';
     MatOptionModule,
     MatSelectModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    SlickCarouselModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
