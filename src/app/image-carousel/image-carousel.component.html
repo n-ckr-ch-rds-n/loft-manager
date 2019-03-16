@@ -26,9 +26,12 @@
                  [fullscreen]="fullscreen">
       </slideshow>
     </div>
-    <div class="button-container">
-      <button mat-button (click)="save()">Save</button>
-    </div>
+  </div>
+
+  <div class="buttons">
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+    <button mat-flat-button color="accent" (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="fileInput.click()" cdkFocusInitial>Add an Image</button>
   </div>
 
 </div>

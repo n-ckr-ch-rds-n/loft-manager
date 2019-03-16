@@ -50,7 +50,7 @@ export class ImageCarouselComponent implements OnInit {
     this.imageUrls.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
   }
 
-  save(): void {
+  cancel(): void {
     this.dialogRef.close();
   }
 
@@ -65,6 +65,10 @@ export class ImageCarouselComponent implements OnInit {
 
   openOptionsDialog() {
     console.log('Opened options dialog');
+  }
+
+  addAnImage() {
+    console.log('Adding image...');
   }
 
 }
