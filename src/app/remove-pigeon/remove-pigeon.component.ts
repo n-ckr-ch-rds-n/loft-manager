@@ -26,6 +26,8 @@ export class RemovePigeonComponent {
       variables: {
         id: this.data.selectedPigeon.id
       }
-    }).subscribe();
+    }).subscribe((response) => {
+      console.log('THIS IS THE REMOVE COMPONENT SPEAKING', response);
+    });
   }
 }
