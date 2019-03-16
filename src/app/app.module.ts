@@ -33,6 +33,7 @@ import { DatatableComponent } from './datatable/datatable.component';
 import { LoadingComponent } from './loading/loading.component';
 import {SlickCarouselModule} from 'ngx-slick-carousel';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,7 @@ import { ImageCarouselComponent } from './image-carousel/image-carousel.componen
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    SlickCarouselModule
+    SlideshowModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},

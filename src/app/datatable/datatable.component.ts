@@ -53,7 +53,6 @@ export class DatatableComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log('help me')
     const allPigeonsQuery = this.apollo.watchQuery<AllPigeonsQueryResponse>({
       query: ALL_PIGEONS_QUERY,
       variables: {
