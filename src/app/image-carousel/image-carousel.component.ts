@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {IImage} from 'ng-simple-slideshow';
+import {Pigeon} from '../pigeon';
 
 @Component({
   selector: 'app-image-carousel',
@@ -41,8 +42,15 @@ export class ImageCarouselComponent implements OnInit {
   width = '800px';
   fullscreen = false;
 
+  constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
+  ) {}
+
   ngOnInit() {
-    console.log('I am working');
+  }
+
+  save(): void {
+    this.dialogRef.close();
   }
 
 }

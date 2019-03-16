@@ -27,7 +27,6 @@ export class RemovePigeonComponent {
         id: this.data.selectedPigeon.id
       }
     }).subscribe((response) => {
-      console.log('THIS IS THE REMOVE COMPONENT SPEAKING', response);
     });
   }
 }
