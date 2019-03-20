@@ -5,6 +5,7 @@ import {Pigeon} from '../pigeon';
 import {HTMLInputEvent} from '../html.input.event';
 import {UPDATE_PIGEON_MUTATION} from '../graphql';
 import {Apollo} from 'apollo-angular';
+import {ImageUploadResponse} from '../add-pigeon/add-pigeon.component';
 
 @Component({
   selector: 'app-image-carousel',
@@ -36,7 +37,7 @@ export class ImageCarouselComponent implements OnInit {
   width = '800px';
   fullscreen = false;
 
-  imageSrc: string;
+  imageFiles: File[] = [];
 
   constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
@@ -67,6 +68,7 @@ export class ImageCarouselComponent implements OnInit {
     console.log('Adding image...');
     if (event.target.files && event.target.files[0]) {
       const imageFile = event.target.files[0];
+      this.imageFiles.push(imageFile);
       const reader = new FileReader();
       reader.onload = () => this.imageUrls.push((this.toIImage(reader.result as string)));
       reader.readAsDataURL(imageFile);
@@ -74,14 +76,15 @@ export class ImageCarouselComponent implements OnInit {
 
   }
 
+  uploadImages(files: File[]) {
+  }
+
   saveImages() {
-    console.log('Saving...');
-    const carouselImages = this.imageUrls.map(image => image.url);
-    this.apollo.mutate({
-      mutation: UPDATE_PIGEON_MUTATION,
-      variables: {
-        carouselImages: carouselImages
-      }
-    }).subscribe();
+    console.log(this.imageFiles);
+    // this.apollo.mutate({
+    //   mutation: UPDATE_PIGEON_MUTATION,
+    //   variables: {
+    //   }
+    // }).subscribe();
   }
 }
