@@ -12,4 +12,5 @@ export class Pigeon {
   active: boolean;
   comments: string;
   imageUrl: string;
+  carouselImages: [string];
 }
