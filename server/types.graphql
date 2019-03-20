@@ -25,6 +25,7 @@ type Pigeon @model {
   active: Boolean
   comments: String
   imageUrl: String
+  carouselImages: [String!]
   user: User @relation(name: "UserPigeons")
 }
 
