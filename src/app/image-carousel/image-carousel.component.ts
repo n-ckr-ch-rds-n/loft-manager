@@ -13,7 +13,7 @@ import {Apollo} from 'apollo-angular';
 })
 export class ImageCarouselComponent implements OnInit {
 
-  imageUrls: (string | IImage)[] = [];
+  imageUrls: (IImage)[] = [];
   height = '400px';
   minHeight: string;
   arrowSize = '30px';
@@ -76,10 +76,11 @@ export class ImageCarouselComponent implements OnInit {
 
   saveImages() {
     console.log('Saving...');
+    const carouselImages = this.imageUrls.map(image => image.url);
     this.apollo.mutate({
       mutation: UPDATE_PIGEON_MUTATION,
       variables: {
-        ...this.data.selectedPigeon
+        carouselImages: carouselImages
       }
     }).subscribe();
   }
