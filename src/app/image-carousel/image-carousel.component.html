@@ -29,7 +29,7 @@
   </div>
 
   <div class="buttons">
-    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+    <input style="display: none" type="file" (change)="addAnImage($event)" #fileInput>
     <button mat-flat-button color="accent" (click)="cancel()">Cancel</button>
     <button mat-flat-button color="primary" (click)="fileInput.click()" cdkFocusInitial>Add an Image</button>
   </div>

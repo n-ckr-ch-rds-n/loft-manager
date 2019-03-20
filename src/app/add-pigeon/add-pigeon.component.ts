@@ -6,10 +6,7 @@ import {Apollo} from 'apollo-angular';
 import {CREATE_PIGEON_MUTATION} from '../graphql';
 import {AuthService} from '../services/auth.service';
 import {HttpClient} from '@angular/common/http';
-
-export interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
+import {HTMLInputEvent} from '../html.input.event';
 
 export interface ImageUploadResponse {
   url: string;

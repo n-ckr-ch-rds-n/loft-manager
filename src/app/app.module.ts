@@ -31,7 +31,6 @@ import {AuthService} from './services/auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { LoadingComponent } from './loading/loading.component';
-import {SlickCarouselModule} from 'ngx-slick-carousel';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 
