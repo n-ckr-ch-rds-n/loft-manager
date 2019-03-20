@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {IImage} from 'ng-simple-slideshow';
 import {Pigeon} from '../pigeon';
 import {HTMLInputEvent} from '../html.input.event';
+import {UPDATE_PIGEON_MUTATION} from '../graphql';
+import {Apollo} from 'apollo-angular';
 
 @Component({
   selector: 'app-image-carousel',
@@ -38,7 +40,7 @@ export class ImageCarouselComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
-  ) {}
+              public apollo: Apollo) {}
 
   ngOnInit() {
     this.imageUrls.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
@@ -74,5 +76,11 @@ export class ImageCarouselComponent implements OnInit {
 
   saveImages() {
     console.log('Saving...');
+    this.apollo.mutate({
+      mutation: UPDATE_PIGEON_MUTATION,
+      variables: {
+        ...this.data.selectedPigeon
+      }
+    }).subscribe();
   }
 }

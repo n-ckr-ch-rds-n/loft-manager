@@ -125,6 +125,7 @@ export const UPDATE_PIGEON_MUTATION = gql`
   $sire: String,
   $strain: String,
   $year: Int
+  $carouselImages: [String!]
   ) {
     updatePigeon(
       id: $id,
@@ -139,7 +140,8 @@ export const UPDATE_PIGEON_MUTATION = gql`
       sex: $sex,
       sire: $sire,
       strain: $strain,
-      year: $year
+      year: $year,
+      carouselImages: $carouselImages
     )
     {
       id
@@ -155,6 +157,7 @@ export const UPDATE_PIGEON_MUTATION = gql`
       sire
       strain
       year
+      carouselImages
     }
   }
 `;
