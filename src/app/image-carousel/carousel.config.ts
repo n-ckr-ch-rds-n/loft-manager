@@ -1,0 +1,22 @@
+export const carouselConfig = {
+  height: '400px',
+  arrowSize: '30px',
+  showArrows: true,
+  disableSwiping: false,
+  autoPlay: true,
+  autoPlayInterval: 3333,
+  stopAutoPlayOnSlide: true,
+  debug: false,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center center',
+  backgroundRepeat: 'no-repeat',
+  showDots: true,
+  dotColor: '#FFF',
+  showCaptions: true,
+  captionColor: '#FFF',
+  captionBackground: 'rgba(0, 0, 0, .35)',
+  lazyLoad: false,
+  hideOnNoSlides: false,
+  width: '800px',
+  fullscreen: false
+};

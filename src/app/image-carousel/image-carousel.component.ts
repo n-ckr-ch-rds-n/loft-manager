@@ -7,6 +7,7 @@ import {UPDATE_PIGEON_MUTATION} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {ImageUploadResponse} from '../add-pigeon/add-pigeon.component';
 import {HttpClient} from '@angular/common/http';
+import {carouselConfig} from './carousel.config';
 
 @Component({
   selector: 'app-image-carousel',
@@ -16,30 +17,9 @@ import {HttpClient} from '@angular/common/http';
 export class ImageCarouselComponent implements OnInit {
 
   iImages: (IImage)[] = [];
-  height = '400px';
-  minHeight: string;
-  arrowSize = '30px';
-  showArrows = true;
-  disableSwiping = false;
-  autoPlay = true;
-  autoPlayInterval = 3333;
-  stopAutoPlayOnSlide = true;
-  debug = false;
-  backgroundSize = 'cover';
-  backgroundPosition = 'center center';
-  backgroundRepeat = 'no-repeat';
-  showDots = true;
-  dotColor = '#FFF';
-  showCaptions = true;
-  captionColor = '#FFF';
-  captionBackground = 'rgba(0, 0, 0, .35)';
-  lazyLoad = false;
-  hideOnNoSlides = false;
-  width = '800px';
-  fullscreen = false;
-
   imageFiles: File[] = [];
   imageUrls: string[] = [];
+  carouselConfig = carouselConfig;
   uploadComplete: EventEmitter<void> = new EventEmitter();
 
   constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,

@@ -2,28 +2,27 @@
 <div mat-dialog-content>
   <div style="margin-bottom:25px">
     <div style="display:block;"
-         [style.width]="width">
+         [style.width]="carouselConfig.width">
       <slideshow #slideshow
                  [imageUrls]="iImages"
-                 [height]="height"
-                 [minHeight]="minHeight"
-                 [arrowSize]="arrowSize"
-                 [showArrows]="showArrows"
-                 [disableSwiping]="disableSwiping"
-                 [autoPlay]="autoPlay"
-                 [stopAutoPlayOnSlide]="stopAutoPlayOnSlide"
-                 [debug]="debug"
-                 [backgroundSize]="backgroundSize"
-                 [backgroundPosition]="backgroundPosition"
-                 [backgroundRepeat]="backgroundRepeat"
-                 [showDots]="showDots"
-                 [dotColor]="dotColor"
-                 [showCaptions]="showCaptions"
-                 [captionColor]="captionColor"
-                 [captionBackground]="captionBackground"
-                 [lazyLoad]="lazyLoad"
-                 [hideOnNoSlides]="hideOnNoSlides"
-                 [fullscreen]="fullscreen">
+                 [height]="carouselConfig.height"
+                 [arrowSize]="carouselConfig.arrowSize"
+                 [showArrows]="carouselConfig.showArrows"
+                 [disableSwiping]="carouselConfig.disableSwiping"
+                 [autoPlay]="carouselConfig.autoPlay"
+                 [stopAutoPlayOnSlide]="carouselConfig.stopAutoPlayOnSlide"
+                 [debug]="carouselConfig.debug"
+                 [backgroundSize]="carouselConfig.backgroundSize"
+                 [backgroundPosition]="carouselConfig.backgroundPosition"
+                 [backgroundRepeat]="carouselConfig.backgroundRepeat"
+                 [showDots]="carouselConfig.showDots"
+                 [dotColor]="carouselConfig.dotColor"
+                 [showCaptions]="carouselConfig.showCaptions"
+                 [captionColor]="carouselConfig.captionColor"
+                 [captionBackground]="carouselConfig.captionBackground"
+                 [lazyLoad]="carouselConfig.lazyLoad"
+                 [hideOnNoSlides]="carouselConfig.hideOnNoSlides"
+                 [fullscreen]="carouselConfig.fullscreen">
       </slideshow>
     </div>
   </div>
