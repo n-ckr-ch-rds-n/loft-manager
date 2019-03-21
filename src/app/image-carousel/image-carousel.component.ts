@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {IImage} from 'ng-simple-slideshow';
 import {Pigeon} from '../pigeon';
@@ -6,6 +6,7 @@ import {HTMLInputEvent} from '../html.input.event';
 import {UPDATE_PIGEON_MUTATION} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {ImageUploadResponse} from '../add-pigeon/add-pigeon.component';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-image-carousel',
@@ -14,7 +15,7 @@ import {ImageUploadResponse} from '../add-pigeon/add-pigeon.component';
 })
 export class ImageCarouselComponent implements OnInit {
 
-  imageUrls: (IImage)[] = [];
+  iImages: (IImage)[] = [];
   height = '400px';
   minHeight: string;
   arrowSize = '30px';
@@ -38,13 +39,16 @@ export class ImageCarouselComponent implements OnInit {
   fullscreen = false;
 
   imageFiles: File[] = [];
+  imageUrls: string[] = [];
+  uploadComplete: EventEmitter<void> = new EventEmitter();
 
   constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
-              public apollo: Apollo) {}
+              @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
+              public apollo: Apollo,
+              private http: HttpClient) {}
 
   ngOnInit() {
-    this.imageUrls.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
+    this.iImages.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
   }
 
   cancel(): void {
@@ -70,21 +74,37 @@ export class ImageCarouselComponent implements OnInit {
       const imageFile = event.target.files[0];
       this.imageFiles.push(imageFile);
       const reader = new FileReader();
-      reader.onload = () => this.imageUrls.push((this.toIImage(reader.result as string)));
+      reader.onload = () => this.iImages.push((this.toIImage(reader.result as string)));
       reader.readAsDataURL(imageFile);
     }
-
   }
 
-  uploadImages(files: File[]) {
+  uploadImages(imageFiles: File[]) {
+    imageFiles.forEach(imageFile => {
+      const uploadData = new FormData();
+      uploadData.append('data', imageFile, imageFile.name, );
+      this.http.post<ImageUploadResponse>('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData)
+        .subscribe(response => {
+          this.imageUrls.push(response.url);
+          if (this.imageUrls.length === imageFiles.length) {
+            this.uploadComplete.emit();
+          }
+        });
+    });
   }
 
   saveImages() {
-    console.log(this.imageFiles);
-    // this.apollo.mutate({
-    //   mutation: UPDATE_PIGEON_MUTATION,
-    //   variables: {
-    //   }
-    // }).subscribe();
+    this.uploadImages(this.imageFiles);
+    this.uploadComplete.subscribe(() => {
+      this.apollo.mutate({
+        mutation: UPDATE_PIGEON_MUTATION,
+        variables: {
+          ...this.data.selectedPigeon,
+          carouselImages: this.imageUrls
+        }
+      }).subscribe((response) => {
+        console.log(response);
+      });
+    });
   }
 }
