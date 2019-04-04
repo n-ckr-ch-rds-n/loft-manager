@@ -36,7 +36,7 @@ export class ImageCarouselComponent implements OnInit {
     }
   }
 
-  cancel(): void {
+  exit(): void {
     this.dialogRef.close();
   }
 
