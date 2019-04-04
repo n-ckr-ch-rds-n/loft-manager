@@ -93,18 +93,26 @@ export class ImageCarouselComponent implements OnInit {
     });
   }
 
-  saveImages() {
-    this.uploadImages(this.imageFiles);
-    this.uploadComplete.subscribe(() => {
-      this.apollo.mutate({
-        mutation: UPDATE_PIGEON_MUTATION,
-        variables: {
-          ...this.data.selectedPigeon,
-          carouselImages: [...this.data.selectedPigeon.carouselImages]
-        }
-      }).subscribe((response) => {
-        console.log(response);
-      });
+  updatePigeon() {
+    this.apollo.mutate({
+      mutation: UPDATE_PIGEON_MUTATION,
+      variables: {
+        ...this.data.selectedPigeon,
+        carouselImages: [...this.data.selectedPigeon.carouselImages]
+      }
+    }).subscribe((response) => {
+      console.log(response);
     });
+  }
+
+  saveImages() {
+    if (this.imageFiles.length > 0) {
+      this.uploadImages(this.imageFiles);
+      this.uploadComplete.subscribe(() => {
+        this.updatePigeon();
+      });
+    } else {
+      this.updatePigeon();
+    }
   }
 }
