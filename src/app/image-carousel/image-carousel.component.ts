@@ -9,6 +9,7 @@ import {ImageUploadResponse} from '../add-pigeon/add-pigeon.component';
 import {HttpClient} from '@angular/common/http';
 import {carouselConfig} from './carousel.config';
 import {CarouselOptionsComponent} from '../carousel-options/carousel-options.component';
+import {Graphcool} from '../graphcool';
 
 @Component({
   selector: 'app-image-carousel',
@@ -81,7 +82,7 @@ export class ImageCarouselComponent implements OnInit {
     imageFiles.forEach(imageFile => {
       const uploadData = new FormData();
       uploadData.append('data', imageFile, imageFile.name, );
-      this.http.post<ImageUploadResponse>('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData)
+      this.http.post<ImageUploadResponse>(Graphcool.FileUploadEndpoint, uploadData)
         .subscribe(response => {
           imageUrls.push(response.url);
           if (imageUrls.length === imageFiles.length) {
