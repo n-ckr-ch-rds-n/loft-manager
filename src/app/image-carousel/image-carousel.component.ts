@@ -59,7 +59,7 @@ export class ImageCarouselComponent implements OnInit {
     });
 
     optionsDialog.afterClosed().subscribe(result => {
-      if (result.imageToDelete) {
+      if (result && result.imageToDelete) {
         this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
         this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages.filter(url => url !== result.imageToDelete);
       }
@@ -67,7 +67,6 @@ export class ImageCarouselComponent implements OnInit {
   }
 
   addAnImage(event: HTMLInputEvent) {
-    console.log('Adding image...');
     if (event.target.files && event.target.files[0]) {
       const imageFile = event.target.files[0];
       this.imageFiles.push(imageFile);

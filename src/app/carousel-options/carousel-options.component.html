@@ -1,5 +1,6 @@
-<h1 mat-dialog-title>Carousel Options</h1>
-<div mat-dialog-content>{{data.image.url}}</div>
+<div mat-dialog-content>
+  <img [src]="data.image.url" alt="">
+</div>
 <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
 <button mat-button color="primary">Add a Caption</button>
-<button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Delete</button>
+<button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Remove</button>
