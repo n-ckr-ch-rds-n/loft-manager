@@ -23,6 +23,8 @@ export class ImageCarouselComponent implements OnInit {
   carouselConfig = carouselConfig;
   uploadComplete: EventEmitter<void> = new EventEmitter();
 
+  placeHolderUrl = '../../assets/placeholder.gif';
+
   constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
               public dialog: MatDialog,
@@ -62,6 +64,7 @@ export class ImageCarouselComponent implements OnInit {
     optionsDialog.afterClosed().subscribe(result => {
       if (result && result.imageToDelete) {
         this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
+        if (this.iImages.length < 1) { this.iImages.push(this.toIImage(this.placeHolderUrl)); }
         this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages.filter(url => url !== result.imageToDelete);
       }
     });
@@ -73,6 +76,9 @@ export class ImageCarouselComponent implements OnInit {
       this.imageFiles.push(imageFile);
       const reader = new FileReader();
       reader.onload = () => this.iImages.push((this.toIImage(reader.result as string)));
+      if (this.iImages.map(iImage => iImage.url).includes(this.placeHolderUrl)) {
+        this.iImages = this.iImages.filter(iImage => iImage.url !== this.placeHolderUrl);
+      }
       reader.readAsDataURL(imageFile);
     }
   }
