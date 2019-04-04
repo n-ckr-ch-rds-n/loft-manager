@@ -30,7 +30,8 @@ export class ImageCarouselComponent implements OnInit {
   ngOnInit() {
     this.iImages = this.data.selectedPigeon.carouselImages
       ? this.data.selectedPigeon.carouselImages.map(imageUrl => this.toIImage(imageUrl)) : [];
-    if (this.data.selectedPigeon.imageUrl.length > 0) {
+    if (this.data.selectedPigeon.imageUrl.length > 0
+      && !this.data.selectedPigeon.carouselImages.includes(this.data.selectedPigeon.imageUrl)) {
       this.iImages.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
     }
   }
@@ -84,7 +85,7 @@ export class ImageCarouselComponent implements OnInit {
         mutation: UPDATE_PIGEON_MUTATION,
         variables: {
           ...this.data.selectedPigeon,
-          carouselImages: this.imageUrls
+          carouselImages: this.iImages.map(iImage => iImage.url)
         }
       }).subscribe((response) => {
         console.log(response);
