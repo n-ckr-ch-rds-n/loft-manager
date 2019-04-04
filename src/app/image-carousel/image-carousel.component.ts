@@ -71,7 +71,10 @@ export class ImageCarouselComponent implements OnInit {
   removeImage(result: any) {
     this.slideshow.autoplay = false;
     this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
-    if (this.iImages.length < 1) { this.iImages.push(this.toIImage(this.placeHolderUrl)); }
+    if (this.iImages.length < 1) {
+      this.iImages.push(this.toIImage(this.placeHolderUrl));
+      this.slideshow.autoplay = false;
+    }
     this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages.filter(url => url !== result.imageToDelete);
     this.slideshow.autoplay = true;
   }
@@ -84,6 +87,7 @@ export class ImageCarouselComponent implements OnInit {
       reader.onload = () => this.iImages.push((this.toIImage(reader.result as string)));
       if (this.iImages.map(iImage => iImage.url).includes(this.placeHolderUrl)) {
         this.iImages = this.iImages.filter(iImage => iImage.url !== this.placeHolderUrl);
+        this.slideshow.autoplay = true;
       }
       reader.readAsDataURL(imageFile);
     }
