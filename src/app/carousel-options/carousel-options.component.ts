@@ -20,7 +20,7 @@ export class CarouselOptionsComponent implements OnInit {
   }
 
   deleteImage() {
-   console.log('deleting image');
+   this.dialogRef.close()
   }
 
 }

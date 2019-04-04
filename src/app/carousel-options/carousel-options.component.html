@@ -2,4 +2,4 @@
 <div mat-dialog-content>{{data.image.url}}</div>
 <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
 <button mat-button color="primary">Add a Caption</button>
-<button mat-button color="accent" (click)="deleteImage()">Delete</button>
+<button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Delete</button>

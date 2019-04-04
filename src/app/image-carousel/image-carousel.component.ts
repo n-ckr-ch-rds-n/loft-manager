@@ -59,7 +59,11 @@ export class ImageCarouselComponent implements OnInit {
       data: { image: this.iImages[this.slideshow.slideIndex] }
     });
 
-    optionsDialog.afterClosed().subscribe();
+    optionsDialog.afterClosed().subscribe(result => {
+      if (result.imageToDelete) {
+        this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
+      }
+    });
   }
 
   addAnImage(event: HTMLInputEvent) {
