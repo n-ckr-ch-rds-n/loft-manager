@@ -33,6 +33,7 @@ import { DatatableComponent } from './datatable/datatable.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
+import { CarouselOptionsComponent } from './carousel-options/carousel-options.component';
 
 @NgModule({
   declarations: [
@@ -48,14 +49,16 @@ import {SlideshowModule} from 'ng-simple-slideshow';
     PageNotFoundComponent,
     DatatableComponent,
     LoadingComponent,
-    ImageCarouselComponent
+    ImageCarouselComponent,
+    CarouselOptionsComponent
   ],
   entryComponents: [
     AddPigeonComponent,
     RemovePigeonComponent,
     EditPigeonComponent,
     PigeonDetailsComponent,
-    ImageCarouselComponent
+    ImageCarouselComponent,
+    CarouselOptionsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {IImage} from 'ng-simple-slideshow';
 import {Pigeon} from '../pigeon';
 import {HTMLInputEvent} from '../html.input.event';
@@ -8,6 +8,7 @@ import {Apollo} from 'apollo-angular';
 import {ImageUploadResponse} from '../add-pigeon/add-pigeon.component';
 import {HttpClient} from '@angular/common/http';
 import {carouselConfig} from './carousel.config';
+import {CarouselOptionsComponent} from '../carousel-options/carousel-options.component';
 
 @Component({
   selector: 'app-image-carousel',
@@ -24,6 +25,7 @@ export class ImageCarouselComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
+              public dialog: MatDialog,
               public apollo: Apollo,
               private http: HttpClient) {}
 
@@ -45,12 +47,20 @@ export class ImageCarouselComponent implements OnInit {
       url: imageUrl,
       backgroundSize: 'contain',
       backgroundPosition: 'center',
-      clickAction: this.openOptionsDialog
+      clickAction: () => { this.openOptionsDialog(); }
     };
   }
 
   openOptionsDialog() {
     console.log('Opened options dialog');
+    const optionsDialog = this.dialog.open(CarouselOptionsComponent, {
+      width: 'auto',
+      data: 'foobar'
+    });
+
+    optionsDialog.afterClosed().subscribe(() => {
+      this.dialogRef.close();
+    });
   }
 
   addAnImage(event: HTMLInputEvent) {
