@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {IImage} from 'ng-simple-slideshow';
 
 @Component({
   selector: 'app-carousel-options',
@@ -9,13 +10,17 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 export class CarouselOptionsComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CarouselOptionsComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              @Inject(MAT_DIALOG_DATA) public data: {image: IImage}) { }
 
   ngOnInit() {
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  deleteImage() {
+   console.log('deleting image');
   }
 
 }
