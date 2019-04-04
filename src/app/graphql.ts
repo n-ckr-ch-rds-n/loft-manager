@@ -18,6 +18,7 @@ export const ALL_PIGEONS_QUERY = gql`
       sire
       strain
       year
+      carouselImages
     }
   }
 `;
@@ -47,6 +48,7 @@ export const NEW_PIGEON_SUBSCRIPTION = gql`
         sire
         strain
         year
+        carouselImages
       }
     }
   }

@@ -28,7 +28,11 @@ export class ImageCarouselComponent implements OnInit {
               private http: HttpClient) {}
 
   ngOnInit() {
-    this.iImages.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
+    this.iImages = this.data.selectedPigeon.carouselImages
+      ? this.data.selectedPigeon.carouselImages.map(imageUrl => this.toIImage(imageUrl)) : [];
+    if (this.data.selectedPigeon.imageUrl.length > 0) {
+      this.iImages.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
+    }
   }
 
   cancel(): void {
