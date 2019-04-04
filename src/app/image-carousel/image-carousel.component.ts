@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {IImage} from 'ng-simple-slideshow';
 import {Pigeon} from '../pigeon';
@@ -29,6 +29,8 @@ export class ImageCarouselComponent implements OnInit {
               public apollo: Apollo,
               private http: HttpClient) {}
 
+  @ViewChild('slideshow') slideshow: any;
+
   ngOnInit() {
     this.iImages = this.data.selectedPigeon.carouselImages
       ? this.data.selectedPigeon.carouselImages.map(imageUrl => this.toIImage(imageUrl)) : [];
@@ -53,6 +55,7 @@ export class ImageCarouselComponent implements OnInit {
 
   openOptionsDialog() {
     console.log('Opened options dialog');
+    console.log('slide index: ' + this.slideshow.slideIndex);
     const optionsDialog = this.dialog.open(CarouselOptionsComponent, {
       width: 'auto',
       data: 'foobar'
