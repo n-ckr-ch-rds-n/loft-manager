@@ -19,7 +19,6 @@ export class ImageCarouselComponent implements OnInit {
 
   iImages: (IImage)[] = [];
   imageFiles: File[] = [];
-  imageUrls: string[] = [];
   carouselConfig = carouselConfig;
   uploadComplete: EventEmitter<void> = new EventEmitter();
 
@@ -62,6 +61,7 @@ export class ImageCarouselComponent implements OnInit {
     optionsDialog.afterClosed().subscribe(result => {
       if (result.imageToDelete) {
         this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
+        this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages.filter(url => url !== result.imageToDelete);
       }
     });
   }
@@ -78,13 +78,15 @@ export class ImageCarouselComponent implements OnInit {
   }
 
   uploadImages(imageFiles: File[]) {
+    const imageUrls: string[] = [];
     imageFiles.forEach(imageFile => {
       const uploadData = new FormData();
       uploadData.append('data', imageFile, imageFile.name, );
       this.http.post<ImageUploadResponse>('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData)
         .subscribe(response => {
-          this.imageUrls.push(response.url);
-          if (this.imageUrls.length === imageFiles.length) {
+          imageUrls.push(response.url);
+          if (imageUrls.length === imageFiles.length) {
+            this.data.selectedPigeon.carouselImages = [...this.data.selectedPigeon.carouselImages, ...imageUrls]
             this.uploadComplete.emit();
           }
         });
@@ -98,7 +100,7 @@ export class ImageCarouselComponent implements OnInit {
         mutation: UPDATE_PIGEON_MUTATION,
         variables: {
           ...this.data.selectedPigeon,
-          carouselImages: [...this.data.selectedPigeon.carouselImages, ...this.imageUrls]
+          carouselImages: [...this.data.selectedPigeon.carouselImages]
         }
       }).subscribe((response) => {
         console.log(response);
