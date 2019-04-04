@@ -34,12 +34,9 @@ export class ImageCarouselComponent implements OnInit {
   @ViewChild('slideshow') slideshow: any;
 
   ngOnInit() {
-    this.iImages = this.data.selectedPigeon.carouselImages
-      ? this.data.selectedPigeon.carouselImages.map(imageUrl => this.toIImage(imageUrl)) : [];
-    if (this.data.selectedPigeon.imageUrl.length > 0
-      && !this.data.selectedPigeon.carouselImages.includes(this.data.selectedPigeon.imageUrl)) {
-      this.iImages.unshift(this.toIImage(this.data.selectedPigeon.imageUrl));
-    }
+    this.iImages = this.data.selectedPigeon.carouselImages.length >= 1
+      ? this.data.selectedPigeon.carouselImages.map(imageUrl => this.toIImage(imageUrl))
+      : [this.toIImage(this.placeHolderUrl)];
   }
 
   exit(): void {
