@@ -6,7 +6,6 @@ export const carouselConfig = {
   autoPlay: true,
   autoPlayInterval: 3333,
   stopAutoPlayOnSlide: true,
-  debug: false,
   backgroundSize: 'cover',
   backgroundPosition: 'center center',
   backgroundRepeat: 'no-repeat',

@@ -54,16 +54,12 @@ export class ImageCarouselComponent implements OnInit {
   }
 
   openOptionsDialog() {
-    console.log('Opened options dialog');
-    console.log('slide index: ' + this.slideshow.slideIndex);
     const optionsDialog = this.dialog.open(CarouselOptionsComponent, {
       width: 'auto',
-      data: 'foobar'
+      data: { image: this.iImages[this.slideshow.slideIndex] }
     });
 
-    optionsDialog.afterClosed().subscribe(() => {
-      this.dialogRef.close();
-    });
+    optionsDialog.afterClosed().subscribe();
   }
 
   addAnImage(event: HTMLInputEvent) {
