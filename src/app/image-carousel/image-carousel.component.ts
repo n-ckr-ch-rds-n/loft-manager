@@ -63,13 +63,17 @@ export class ImageCarouselComponent implements OnInit {
 
     optionsDialog.afterClosed().subscribe(result => {
       if (result && result.imageToDelete) {
-        this.slideshow.autoplay = false;
-        this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
-        if (this.iImages.length < 1) { this.iImages.push(this.toIImage(this.placeHolderUrl)); }
-        this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages.filter(url => url !== result.imageToDelete);
-        this.slideshow.autoplay = true;
+        this.removeImage(result);
       }
     });
+  }
+
+  removeImage(result: any) {
+    this.slideshow.autoplay = false;
+    this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
+    if (this.iImages.length < 1) { this.iImages.push(this.toIImage(this.placeHolderUrl)); }
+    this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages.filter(url => url !== result.imageToDelete);
+    this.slideshow.autoplay = true;
   }
 
   addAnImage(event: HTMLInputEvent) {
