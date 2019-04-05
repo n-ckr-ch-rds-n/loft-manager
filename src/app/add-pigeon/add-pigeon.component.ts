@@ -54,7 +54,6 @@ export class AddPigeonComponent implements OnInit {
       variables: {
         ...this.pigeon,
         userId: this.auth.authenticatedUser.id,
-        imageUrl: this.imageUrl || '',
         carouselImages: [this.imageUrl] || []
       }
     }).subscribe((response) => {
