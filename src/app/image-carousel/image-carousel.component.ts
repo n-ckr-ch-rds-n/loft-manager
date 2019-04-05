@@ -113,7 +113,7 @@ export class ImageCarouselComponent implements OnInit {
         carouselImages: [...this.data.selectedPigeon.carouselImages]
       }
     }).subscribe((response) => {
-      console.log(response);
+      console.log('Changes saved');
     });
   }
 

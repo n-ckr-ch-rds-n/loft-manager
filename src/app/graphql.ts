@@ -72,7 +72,8 @@ export const CREATE_PIGEON_MUTATION = gql`
   $sire: String,
   $strain: String,
   $year: Int,
-  $userId: ID
+  $userId: ID,
+  $carouselImages: [String!]
   ) {
     createPigeon(
       active: $active,
@@ -87,7 +88,8 @@ export const CREATE_PIGEON_MUTATION = gql`
       sire: $sire,
       strain: $strain,
       year: $year,
-      userId: $userId
+      userId: $userId,
+      carouselImages: $carouselImages
     )
     {
       id
@@ -103,6 +105,7 @@ export const CREATE_PIGEON_MUTATION = gql`
       sire
       strain
       year
+      carouselImages
     }
   }
 `;
