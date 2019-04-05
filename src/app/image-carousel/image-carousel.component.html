@@ -30,7 +30,7 @@
     <input style="display: none" type="file" (change)="addAnImage($event)" #fileInput>
     <button mat-button color="warn" (click)="exit()">Exit</button>
     <button mat-button color="primary" (click)="fileInput.click()" cdkFocusInitial>Add an Image</button>
-    <button mat-button color="accent" (click)="saveImages()" cdkFocusInitial>Save Changes</button>
+    <button mat-button color="accent" [disabled]="true" (click)="saveImages()" cdkFocusInitial>Save Changes</button>
   </div>
 
 </div>
