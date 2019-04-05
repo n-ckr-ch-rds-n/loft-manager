@@ -7,6 +7,7 @@ import {CREATE_PIGEON_MUTATION} from '../graphql';
 import {AuthService} from '../services/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {HTMLInputEvent} from '../html.input.event';
+import {Graphcool} from '../graphcool';
 
 export interface ImageUploadResponse {
   url: string;
@@ -74,7 +75,7 @@ export class AddPigeonComponent implements OnInit {
   async uploadImage(imageFile: File): Promise<void> {
     const uploadData = new FormData();
     uploadData.append('data', imageFile, imageFile.name, );
-    this.http.post<ImageUploadResponse>('https://api.graph.cool/file/v1/cjrahl4l55q080115r0djemfn', uploadData)
+    this.http.post<ImageUploadResponse>(Graphcool.FileUploadEndpoint, uploadData)
       .subscribe(response => {
         this.imageUrl = response.url;
         this.addPigeonToDataBase();
