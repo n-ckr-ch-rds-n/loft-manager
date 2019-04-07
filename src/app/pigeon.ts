@@ -12,5 +12,12 @@ export class Pigeon {
   active: boolean;
   comments: string;
   imageUrl: string;
-  carouselImages: string[];
+  carouselImages: Image[];
+}
+
+export class Image {
+  id: string;
+  caption: string;
+  url: string;
+  pigeon: Pigeon;
 }
