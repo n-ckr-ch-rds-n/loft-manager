@@ -8,15 +8,13 @@ import {IImage} from 'ng-simple-slideshow';
   styleUrls: ['./carousel-options.component.scss']
 })
 export class CarouselOptionsComponent implements OnInit {
+  captionChanged: boolean;
 
   constructor(public dialogRef: MatDialogRef<CarouselOptionsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {image: IImage}) { }
 
   ngOnInit() {
-  }
-
-  sayHi() {
-    console.log('hihihihihihi');
+    this.captionChanged = false;
   }
 
 }

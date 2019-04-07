@@ -63,14 +63,10 @@ export class ImageCarouselComponent implements OnInit {
     optionsDialog.afterClosed().subscribe(result => {
       if (result.imageToDelete) {
         this.removeImage(result);
-      } else {
-        this.updateCaption(result);
+      } else if (result.captionChanged) {
+        this.changesMade = true;
       }
     });
-  }
-
-  updateCaption(result: IImage) {
-
   }
 
   removeImage(result: {imageToDelete: string}) {
