@@ -105,6 +105,7 @@ export class ImageCarouselComponent implements OnInit {
             this.data.selectedPigeon.carouselImages =
               [...this.data.selectedPigeon.carouselImages, ...imageUrls.map(url => ({url: url, caption: ''}))];
             this.uploadComplete.emit();
+            this.imageFiles = [];
           }
         });
     });
@@ -115,10 +116,10 @@ export class ImageCarouselComponent implements OnInit {
       mutation: UPDATE_PIGEON_MUTATION,
       variables: {
         ...this.data.selectedPigeon,
-        carouselImages: [...this.data.selectedPigeon.carouselImages.map(image => ({url: image.url, caption: image.caption}))]
+        carouselImages: [...this.iImages.map(image => ({url: image.url, caption: image.caption}))]
       }
     }).subscribe((response) => {
-      console.log('Changes saved');
+      console.log(response);
     });
   }
 
