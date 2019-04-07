@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {IImage} from 'ng-simple-slideshow';
-import {Pigeon} from '../pigeon';
+import {Image, Pigeon} from '../pigeon';
 import {HTMLInputEvent} from '../html.input.event';
 import {UPDATE_PIGEON_MUTATION} from '../graphql';
 import {Apollo} from 'apollo-angular';
@@ -36,20 +36,20 @@ export class ImageCarouselComponent implements OnInit {
 
   ngOnInit() {
     this.iImages = this.data.selectedPigeon.carouselImages.length >= 1
-      ? this.data.selectedPigeon.carouselImages.map(imageUrl => this.toIImage(imageUrl))
-      : [this.toIImage(this.placeHolderUrl)];
+      ? this.data.selectedPigeon.carouselImages.map(image => this.toIImage(image))
+      : [this.toIImage({url: this.placeHolderUrl, caption: ''})];
   }
 
   exit(): void {
     this.dialogRef.close();
   }
 
-  toIImage(imageUrl: string): IImage {
+  toIImage(image: Image): IImage {
     return {
-      url: imageUrl,
+      url: image.url,
       backgroundSize: 'contain',
       backgroundPosition: 'center',
-      caption: 'Foo bar baz',
+      caption: image.caption || '',
       clickAction: () => { this.openOptionsDialog(); }
     };
   }
@@ -79,7 +79,7 @@ export class ImageCarouselComponent implements OnInit {
       this.iImages.push(this.toIImage(this.placeHolderUrl));
     }
     this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages
-      .filter(url => url !== result.imageToDelete);
+      .filter(image => image.url !== result.imageToDelete);
     this.changesMade = true;
   }
 
