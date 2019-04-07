@@ -78,7 +78,8 @@ export class ImageCarouselComponent implements OnInit {
     if (this.iImages.length < 1) {
       this.iImages.push(this.toIImage(this.placeHolderUrl));
     }
-    this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages.filter(url => url !== result.imageToDelete);
+    this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages
+      .filter(url => url !== result.imageToDelete);
     this.changesMade = true;
   }
 

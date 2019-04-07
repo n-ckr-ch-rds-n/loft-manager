@@ -25,8 +25,15 @@ type Pigeon @model {
   active: Boolean
   comments: String
   imageUrl: String
-  carouselImages: [String!]
+  carouselImages: [Image!]! @relation(name: "PigeonImages")
   user: User @relation(name: "UserPigeons")
+}
+
+type Image @model {
+  id: ID! @isUnique
+  url: String
+  caption: String
+  pigeon: Pigeon! @relation(name: "PigeonImages")
 }
 
 type File @model {
