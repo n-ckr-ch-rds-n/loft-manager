@@ -1,6 +1,13 @@
 <div mat-dialog-content style="text-align: center">
-  <img style="max-width: 200px" [src]="data.image.url" alt="">
+  <img style="width: 400px" [src]="data.image.url" alt="">
 </div>
+
+<form>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Caption">{{data.image.caption}}</textarea>
+  </mat-form-field>
+</form>
+
 <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
 <button mat-button color="primary">Add a Caption</button>
 <button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Remove</button>

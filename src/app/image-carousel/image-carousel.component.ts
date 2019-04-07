@@ -49,6 +49,7 @@ export class ImageCarouselComponent implements OnInit {
       url: imageUrl,
       backgroundSize: 'contain',
       backgroundPosition: 'center',
+      caption: 'Foo bar baz',
       clickAction: () => { this.openOptionsDialog(); }
     };
   }
