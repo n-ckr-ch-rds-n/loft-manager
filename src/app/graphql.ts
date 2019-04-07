@@ -139,7 +139,7 @@ export const UPDATE_PIGEON_MUTATION = gql`
   $sire: String,
   $strain: String,
   $year: Int
-  $carouselImages: [String!]
+  $carouselImages: [PigeoncarouselImagesImage!]
   ) {
     updatePigeon(
       id: $id,
@@ -171,7 +171,10 @@ export const UPDATE_PIGEON_MUTATION = gql`
       sire
       strain
       year
-      carouselImages
+      carouselImages {
+        url
+        caption
+      }
     }
   }
 `;
