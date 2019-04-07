@@ -84,7 +84,7 @@ export class ImageCarouselComponent implements OnInit {
       const imageFile = event.target.files[0];
       this.imageFiles.push(imageFile);
       const reader = new FileReader();
-      reader.onload = () => this.iImages.push((this.toIImage(reader.result as string)));
+      reader.onload = () => this.iImages.push((this.toIImage({url: reader.result as string, caption: ''})));
       if (this.iImages.map(iImage => iImage.url).includes(this.placeHolderUrl)) {
         this.iImages = this.iImages.filter(iImage => iImage.url !== this.placeHolderUrl);
       }
@@ -102,7 +102,8 @@ export class ImageCarouselComponent implements OnInit {
         .subscribe(response => {
           imageUrls.push(response.url);
           if (imageUrls.length === imageFiles.length) {
-            this.data.selectedPigeon.carouselImages = [...this.data.selectedPigeon.carouselImages, ...imageUrls]
+            this.data.selectedPigeon.carouselImages =
+              [...this.data.selectedPigeon.carouselImages, ...imageUrls.map(url => ({url: url, caption: ''}))];
             this.uploadComplete.emit();
           }
         });
