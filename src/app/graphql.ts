@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import {Pigeon} from './pigeon';
+import {Image} from './pigeon';
 import {User} from './user';
 
 export const ALL_PIGEONS_QUERY = gql`
@@ -79,7 +80,6 @@ export const CREATE_PIGEON_MUTATION = gql`
   $strain: String,
   $year: Int,
   $userId: ID,
-  $carouselImages: [String!]
   ) {
     createPigeon(
       active: $active,
@@ -95,7 +95,7 @@ export const CREATE_PIGEON_MUTATION = gql`
       strain: $strain,
       year: $year,
       userId: $userId,
-      carouselImages: $carouselImages
+      carouselImages: {url: $imageUrl}
     )
     {
       id
@@ -111,7 +111,10 @@ export const CREATE_PIGEON_MUTATION = gql`
       sire
       strain
       year
-      carouselImages
+      carouselImages {
+        url
+        caption
+      }
     }
   }
 `;

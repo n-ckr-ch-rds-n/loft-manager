@@ -16,8 +16,6 @@ export class Pigeon {
 }
 
 export class Image {
-  id: string;
   caption: string;
   url: string;
-  pigeon: Pigeon;
 }

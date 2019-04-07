@@ -29,13 +29,6 @@ type Pigeon @model {
   user: User @relation(name: "UserPigeons")
 }
 
-type Image @model {
-  id: ID! @isUnique
-  url: String
-  caption: String
-  pigeon: Pigeon! @relation(name: "PigeonImages")
-}
-
 type File @model {
   id: ID! @isUnique
   createdAt: DateTime!
