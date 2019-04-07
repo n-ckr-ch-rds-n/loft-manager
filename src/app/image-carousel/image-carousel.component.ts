@@ -72,7 +72,7 @@ export class ImageCarouselComponent implements OnInit {
   removeImage(result: {imageToDelete: string}) {
     this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
     if (this.iImages.length < 1) {
-      this.iImages.push(this.toIImage(this.placeHolderUrl));
+      this.iImages.push(this.toIImage({url: this.placeHolderUrl, caption: ''}));
     }
     this.data.selectedPigeon.carouselImages = this.data.selectedPigeon.carouselImages
       .filter(image => image.url !== result.imageToDelete);
@@ -102,8 +102,6 @@ export class ImageCarouselComponent implements OnInit {
         .subscribe(response => {
           imageUrls.push(response.url);
           if (imageUrls.length === imageFiles.length) {
-            this.data.selectedPigeon.carouselImages =
-              [...this.data.selectedPigeon.carouselImages, ...imageUrls.map(url => ({url: url, caption: ''}))];
             this.uploadComplete.emit();
             this.imageFiles = [];
           }
@@ -119,7 +117,7 @@ export class ImageCarouselComponent implements OnInit {
         carouselImages: [...this.iImages.map(image => ({url: image.url, caption: image.caption}))]
       }
     }).subscribe((response) => {
-      console.log(response);
+      console.log('Changes saved');
     });
   }
 
