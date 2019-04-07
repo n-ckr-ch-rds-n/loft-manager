@@ -15,4 +15,8 @@ export class CarouselOptionsComponent implements OnInit {
   ngOnInit() {
   }
 
+  sayHi() {
+    console.log('hihihihihihi');
+  }
+
 }

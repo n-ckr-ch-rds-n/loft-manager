@@ -3,8 +3,8 @@
 </div>
 
 <mat-form-field class="example-full-width">
-  <textarea matInput [(ngModel)]="data.image.caption" placeholder="Caption">{{data.image.caption}}</textarea>
+  <textarea matInput [(ngModel)]="data.image.caption" (change)="sayHi()"  placeholder="Caption">{{data.image.caption}}</textarea>
 </mat-form-field>
 
-<button mat-button color="primary" [mat-dialog-close]="data.image" (click)="onNoClick()">Ok</button>
+<button mat-button color="primary" [mat-dialog-close]="data.image">Ok</button>
 <button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Delete Image</button>
