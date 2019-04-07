@@ -115,7 +115,7 @@ export class ImageCarouselComponent implements OnInit {
       mutation: UPDATE_PIGEON_MUTATION,
       variables: {
         ...this.data.selectedPigeon,
-        carouselImages: [...this.data.selectedPigeon.carouselImages.map(image => ({url: image.url}))]
+        carouselImages: [...this.data.selectedPigeon.carouselImages.map(image => ({url: image.url, caption: image.caption}))]
       }
     }).subscribe((response) => {
       console.log('Changes saved');
