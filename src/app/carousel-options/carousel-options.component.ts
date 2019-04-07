@@ -15,12 +15,4 @@ export class CarouselOptionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  deleteImage() {
-   this.dialogRef.close()
-  }
-
 }

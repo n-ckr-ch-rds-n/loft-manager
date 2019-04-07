@@ -2,12 +2,9 @@
   <img style="width: 400px" [src]="data.image.url" alt="">
 </div>
 
-<form>
-  <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Caption">{{data.image.caption}}</textarea>
-  </mat-form-field>
-</form>
+<mat-form-field class="example-full-width">
+  <textarea matInput [(ngModel)]="data.image.caption" placeholder="Caption">{{data.image.caption}}</textarea>
+</mat-form-field>
 
-<button mat-button color="warn" (click)="onNoClick()">Cancel</button>
-<button mat-button color="primary">Add a Caption</button>
-<button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Remove</button>
+<button mat-button color="primary" [mat-dialog-close]="data.image" (click)="onNoClick()">Ok</button>
+<button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Delete Image</button>

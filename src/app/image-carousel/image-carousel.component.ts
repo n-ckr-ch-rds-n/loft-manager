@@ -61,13 +61,19 @@ export class ImageCarouselComponent implements OnInit {
     });
 
     optionsDialog.afterClosed().subscribe(result => {
-      if (result && result.imageToDelete) {
+      if (result.imageToDelete) {
         this.removeImage(result);
+      } else {
+        this.updateCaption(result);
       }
     });
   }
 
-  removeImage(result: any) {
+  updateCaption(result: IImage) {
+
+  }
+
+  removeImage(result: {imageToDelete: string}) {
     this.iImages = this.iImages.filter(iImage => iImage.url !== result.imageToDelete);
     if (this.iImages.length < 1) {
       this.iImages.push(this.toIImage(this.placeHolderUrl));
