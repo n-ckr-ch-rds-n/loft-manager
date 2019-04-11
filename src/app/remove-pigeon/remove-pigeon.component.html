@@ -3,7 +3,7 @@
   <div class="remove_warning">
     <img class="warning" src="../../assets/warning.png">
     <p>
-      Are you sure you want to remove {{data.selectedPigeon.name}} ({{data.selectedPigeon.bandNo}}) from the database?
+      Are you sure you want to remove {{data.selectedPigeon.name}} <span *ngIf="data.selectedPigeon.bandNo">({{data.selectedPigeon.bandNo}})</span> from the database?
     </p>
   </div>
 </div>

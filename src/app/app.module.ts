@@ -34,6 +34,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { CarouselOptionsComponent } from './carousel-options/carousel-options.component';
+import { PedigreeComponent } from './pedigree/pedigree.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CarouselOptionsComponent } from './carousel-options/carousel-options.co
     DatatableComponent,
     LoadingComponent,
     ImageCarouselComponent,
-    CarouselOptionsComponent
+    CarouselOptionsComponent,
+    PedigreeComponent
   ],
   entryComponents: [
     AddPigeonComponent,
@@ -58,7 +60,8 @@ import { CarouselOptionsComponent } from './carousel-options/carousel-options.co
     EditPigeonComponent,
     PigeonDetailsComponent,
     ImageCarouselComponent,
-    CarouselOptionsComponent
+    CarouselOptionsComponent,
+    PedigreeComponent
   ],
   imports: [
     BrowserModule,

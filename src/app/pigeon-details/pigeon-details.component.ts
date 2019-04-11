@@ -6,6 +6,7 @@ import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 import {RemovePigeonComponent} from '../remove-pigeon/remove-pigeon.component';
 import {EditPigeonComponent} from '../edit-pigeon/edit-pigeon.component';
 import {ImageCarouselComponent} from '../image-carousel/image-carousel.component';
+import {PedigreeComponent} from '../pedigree/pedigree.component';
 
 @Component({
   selector: 'app-pigeon-details',
@@ -17,7 +18,8 @@ export class PigeonDetailsComponent{
     [NavEvent.add]: AddPigeonComponent,
     [NavEvent.remove]: RemovePigeonComponent,
     [NavEvent.edit]: EditPigeonComponent,
-    [NavEvent.media]: ImageCarouselComponent
+    [NavEvent.media]: ImageCarouselComponent,
+    [NavEvent.pedigree]: PedigreeComponent
   };
 
   constructor(public dialogRef: MatDialogRef<PigeonDetailsComponent>,
