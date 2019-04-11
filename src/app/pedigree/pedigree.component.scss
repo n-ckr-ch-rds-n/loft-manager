@@ -18,3 +18,45 @@
   color: #000;
   text-decoration: none;
 }
+
+#line1 {
+  font-size: 0;
+  width: 1px;
+  height: 20px;
+  color: #fff;
+  background-color: #000;
+  margin: auto;
+}
+
+#line2 {
+  font-size: 0;
+  width: 300px;
+  height: 1px;
+  color: #fff;
+  background-color: #000;
+  margin: auto;
+}
+
+#line3 {
+  display: inline-block;
+  position: relative;
+  right: 149px;
+  font-size: 0;
+  width: 1px;
+  height: 20px;
+  color: #fff;
+  background-color: #000;
+  margin: auto;
+}
+
+#line4 {
+  display: inline-block;
+  position: relative;
+  left: 149px;
+  font-size: 0;
+  width: 1px;
+  height: 20px;
+  color: #fff;
+  background-color: #000;
+  margin: auto;
+}
