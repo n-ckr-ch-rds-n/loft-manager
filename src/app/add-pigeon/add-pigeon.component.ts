@@ -59,8 +59,7 @@ export class AddPigeonComponent implements OnInit {
         carouselImages: [{url: this.imageUrl}]
       }
     }).subscribe((response) => {
-      console.log(response);
-      this.pigeon = defaultPigeon;
+      console.log(`Saved ${response.data.createPigeon.name} to database`);
     });
   }
 
