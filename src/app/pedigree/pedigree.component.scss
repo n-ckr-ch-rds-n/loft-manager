@@ -1,5 +1,6 @@
 #chart-container {
-  width: 580px;
+  width: 1000px;
+  height: 1000px;
   text-align: center;
   margin: auto;
 }
@@ -59,4 +60,47 @@
   color: #fff;
   background-color: #000;
   margin: auto;
+}
+
+#parents-container {
+  height: 0;
+  display: block;
+}
+
+#parent-sire {
+  display: inline-block;
+  position: relative;
+  bottom: 5px;
+  right: 75px;
+  width: 190px;
+  background-color: rgba(144, 195, 244, 0.12);
+  line-height: 60px;
+  border: 1px solid #000;
+  margin: auto;
+}
+
+#parent-sire p {
+  display: block;
+  height: 100%;
+  color: #000;
+  text-decoration: none;
+}
+
+#parent-dam {
+  display: inline-block;
+  position: relative;
+  left: 75px;
+  bottom: 5px;
+  width: 190px;
+  background-color: rgba(144, 195, 244, 0.12);
+  line-height: 60px;
+  border: 1px solid #000;
+  margin: auto;
+}
+
+#parent-dam p {
+  display: block;
+  height: 100%;
+  color: #000;
+  text-decoration: none;
 }
