@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {carouselConfig} from './carousel.config';
 import {CarouselOptionsComponent} from '../carousel-options/carousel-options.component';
 import {Graphcool} from '../graphcool';
+import {PlaceholderImage} from '../placeholder.image';
 
 @Component({
   selector: 'app-image-carousel',
@@ -24,7 +25,7 @@ export class ImageCarouselComponent implements OnInit {
   uploadComplete: EventEmitter<void> = new EventEmitter();
 
   changesMade = false;
-  placeHolderUrl = '../../assets/placeholder.gif';
+  placeHolderUrl = PlaceholderImage.Url;
 
   constructor(public dialogRef: MatDialogRef<ImageCarouselComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},

@@ -8,6 +8,7 @@ import {AuthService} from '../services/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {HTMLInputEvent} from '../html.input.event';
 import {Graphcool} from '../graphcool';
+import {PlaceholderImage} from '../placeholder.image';
 
 export interface ImageUploadResponse {
   url: string;
@@ -54,7 +55,8 @@ export class AddPigeonComponent implements OnInit {
       variables: {
         ...this.pigeon,
         userId: this.auth.authenticatedUser.id,
-        imageUrl: this.imageUrl || ''
+        imageUrl: this.imageUrl || PlaceholderImage.Url,
+        carouselImages: [{url: this.imageUrl}]
       }
     }).subscribe((response) => {
       console.log(response);
