@@ -78,7 +78,7 @@ export class DatatableComponent implements OnInit {
     });
 
     allPigeonsQuery.valueChanges
-      .subscribe<Pigeon>((response) => {
+      .subscribe((response) => {
       this.selectablePigeons = response.data.allPigeons.map(pigeon => ({...pigeon, selected: false}));
       this.dataSource = new MatTableDataSource(this.selectablePigeons);
       this.loading = response.data.loading;
