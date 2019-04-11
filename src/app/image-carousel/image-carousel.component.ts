@@ -100,6 +100,7 @@ export class ImageCarouselComponent implements OnInit {
       uploadData.append('data', imageFile, imageFile.name, );
       this.http.post<ImageUploadResponse>(Graphcool.FileUploadEndpoint, uploadData)
         .subscribe(response => {
+          this.switchInGraphcoolUrl(response.url);
           imageUrls.push(response.url);
           if (imageUrls.length === imageFiles.length) {
             this.uploadComplete.emit();
@@ -131,5 +132,10 @@ export class ImageCarouselComponent implements OnInit {
       this.updatePigeon();
     }
     this.changesMade = false;
+  }
+
+  switchInGraphcoolUrl(newUrl: string) {
+    const imageToUpdate = this.iImages.find(image => image.url.startsWith('data'));
+    imageToUpdate.url = newUrl;
   }
 }
