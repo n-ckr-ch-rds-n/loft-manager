@@ -90,7 +90,7 @@ export class DatatableComponent implements OnInit {
 
   addPigeon() {
     const dialogRef = this.dialog.open(AddPigeonComponent, {
-      width: 'auto',
+      width: 'auto'
     });
 
     dialogRef.afterClosed().subscribe(() => {});

@@ -34,7 +34,7 @@ export class AddPigeonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pigeon = defaultPigeon;
+    this.pigeon = {...defaultPigeon};
   }
 
   onNoClick(): void {
