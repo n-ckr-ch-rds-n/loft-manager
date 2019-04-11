@@ -14,6 +14,7 @@ export class PedigreeComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
+
   }
 
   exit(): void {

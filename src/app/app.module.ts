@@ -35,6 +35,7 @@ import { ImageCarouselComponent } from './image-carousel/image-carousel.componen
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { CarouselOptionsComponent } from './carousel-options/carousel-options.component';
 import { PedigreeComponent } from './pedigree/pedigree.component';
+import {NgxGraphModule} from '@swimlane/ngx-graph';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { PedigreeComponent } from './pedigree/pedigree.component';
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    SlideshowModule
+    SlideshowModule,
+    NgxGraphModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
