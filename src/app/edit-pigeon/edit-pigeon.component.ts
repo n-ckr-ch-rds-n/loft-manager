@@ -24,7 +24,8 @@ export class EditPigeonComponent {
     this.apollo.mutate({
       mutation: UPDATE_PIGEON_MUTATION,
       variables: {
-        ...this.data.selectedPigeon
+        ...this.data.selectedPigeon,
+        carouselImages: [...this.data.selectedPigeon.carouselImages.map(image => ({url: image.url, caption: image.caption}))]
       }
     }).subscribe();
   }

@@ -13,6 +13,7 @@ export class Pigeon {
   comments: string;
   imageUrl: string;
   carouselImages: Image[];
+  user: {id: string};
 }
 
 export class Image {

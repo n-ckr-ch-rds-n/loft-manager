@@ -23,6 +23,9 @@ export const ALL_PIGEONS_QUERY = gql`
         url
         caption
       }
+      user {
+        id
+      }
     }
   }
 `;
@@ -31,6 +34,17 @@ export interface AllPigeonsQueryResponse {
   allPigeons: Pigeon[];
   loading: boolean;
 }
+
+export const GET_PIGEON_BY_BAND_NO = gql`
+  query GetPigeonByBandNo($userId: ID, $bandNo: String) {
+    allPigeons(filter: {bandNo: $bandNo, user: {id: $userId}}) {
+      name
+      bandNo
+      sire
+      dam
+    }
+  }
+`;
 
 export const NEW_PIGEON_SUBSCRIPTION = gql`
   subscription {
