@@ -24,18 +24,17 @@ import { PigeonDetailsComponent } from './pigeon-details/pigeon-details.componen
 import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
 import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
 import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
-import {GraphQLModule} from './apollo.config';
-import {FormsModule} from '@angular/forms';
+import { GraphQLModule } from './apollo.config';
+import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import {AuthService} from './services/auth.service';
+import { AuthService } from './services/auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
-import {SlideshowModule} from 'ng-simple-slideshow';
+import { SlideshowModule } from 'ng-simple-slideshow';
 import { CarouselOptionsComponent } from './carousel-options/carousel-options.component';
 import { PedigreeComponent } from './pedigree/pedigree.component';
-import {NgxGraphModule} from '@swimlane/ngx-graph';
 
 @NgModule({
   declarations: [
@@ -81,8 +80,7 @@ import {NgxGraphModule} from '@swimlane/ngx-graph';
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    SlideshowModule,
-    NgxGraphModule
+    SlideshowModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
