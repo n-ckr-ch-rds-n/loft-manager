@@ -4,6 +4,7 @@ import {Pigeon} from '../pigeon';
 import mermaid from 'mermaid';
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse, GET_PIGEON_BY_BAND_NO} from '../graphql';
 import {Apollo} from 'apollo-angular';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-pedigree',
@@ -27,20 +28,50 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
         bandNo: '',
         sire: '',
         dam: ''
+      },
+      dam: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
       }
     }
   };
 
-  ngOnInit() {
-    this.apollo.watchQuery ({
-      query: GET_PIGEON_BY_BAND_NO,
-      variables: {
-        userId: this.data.selectedPigeon.user.id,
-        bandNo: this.data.selectedPigeon.sire
+  async ngOnInit() {
+    this.pedigree.parents = await this.getParents(this.data.selectedPigeon.sire, this.data.selectedPigeon.dam);
+    this.drawFlowchart();
+  }
+
+  getParents(sire: string, dam: string): Promise<{
+    sire: {
+      name: string,
+      bandNo: string,
+      sire: string,
+      dam: string
+    },
+    dam: {
+      name: string,
+      bandNo: string,
+      sire: string,
+      dam: string
+    }
+  }> {
+    return new Promise((resolve) => {
+      const parents: {sire: {}, dam: {}} = {};
+      for (const parent of [sire, dam]) {
+        this.getPigeonByBandNo(parent).subscribe(response => {
+          if (response.data.allPigeons[0].bandNo === this.data.selectedPigeon.sire) {
+            parents.sire = response.data.allPigeons[0];
+          }
+          if (response.data.allPigeons[0].bandNo === this.data.selectedPigeon.dam) {
+            parents.dam = response.data.allPigeons[0];
+          }
+          if (parents.sire && parents.dam) {
+            resolve(parents);
+          }
+        });
       }
-    }).valueChanges.subscribe(response => {
-      this.pedigree.parents.sire = response.data.allPigeons[0];
-      this.drawFlowchart();
     });
   }
 
@@ -48,6 +79,16 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     mermaid.initialize({
       theme: 'forest'
     });
+  }
+
+  getPigeonByBandNo(bandNo: string): Observable {
+    return this.apollo.watchQuery ({
+      query: GET_PIGEON_BY_BAND_NO,
+      variables: {
+        userId: this.data.selectedPigeon.user.id,
+        bandNo: bandNo
+      }
+    }).valueChanges;
   }
 
   drawFlowchart() {
@@ -63,10 +104,10 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       '\ngreat-grand-dam4-->grand-dam2' +
       `\ngrand-sire-->${this.pedigree.parents.sire.name || 'sire'}` +
       `\ngrand-dam-->${this.pedigree.parents.sire.name || 'sire'}` +
-      '\ngrand-sire2-->dam' +
-      '\ngrand-dam2-->dam' +
+      `\ngrand-sire2-->${this.pedigree.parents.dam.name || 'dam'}` +
+      `\ngrand-dam2-->${this.pedigree.parents.dam.name || 'dam'}` +
       `\n${this.pedigree.parents.sire.name}-->${this.data.selectedPigeon.name}` +
-      `\ndam-->${this.data.selectedPigeon.name}`;
+      `\n${this.pedigree.parents.dam.name || 'dam'}-->${this.data.selectedPigeon.name}`;
     mermaid.render('graphDiv', graphDefinition, (svgCode, bindFunctions) => {
       element.innerHTML = svgCode;
     });
