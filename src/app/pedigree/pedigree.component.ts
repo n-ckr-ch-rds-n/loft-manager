@@ -5,6 +5,7 @@ import mermaid from 'mermaid';
 import {GET_PIGEON_BY_BAND_NO} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
+import {defaultPigeon} from '../default.pigeon';
 
 @Component({
   selector: 'app-pedigree',
@@ -21,105 +22,16 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   @ViewChild('mermaid')
   public mermaidDiv;
 
+  defaultParents: {sire: Pigeon, dam: Pigeon} = {sire: {...defaultPigeon, name: 'Unknown'}, dam: {...defaultPigeon, name: 'Unknown'}};
+
   pedigree = {
-    parents: {
-      sire: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      },
-      dam: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      }
-    },
-    paternalGrandparents: {
-      sire: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      },
-      dam: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      }
-    },
-    maternalGrandparents: {
-      sire: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      },
-      dam: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      }
-    },
-    parentsOfPaternalGrandsire: {
-      sire: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      },
-      dam: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      }
-    },
-    parentsOfPaternalGranddam: {
-      sire: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      },
-      dam: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      }
-    },
-    parentsOfMaternalGrandsire: {
-      sire: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      },
-      dam: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      }
-    },
-    parentsOfMaternalGranddam: {
-      sire: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      },
-      dam: {
-        name: '',
-        bandNo: '',
-        sire: '',
-        dam: ''
-      }
-    }
+    parents: this.defaultParents,
+    paternalGrandparents: this.defaultParents,
+    maternalGrandparents: this.defaultParents,
+    parentsOfPaternalGrandsire: this.defaultParents,
+    parentsOfPaternalGranddam: this.defaultParents,
+    parentsOfMaternalGrandsire: this.defaultParents,
+    parentsOfMaternalGranddam: this.defaultParents
   };
 
   async ngOnInit() {
@@ -147,10 +59,10 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       for (const parent of [sire, dam]) {
         this.getPigeonByBandNo(parent).subscribe(response => {
           if (parent === sire) {
-            parents.sire = response.data.allPigeons[0] ? response.data.allPigeons[0] : {name: 'Unknown', sire: '', dam: '', bandNo: ''};
+            parents.sire = response.data.allPigeons[0] ? response.data.allPigeons[0] : {...defaultPigeon, name: 'Unknown'};
           }
           if (parent === dam) {
-            parents.dam = response.data.allPigeons[0] ? response.data.allPigeons[0] : {name: 'Unknown', sire: '', dam: '', bandNo: ''};
+            parents.dam = response.data.allPigeons[0] ? response.data.allPigeons[0] : {...defaultPigeon, name: 'Unknown'};
           }
           if (parents.sire && parents.dam) {
             resolve(parents);
