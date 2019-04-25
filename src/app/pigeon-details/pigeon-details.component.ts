@@ -32,7 +32,7 @@ export class PigeonDetailsComponent{
 
   select(eventType: NavEvent) {
     const pigeonAction = this.dialog.open(this.navOptions[eventType], {
-      width: eventType === NavEvent.pedigree ? '600px' : 'auto',
+      width: eventType === NavEvent.pedigree ? '45vw' : 'auto',
       height: 'auto',
       data: { selectedPigeon: this.data.selectedPigeon }
     });

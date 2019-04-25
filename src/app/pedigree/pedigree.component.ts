@@ -91,6 +91,34 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
         sire: '',
         dam: ''
       }
+    },
+    parentsOfMaternalGrandsire: {
+      sire: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      },
+      dam: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      }
+    },
+    parentsOfMaternalGranddam: {
+      sire: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      },
+      dam: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      }
     }
   };
 
@@ -102,6 +130,10 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       await this.getParents(this.pedigree.paternalGrandparents.sire.sire, this.pedigree.paternalGrandparents.sire.dam);
     this.pedigree.parentsOfPaternalGranddam =
       await this.getParents(this.pedigree.paternalGrandparents.dam.sire, this.pedigree.paternalGrandparents.dam.dam);
+    this.pedigree.parentsOfMaternalGrandsire =
+      await this.getParents(this.pedigree.maternalGrandparents.sire.sire, this.pedigree.maternalGrandparents.sire.dam);
+    this.pedigree.parentsOfMaternalGranddam =
+      await this.getParents(this.pedigree.maternalGrandparents.dam.sire, this.pedigree.maternalGrandparents.dam.dam);
     this.drawFlowchart();
   }
 
@@ -161,10 +193,10 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       `\n${this.pedigree.parentsOfPaternalGrandsire.dam.name}-->${this.pedigree.paternalGrandparents.sire.name}` +
       `\n${this.pedigree.parentsOfPaternalGranddam.sire.name}-->${this.pedigree.paternalGrandparents.dam.name}` +
       `\n${this.pedigree.parentsOfPaternalGranddam.dam.name}-->${this.pedigree.paternalGrandparents.dam.name}` +
-      `\ngreat-grand-sire3-->${this.pedigree.maternalGrandparents.sire.name}` +
-      `\ngreat-grand-dam3-->${this.pedigree.maternalGrandparents.sire.name}` +
-      `\ngreat-grand-sire4-->${this.pedigree.maternalGrandparents.dam.name}` +
-      `\ngreat-grand-dam4-->${this.pedigree.maternalGrandparents.dam.name}` +
+      `\n${this.pedigree.parentsOfMaternalGrandsire.sire.name}-->${this.pedigree.maternalGrandparents.sire.name}` +
+      `\n${this.pedigree.parentsOfMaternalGrandsire.dam.name}-->${this.pedigree.maternalGrandparents.sire.name}` +
+      `\n${this.pedigree.parentsOfMaternalGranddam.sire.name}-->${this.pedigree.maternalGrandparents.dam.name}` +
+      `\n${this.pedigree.parentsOfMaternalGranddam.dam.name}-->${this.pedigree.maternalGrandparents.dam.name}` +
       `\n${this.pedigree.paternalGrandparents.sire.name}-->${this.pedigree.parents.sire.name || 'sire'}` +
       `\n${this.pedigree.paternalGrandparents.dam.name}-->${this.pedigree.parents.sire.name || 'sire'}` +
       `\n${this.pedigree.maternalGrandparents.sire.name}-->${this.pedigree.parents.dam.name || 'dam'}` +
