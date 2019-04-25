@@ -129,6 +129,9 @@ export const CREATE_PIGEON_MUTATION = gql`
         url
         caption
       }
+      user {
+        id
+      }
     }
   }
 `;

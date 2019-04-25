@@ -49,12 +49,27 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
         sire: '',
         dam: ''
       }
+    },
+    maternalGrandparents: {
+      sire: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      },
+      dam: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      }
     }
   };
 
   async ngOnInit() {
     this.pedigree.parents = await this.getParents(this.data.selectedPigeon.sire, this.data.selectedPigeon.dam);
     this.pedigree.paternalGrandparents = await this.getParents(this.pedigree.parents.sire.sire, this.pedigree.parents.sire.dam);
+    this.pedigree.maternalGrandparents = await this.getParents(this.pedigree.parents.dam.sire, this.pedigree.parents.dam.dam);
     this.drawFlowchart();
   }
 
@@ -113,14 +128,14 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       `\ngreat-grand-dam-->${this.pedigree.paternalGrandparents.sire.name}` +
       `\ngreat-grand-sire2-->${this.pedigree.paternalGrandparents.dam.name}` +
       `\ngreat-grand-dam2-->${this.pedigree.paternalGrandparents.dam.name}` +
-      '\ngreat-grand-sire3-->grand-sire2' +
-      '\ngreat-grand-dam3-->grand-sire2' +
-      '\ngreat-grand-sire4-->grand-dam2' +
-      '\ngreat-grand-dam4-->grand-dam2' +
+      `\ngreat-grand-sire3-->${this.pedigree.maternalGrandparents.sire.name}` +
+      `\ngreat-grand-dam3-->${this.pedigree.maternalGrandparents.sire.name}` +
+      `\ngreat-grand-sire4-->${this.pedigree.maternalGrandparents.dam.name}` +
+      `\ngreat-grand-dam4-->${this.pedigree.maternalGrandparents.dam.name}` +
       `\n${this.pedigree.paternalGrandparents.sire.name}-->${this.pedigree.parents.sire.name || 'sire'}` +
       `\n${this.pedigree.paternalGrandparents.dam.name}-->${this.pedigree.parents.sire.name || 'sire'}` +
-      `\ngrand-sire2-->${this.pedigree.parents.dam.name || 'dam'}` +
-      `\ngrand-dam2-->${this.pedigree.parents.dam.name || 'dam'}` +
+      `\n${this.pedigree.maternalGrandparents.sire.name}-->${this.pedigree.parents.dam.name || 'dam'}` +
+      `\n${this.pedigree.maternalGrandparents.dam.name}-->${this.pedigree.parents.dam.name || 'dam'}` +
       `\n${this.pedigree.parents.sire.name}-->${this.data.selectedPigeon.name}` +
       `\n${this.pedigree.parents.dam.name || 'dam'}-->${this.data.selectedPigeon.name}`;
     mermaid.render('graphDiv', graphDefinition, (svgCode, bindFunctions) => {
