@@ -77,6 +77,20 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
         sire: '',
         dam: ''
       }
+    },
+    parentsOfPaternalGranddam: {
+      sire: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      },
+      dam: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      }
     }
   };
 
@@ -86,6 +100,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     this.pedigree.maternalGrandparents = await this.getParents(this.pedigree.parents.dam.sire, this.pedigree.parents.dam.dam);
     this.pedigree.parentsOfPaternalGrandsire =
       await this.getParents(this.pedigree.paternalGrandparents.sire.sire, this.pedigree.paternalGrandparents.sire.dam);
+    this.pedigree.parentsOfPaternalGranddam =
+      await this.getParents(this.pedigree.paternalGrandparents.dam.sire, this.pedigree.paternalGrandparents.dam.dam);
     this.drawFlowchart();
   }
 
@@ -123,7 +139,7 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
 
   public ngAfterContentInit(): void {
     mermaid.initialize({
-      theme: 'forest',
+      theme: 'dark',
       flowchart: {htmlLabels: true}
     });
   }
@@ -143,8 +159,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     const graphDefinition = 'graph LR' +
       `\n${this.pedigree.parentsOfPaternalGrandsire.sire.name}-->${this.pedigree.paternalGrandparents.sire.name}` +
       `\n${this.pedigree.parentsOfPaternalGrandsire.dam.name}-->${this.pedigree.paternalGrandparents.sire.name}` +
-      `\ngreat-grand-sire2-->${this.pedigree.paternalGrandparents.dam.name}` +
-      `\ngreat-grand-dam2-->${this.pedigree.paternalGrandparents.dam.name}` +
+      `\n${this.pedigree.parentsOfPaternalGranddam.sire.name}-->${this.pedigree.paternalGrandparents.dam.name}` +
+      `\n${this.pedigree.parentsOfPaternalGranddam.dam.name}-->${this.pedigree.paternalGrandparents.dam.name}` +
       `\ngreat-grand-sire3-->${this.pedigree.maternalGrandparents.sire.name}` +
       `\ngreat-grand-dam3-->${this.pedigree.maternalGrandparents.sire.name}` +
       `\ngreat-grand-sire4-->${this.pedigree.maternalGrandparents.dam.name}` +
