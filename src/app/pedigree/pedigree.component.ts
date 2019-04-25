@@ -123,6 +123,11 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   };
 
   async ngOnInit() {
+    await this.buildPedigreeObject();
+    this.drawFlowchart();
+  }
+
+  async buildPedigreeObject() {
     this.pedigree.parents = await this.getParents(this.data.selectedPigeon.sire, this.data.selectedPigeon.dam);
     this.pedigree.paternalGrandparents = await this.getParents(this.pedigree.parents.sire.sire, this.pedigree.parents.sire.dam);
     this.pedigree.maternalGrandparents = await this.getParents(this.pedigree.parents.dam.sire, this.pedigree.parents.dam.dam);
@@ -134,7 +139,6 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       await this.getParents(this.pedigree.maternalGrandparents.sire.sire, this.pedigree.maternalGrandparents.sire.dam);
     this.pedigree.parentsOfMaternalGranddam =
       await this.getParents(this.pedigree.maternalGrandparents.dam.sire, this.pedigree.maternalGrandparents.dam.dam);
-    this.drawFlowchart();
   }
 
   getParents(sire: string, dam: string): Promise<{
