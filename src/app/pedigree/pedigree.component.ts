@@ -180,20 +180,20 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   drawFlowchart() {
     const element: any = this.mermaidDiv.nativeElement;
     const graphDefinition = 'graph LR' +
-      `\nid8(${this.pedigree.parentsOfPaternalGrandsire.sire.name})-->id4(${this.pedigree.paternalGrandparents.sire.name})` +
-      `\nid9(${this.pedigree.parentsOfPaternalGrandsire.dam.name})-->id4(${this.pedigree.paternalGrandparents.sire.name})` +
-      `\nid10(${this.pedigree.parentsOfPaternalGranddam.sire.name})-->id5(${this.pedigree.paternalGrandparents.dam.name})` +
-      `\nid11(${this.pedigree.parentsOfPaternalGranddam.dam.name})-->id5(${this.pedigree.paternalGrandparents.dam.name})` +
-      `\nid12(${this.pedigree.parentsOfMaternalGrandsire.sire.name})-->id6(${this.pedigree.maternalGrandparents.sire.name})` +
-      `\nid13(${this.pedigree.parentsOfMaternalGrandsire.dam.name})-->id6(${this.pedigree.maternalGrandparents.sire.name})` +
-      `\nid14(${this.pedigree.parentsOfMaternalGranddam.sire.name})-->id7(${this.pedigree.maternalGrandparents.dam.name})` +
-      `\nid15(${this.pedigree.parentsOfMaternalGranddam.dam.name})-->id7(${this.pedigree.maternalGrandparents.dam.name})` +
-      `\nid4(${this.pedigree.paternalGrandparents.sire.name})-->id2(${this.pedigree.parents.sire.name})` +
-      `\nid5(${this.pedigree.paternalGrandparents.dam.name})-->id2(${this.pedigree.parents.sire.name})` +
-      `\nid6(${this.pedigree.maternalGrandparents.sire.name})-->id3(${this.pedigree.parents.dam.name})` +
-      `\nid7(${this.pedigree.maternalGrandparents.dam.name})-->id3(${this.pedigree.parents.dam.name})` +
-      `\nid2(${this.pedigree.parents.sire.name})-->id1(${this.data.selectedPigeon.name})` +
-      `\nid3(${this.pedigree.parents.dam.name})-->id1(${this.data.selectedPigeon.name})`;
+      `\nid8(Sire: ${this.pedigree.parentsOfPaternalGrandsire.sire.name})-->id4(${this.pedigree.paternalGrandparents.sire.name})` +
+      `\nid9(Dam: ${this.pedigree.parentsOfPaternalGrandsire.dam.name})-->id4(${this.pedigree.paternalGrandparents.sire.name})` +
+      `\nid10(Sire: ${this.pedigree.parentsOfPaternalGranddam.sire.name})-->id5(${this.pedigree.paternalGrandparents.dam.name})` +
+      `\nid11(Dam: ${this.pedigree.parentsOfPaternalGranddam.dam.name})-->id5(${this.pedigree.paternalGrandparents.dam.name})` +
+      `\nid12(Sire: ${this.pedigree.parentsOfMaternalGrandsire.sire.name})-->id6(${this.pedigree.maternalGrandparents.sire.name})` +
+      `\nid13(Dam: ${this.pedigree.parentsOfMaternalGrandsire.dam.name})-->id6(${this.pedigree.maternalGrandparents.sire.name})` +
+      `\nid14(Sire: ${this.pedigree.parentsOfMaternalGranddam.sire.name})-->id7(${this.pedigree.maternalGrandparents.dam.name})` +
+      `\nid15(Dam: ${this.pedigree.parentsOfMaternalGranddam.dam.name})-->id7(${this.pedigree.maternalGrandparents.dam.name})` +
+      `\nid4(Sire: ${this.pedigree.paternalGrandparents.sire.name})-->id2(${this.pedigree.parents.sire.name})` +
+      `\nid5(Dam: ${this.pedigree.paternalGrandparents.dam.name})-->id2(${this.pedigree.parents.sire.name})` +
+      `\nid6(Sire: ${this.pedigree.maternalGrandparents.sire.name})-->id3(${this.pedigree.parents.dam.name})` +
+      `\nid7(Dam: ${this.pedigree.maternalGrandparents.dam.name})-->id3(${this.pedigree.parents.dam.name})` +
+      `\nid2(Sire: ${this.pedigree.parents.sire.name})-->id1(${this.data.selectedPigeon.name})` +
+      `\nid3(Dam: ${this.pedigree.parents.dam.name})-->id1(${this.data.selectedPigeon.name})`;
     mermaid.render('graphDiv', graphDefinition, (svgCode, bindFunctions) => {
       element.innerHTML = svgCode;
     });
