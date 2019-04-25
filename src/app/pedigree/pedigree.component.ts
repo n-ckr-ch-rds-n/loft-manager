@@ -6,6 +6,8 @@ import {GET_PIGEON_BY_BAND_NO} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
 import {defaultPigeon} from '../default.pigeon';
+import {Pedigree} from '../pedigree';
+import {Parents} from '../../parents';
 
 @Component({
   selector: 'app-pedigree',
@@ -22,9 +24,9 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   @ViewChild('mermaid')
   public mermaidDiv;
 
-  defaultParents: {sire: Pigeon, dam: Pigeon} = {sire: {...defaultPigeon, name: 'Unknown'}, dam: {...defaultPigeon, name: 'Unknown'}};
+  defaultParents: Parents = {sire: {...defaultPigeon, name: 'Unknown'}, dam: {...defaultPigeon, name: 'Unknown'}};
 
-  pedigree = {
+  pedigree: Pedigree = {
     parents: this.defaultParents,
     paternalGrandparents: this.defaultParents,
     maternalGrandparents: this.defaultParents,
@@ -53,7 +55,7 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       await this.getParents(this.pedigree.maternalGrandparents.dam.sire, this.pedigree.maternalGrandparents.dam.dam);
   }
 
-  getParents(sire: string, dam: string): Promise<{sire: Pigeon, dam: Pigeon}> {
+  getParents(sire: string, dam: string): Promise<Parents> {
     return new Promise((resolve) => {
       const parents: any = {};
       for (const parent of [sire, dam]) {
