@@ -14,5 +14,6 @@ export const defaultPigeon: Pigeon = {
   active: true,
   comments: '',
   imageUrl: '',
-  carouselImages: [{url: '', caption: ''}]
+  carouselImages: [{url: '', caption: ''}],
+  user: {id: ''}
 };

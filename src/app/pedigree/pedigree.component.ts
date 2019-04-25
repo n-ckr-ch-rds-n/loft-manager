@@ -2,7 +2,7 @@ import {AfterContentInit, Component, Inject, OnInit, ViewChild} from '@angular/c
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import mermaid from 'mermaid';
-import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse, GET_PIGEON_BY_BAND_NO} from '../graphql';
+import {GET_PIGEON_BY_BAND_NO} from '../graphql';
 import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
 
@@ -35,11 +35,26 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
         sire: '',
         dam: ''
       }
+    },
+    paternalGrandparents: {
+      sire: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      },
+      dam: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      }
     }
   };
 
   async ngOnInit() {
     this.pedigree.parents = await this.getParents(this.data.selectedPigeon.sire, this.data.selectedPigeon.dam);
+    this.pedigree.paternalGrandparents = await this.getParents(this.pedigree.parents.sire.sire, this.pedigree.parents.sire.dam);
     this.drawFlowchart();
   }
 
@@ -58,13 +73,13 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     }
   }> {
     return new Promise((resolve) => {
-      const parents: {sire: {}, dam: {}} = {};
+      const parents: any = {};
       for (const parent of [sire, dam]) {
         this.getPigeonByBandNo(parent).subscribe(response => {
-          if (response.data.allPigeons[0].bandNo === this.data.selectedPigeon.sire) {
+          if (response.data.allPigeons[0].bandNo === sire) {
             parents.sire = response.data.allPigeons[0];
           }
-          if (response.data.allPigeons[0].bandNo === this.data.selectedPigeon.dam) {
+          if (response.data.allPigeons[0].bandNo === dam) {
             parents.dam = response.data.allPigeons[0];
           }
           if (parents.sire && parents.dam) {
@@ -81,8 +96,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     });
   }
 
-  getPigeonByBandNo(bandNo: string): Observable {
-    return this.apollo.watchQuery ({
+  getPigeonByBandNo(bandNo: string): Observable<{data: any}> {
+    return this.apollo.watchQuery({
       query: GET_PIGEON_BY_BAND_NO,
       variables: {
         userId: this.data.selectedPigeon.user.id,
@@ -94,16 +109,16 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   drawFlowchart() {
     const element: any = this.mermaidDiv.nativeElement;
     const graphDefinition = 'graph LR' +
-      '\ngreat-grand-sire-->grand-sire' +
-      '\ngreat-grand-dam-->grand-sire' +
-      '\ngreat-grand-sire2-->grand-dam' +
-      '\ngreat-grand-dam2-->grand-dam' +
+      `\ngreat-grand-sire-->${this.pedigree.paternalGrandparents.sire.name}` +
+      `\ngreat-grand-dam-->${this.pedigree.paternalGrandparents.sire.name}` +
+      `\ngreat-grand-sire2-->${this.pedigree.paternalGrandparents.dam.name}` +
+      `\ngreat-grand-dam2-->${this.pedigree.paternalGrandparents.dam.name}` +
       '\ngreat-grand-sire3-->grand-sire2' +
       '\ngreat-grand-dam3-->grand-sire2' +
       '\ngreat-grand-sire4-->grand-dam2' +
       '\ngreat-grand-dam4-->grand-dam2' +
-      `\ngrand-sire-->${this.pedigree.parents.sire.name || 'sire'}` +
-      `\ngrand-dam-->${this.pedigree.parents.sire.name || 'sire'}` +
+      `\n${this.pedigree.paternalGrandparents.sire.name}-->${this.pedigree.parents.sire.name || 'sire'}` +
+      `\n${this.pedigree.paternalGrandparents.dam.name}-->${this.pedigree.parents.sire.name || 'sire'}` +
       `\ngrand-sire2-->${this.pedigree.parents.dam.name || 'dam'}` +
       `\ngrand-dam2-->${this.pedigree.parents.dam.name || 'dam'}` +
       `\n${this.pedigree.parents.sire.name}-->${this.data.selectedPigeon.name}` +
