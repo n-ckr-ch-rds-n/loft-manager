@@ -63,6 +63,20 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
         sire: '',
         dam: ''
       }
+    },
+    parentsOfPaternalGrandsire: {
+      sire: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      },
+      dam: {
+        name: '',
+        bandNo: '',
+        sire: '',
+        dam: ''
+      }
     }
   };
 
@@ -70,6 +84,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     this.pedigree.parents = await this.getParents(this.data.selectedPigeon.sire, this.data.selectedPigeon.dam);
     this.pedigree.paternalGrandparents = await this.getParents(this.pedigree.parents.sire.sire, this.pedigree.parents.sire.dam);
     this.pedigree.maternalGrandparents = await this.getParents(this.pedigree.parents.dam.sire, this.pedigree.parents.dam.dam);
+    this.pedigree.parentsOfPaternalGrandsire =
+      await this.getParents(this.pedigree.paternalGrandparents.sire.sire, this.pedigree.paternalGrandparents.sire.dam);
     this.drawFlowchart();
   }
 
@@ -124,8 +140,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   drawFlowchart() {
     const element: any = this.mermaidDiv.nativeElement;
     const graphDefinition = 'graph LR' +
-      `\ngreat-grand-sire-->${this.pedigree.paternalGrandparents.sire.name}` +
-      `\ngreat-grand-dam-->${this.pedigree.paternalGrandparents.sire.name}` +
+      `\n${this.pedigree.parentsOfPaternalGrandsire.sire.name}-->${this.pedigree.paternalGrandparents.sire.name}` +
+      `\n${this.pedigree.parentsOfPaternalGrandsire.dam.name}-->${this.pedigree.paternalGrandparents.sire.name}` +
       `\ngreat-grand-sire2-->${this.pedigree.paternalGrandparents.dam.name}` +
       `\ngreat-grand-dam2-->${this.pedigree.paternalGrandparents.dam.name}` +
       `\ngreat-grand-sire3-->${this.pedigree.maternalGrandparents.sire.name}` +
