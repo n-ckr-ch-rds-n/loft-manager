@@ -93,7 +93,7 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   drawFlowchart() {
     const element: any = this.mermaidDiv.nativeElement;
     const graphDefinition = this.buildFlowchartString();
-    mermaid.render('graphDiv', graphDefinition, (svgCode, bindFunctions) => {
+    mermaid.render('graphDiv', graphDefinition, (svgCode) => {
       element.innerHTML = svgCode;
     });
   }
