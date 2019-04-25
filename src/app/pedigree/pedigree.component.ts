@@ -123,7 +123,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
 
   public ngAfterContentInit(): void {
     mermaid.initialize({
-      theme: 'forest'
+      theme: 'forest',
+      flowchart: {htmlLabels: true}
     });
   }
 
