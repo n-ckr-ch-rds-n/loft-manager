@@ -141,20 +141,7 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       await this.getParents(this.pedigree.maternalGrandparents.dam.sire, this.pedigree.maternalGrandparents.dam.dam);
   }
 
-  getParents(sire: string, dam: string): Promise<{
-    sire: {
-      name: string,
-      bandNo: string,
-      sire: string,
-      dam: string
-    },
-    dam: {
-      name: string,
-      bandNo: string,
-      sire: string,
-      dam: string
-    }
-  }> {
+  getParents(sire: string, dam: string): Promise<{sire: Pigeon, dam: Pigeon}> {
     return new Promise((resolve) => {
       const parents: any = {};
       for (const parent of [sire, dam]) {
