@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="buttons">
+  <div class="button-container">
     <input style="display: none" type="file" (change)="addAnImage($event)" #fileInput>
     <button mat-button color="warn" (click)="exit()">Exit</button>
     <button mat-button color="primary" (click)="fileInput.click()" cdkFocusInitial>Add an Image</button>

@@ -6,5 +6,7 @@
   <textarea matInput [(ngModel)]="data.image.caption" (change)="captionChanged=true"  placeholder="Caption">{{data.image.caption}}</textarea>
 </mat-form-field>
 
-<button mat-button color="primary" [mat-dialog-close]="{captionChanged: captionChanged}">Ok</button>
-<button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Delete Image</button>
+<div class="button-container">
+  <button mat-button color="primary" [mat-dialog-close]="{captionChanged: captionChanged}">Ok</button>
+  <button mat-button color="accent" [mat-dialog-close]="{imageToDelete: data.image.url}">Delete Image</button>
+</div>
