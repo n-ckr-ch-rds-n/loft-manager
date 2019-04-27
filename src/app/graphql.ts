@@ -46,7 +46,7 @@ export const GET_PIGEON_BY_BAND_NO = gql`
   }
 `;
 
-export const NEW_PIGEON_SUBSCRIPTION = gql`
+export const PIGEON_UPDATE_SUBSCRIPTION = gql`
   subscription {
     Pigeon(filter: {
       mutation_in: [CREATED, UPDATED, DELETED]

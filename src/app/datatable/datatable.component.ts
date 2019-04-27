@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Pigeon} from '../pigeon';
-import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse, NEW_PIGEON_SUBSCRIPTION} from '../graphql';
+import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse, PIGEON_UPDATE_SUBSCRIPTION} from '../graphql';
 import {Apollo, QueryRef} from 'apollo-angular';
 import {Router} from '@angular/router';
 import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
@@ -27,7 +27,7 @@ export class DatatableComponent implements OnInit {
   selectedPigeon: SelectablePigeon;
   loading = true;
   selectablePigeons: SelectablePigeon[];
-  allPigeonsQuery: QueryRef;
+  allPigeonsQuery: QueryRef<any>;
 
   @Input()
   user: AuthenticatedUser;
@@ -60,7 +60,7 @@ export class DatatableComponent implements OnInit {
 
   subscribeToPigeonUpdates(): void {
     this.allPigeonsQuery.subscribeToMore({
-      document: NEW_PIGEON_SUBSCRIPTION,
+      document: PIGEON_UPDATE_SUBSCRIPTION,
       updateQuery: (previous, { subscriptionData }) => {
         const mutationType = subscriptionData.data.Pigeon.mutation;
         if (mutationType === MutationType.Deleted) {
