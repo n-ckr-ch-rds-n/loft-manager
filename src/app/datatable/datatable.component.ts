@@ -2,7 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import {ALL_PIGEONS_QUERY, AllPigeonsQueryResponse, NEW_PIGEON_SUBSCRIPTION} from '../graphql';
-import {Apollo} from 'apollo-angular';
+import {Apollo, QueryRef} from 'apollo-angular';
 import {Router} from '@angular/router';
 import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component';
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
@@ -27,6 +27,7 @@ export class DatatableComponent implements OnInit {
   selectedPigeon: SelectablePigeon;
   loading = true;
   selectablePigeons: SelectablePigeon[];
+  allPigeonsQuery: QueryRef;
 
   @Input()
   user: AuthenticatedUser;
@@ -39,28 +40,15 @@ export class DatatableComponent implements OnInit {
               public dialog: MatDialog) {
   }
 
-  select(selectedPigeon: SelectablePigeon) {
-    if (this.selectedPigeon) { this.selectedPigeon.selected = false; }
-    this.selectedPigeon = selectedPigeon;
-    this.selectedPigeon.selected = true;
-    this.router.navigate([`/pigeon/{${this.selectedPigeon.id}`]);
-    const dialogRef = this.dialog.open(PigeonDetailsComponent, {
-      width: '600px',
-      data: { selectedPigeon: this.selectedPigeon }
-    });
-
-    dialogRef.afterClosed().subscribe(() => {});
-  }
-
   async ngOnInit() {
-    const allPigeonsQuery = this.apollo.watchQuery<AllPigeonsQueryResponse>({
+    this.allPigeonsQuery = this.apollo.watchQuery<AllPigeonsQueryResponse>({
       query: ALL_PIGEONS_QUERY,
       variables: {
         userId: this.user.id
       }
     });
 
-    allPigeonsQuery.subscribeToMore({
+    this.allPigeonsQuery.subscribeToMore({
       document: NEW_PIGEON_SUBSCRIPTION,
       updateQuery: (previous, { subscriptionData }) => {
         const mutationType = subscriptionData.data.Pigeon.mutation;
@@ -77,7 +65,7 @@ export class DatatableComponent implements OnInit {
       }
     });
 
-    allPigeonsQuery.valueChanges
+    this.allPigeonsQuery.valueChanges
       .subscribe((response) => {
       this.selectablePigeons = response.data.allPigeons.map(pigeon => ({...pigeon, selected: false}));
       this.dataSource = new MatTableDataSource(this.selectablePigeons);
@@ -91,6 +79,19 @@ export class DatatableComponent implements OnInit {
   addPigeon() {
     const dialogRef = this.dialog.open(AddPigeonComponent, {
       width: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(() => {});
+  }
+
+  async select(selectedPigeon: SelectablePigeon) {
+    if (this.selectedPigeon) { this.selectedPigeon.selected = false; }
+    this.selectedPigeon = selectedPigeon;
+    this.selectedPigeon.selected = true;
+    await this.router.navigate([`/pigeon/{${this.selectedPigeon.id}`]);
+    const dialogRef = this.dialog.open(PigeonDetailsComponent, {
+      width: '600px',
+      data: { selectedPigeon: this.selectedPigeon }
     });
 
     dialogRef.afterClosed().subscribe(() => {});
