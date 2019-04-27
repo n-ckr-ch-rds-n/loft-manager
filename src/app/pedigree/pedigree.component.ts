@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {defaultPigeon} from '../default.pigeon';
 import {Pedigree} from '../pedigree';
 import {Parents} from '../../parents';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-pedigree',
@@ -60,12 +61,12 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     return new Promise((resolve) => {
       const parents: any = {};
       for (const parent of [sire, dam]) {
-        this.getPigeonByBandNo(parent).subscribe(response => {
+        this.getPigeonByBandNo(parent).subscribe(pigeons => {
           if (parent === sire) {
-            parents.sire = response.data.allPigeons[0] ? response.data.allPigeons[0] : this.defaultParents.sire;
+            parents.sire = pigeons[0] ? pigeons[0] : this.defaultParents.sire;
           }
           if (parent === dam) {
-            parents.dam = response.data.allPigeons[0] ? response.data.allPigeons[0] : this.defaultParents.dam;
+            parents.dam = pigeons[0] ? pigeons[0] : this.defaultParents.dam;
           }
           if (parents.sire && parents.dam) {
             resolve(parents);
@@ -81,14 +82,15 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     });
   }
 
-  getPigeonByBandNo(bandNo: string): Observable<{data: any}> {
+  getPigeonByBandNo(bandNo: string): Observable<{data: {allPigeons: Array<Pigeon>}}> {
     return this.apollo.watchQuery({
       query: GET_PIGEON_BY_BAND_NO,
       variables: {
         userId: this.data.selectedPigeon.user.id,
         bandNo: bandNo
       }
-    }).valueChanges;
+    }).valueChanges
+      .pipe(map(response => response.data.allPigeons));
   }
 
   drawFlowchart() {
