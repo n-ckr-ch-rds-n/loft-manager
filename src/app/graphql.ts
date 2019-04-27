@@ -70,6 +70,9 @@ export const PIGEON_UPDATE_SUBSCRIPTION = gql`
           url
           caption
         }
+        user {
+          id
+        }
       }
     }
   }

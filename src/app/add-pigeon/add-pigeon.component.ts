@@ -21,7 +21,7 @@ export interface ImageUploadResponse {
 })
 
 export class AddPigeonComponent implements OnInit {
-  pigeon: Pigeon;
+  pigeon: {};
   imageSrc: string;
   imageFile: File;
   imageUrl: string;
@@ -59,6 +59,7 @@ export class AddPigeonComponent implements OnInit {
         carouselImages: [{url: this.imageUrl}]
       }
     }).subscribe((response) => {
+      console.log(response);
       console.log(`Saved ${response.data.createPigeon.name} to database`);
     });
   }
