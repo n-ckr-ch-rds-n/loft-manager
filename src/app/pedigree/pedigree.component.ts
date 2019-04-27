@@ -82,8 +82,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     });
   }
 
-  getPigeonByBandNo(bandNo: string): Observable<{data: {allPigeons: Array<Pigeon>}}> {
-    return this.apollo.watchQuery({
+  getPigeonByBandNo(bandNo: string): Observable<Array<Pigeon>> {
+    return this.apollo.watchQuery<any>({
       query: GET_PIGEON_BY_BAND_NO,
       variables: {
         userId: this.data.selectedPigeon.user.id,
