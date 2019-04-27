@@ -26,7 +26,6 @@ export class DatatableComponent implements OnInit {
   allPigeons: Pigeon[] = [];
   dataSource: MatTableDataSource<Pigeon>;
   selectedPigeon: SelectablePigeon;
-  loading = true;
   selectablePigeons: SelectablePigeon[];
   allPigeonsQuery: QueryRef<any>;
 
