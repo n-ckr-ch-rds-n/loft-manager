@@ -47,7 +47,18 @@ export class DatatableComponent implements OnInit {
         userId: this.user.id
       }
     });
+    this.subscribeToPigeonUpdates();
+    this.allPigeonsQuery.valueChanges
+      .subscribe((response) => {
+      this.selectablePigeons = response.data.allPigeons.map(pigeon => ({...pigeon, selected: false}));
+      this.dataSource = new MatTableDataSource(this.selectablePigeons);
+      this.loading = response.data.loading;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
 
+  subscribeToPigeonUpdates(): void {
     this.allPigeonsQuery.subscribeToMore({
       document: NEW_PIGEON_SUBSCRIPTION,
       updateQuery: (previous, { subscriptionData }) => {
@@ -64,16 +75,6 @@ export class DatatableComponent implements OnInit {
         }
       }
     });
-
-    this.allPigeonsQuery.valueChanges
-      .subscribe((response) => {
-      this.selectablePigeons = response.data.allPigeons.map(pigeon => ({...pigeon, selected: false}));
-      this.dataSource = new MatTableDataSource(this.selectablePigeons);
-      this.loading = response.data.loading;
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
-
   }
 
   addPigeon() {
