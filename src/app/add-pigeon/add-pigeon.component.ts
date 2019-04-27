@@ -22,7 +22,7 @@ export interface ImageUploadResponse {
 })
 
 export class AddPigeonComponent implements OnInit {
-  pigeon: {};
+  pigeon: Pigeon;
   imageSrc: string;
   imageFile: File;
   imageUrl: string;
