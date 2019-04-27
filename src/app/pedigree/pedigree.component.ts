@@ -63,10 +63,10 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
       for (const parent of [sire, dam]) {
         this.getPigeonByBandNo(parent).subscribe(pigeons => {
           if (parent === sire) {
-            parents.sire = pigeons[0] ? pigeons[0] : this.defaultParents.sire;
+            parents.sire = (pigeons[0] && pigeons[0].bandNo.length > 0) ? pigeons[0] : this.defaultParents.sire;
           }
           if (parent === dam) {
-            parents.dam = pigeons[0] ? pigeons[0] : this.defaultParents.dam;
+            parents.dam = (pigeons[0] && pigeons[0].bandNo.length > 0) ? pigeons[0] : this.defaultParents.dam;
           }
           if (parents.sire && parents.dam) {
             resolve(parents);
