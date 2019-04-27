@@ -3,12 +3,13 @@ import {MatDialogRef} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import {defaultPigeon} from '../default.pigeon';
 import {Apollo} from 'apollo-angular';
-import {CREATE_PIGEON_MUTATION} from '../graphql';
+import {CREATE_PIGEON_MUTATION, CreatePigeonMutationResponse} from '../graphql';
 import {AuthService} from '../services/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {HTMLInputEvent} from '../html.input.event';
 import {Graphcool} from '../graphcool';
 import {PlaceholderImage} from '../placeholder.image';
+import {map} from 'rxjs/operators';
 
 export interface ImageUploadResponse {
   url: string;
@@ -50,7 +51,7 @@ export class AddPigeonComponent implements OnInit {
   }
 
   addPigeonToDataBase() {
-    this.apollo.mutate({
+    this.apollo.mutate<CreatePigeonMutationResponse>({
       mutation: CREATE_PIGEON_MUTATION,
       variables: {
         ...this.pigeon,
@@ -58,9 +59,9 @@ export class AddPigeonComponent implements OnInit {
         imageUrl: this.imageUrl || PlaceholderImage.Url,
         carouselImages: [{url: this.imageUrl}]
       }
-    }).subscribe((response) => {
-      console.log(response);
-      console.log(`Saved ${response.data.createPigeon.name} to database`);
+    }).pipe(map(response => response.data.createPigeon))
+      .subscribe(pigeon => {
+      console.log(`Saved ${pigeon.name} to database`);
     });
   }
 
