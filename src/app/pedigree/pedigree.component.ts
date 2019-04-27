@@ -41,18 +41,19 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
     this.drawFlowchart();
   }
 
-  async buildPedigreeObject() {
-    this.pedigree.parents = await this.getParents(this.data.selectedPigeon.sire, this.data.selectedPigeon.dam);
-    this.pedigree.paternalGrandparents = await this.getParents(this.pedigree.parents.sire.sire, this.pedigree.parents.sire.dam);
-    this.pedigree.maternalGrandparents = await this.getParents(this.pedigree.parents.dam.sire, this.pedigree.parents.dam.dam);
-    this.pedigree.parentsOfPaternalGrandsire =
-      await this.getParents(this.pedigree.paternalGrandparents.sire.sire, this.pedigree.paternalGrandparents.sire.dam);
-    this.pedigree.parentsOfPaternalGranddam =
-      await this.getParents(this.pedigree.paternalGrandparents.dam.sire, this.pedigree.paternalGrandparents.dam.dam);
-    this.pedigree.parentsOfMaternalGrandsire =
-      await this.getParents(this.pedigree.maternalGrandparents.sire.sire, this.pedigree.maternalGrandparents.sire.dam);
-    this.pedigree.parentsOfMaternalGranddam =
-      await this.getParents(this.pedigree.maternalGrandparents.dam.sire, this.pedigree.maternalGrandparents.dam.dam);
+  async buildPedigreeObject(): Promise<void> {
+    for (const parents of Object.keys(this.pedigree)) {
+      const offspring: Record<keyof Pedigree, Pigeon> = {
+        parents: this.data.selectedPigeon,
+        paternalGrandparents: this.pedigree.parents.sire,
+        maternalGrandparents: this.pedigree.parents.dam,
+        parentsOfPaternalGrandsire: this.pedigree.paternalGrandparents.sire,
+        parentsOfPaternalGranddam: this.pedigree.paternalGrandparents.dam,
+        parentsOfMaternalGrandsire: this.pedigree.maternalGrandparents.sire,
+        parentsOfMaternalGranddam: this.pedigree.maternalGrandparents.dam
+      };
+      this.pedigree[parents] = await this.getParents(offspring[parents].sire, offspring[parents].dam);
+    }
   }
 
   getParents(sire: string, dam: string): Promise<Parents> {
