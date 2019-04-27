@@ -4,3 +4,9 @@
 body, h1 {
   margin: 0;
 }
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
