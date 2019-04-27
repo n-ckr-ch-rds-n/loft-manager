@@ -9,6 +9,7 @@ import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 import {AuthenticatedUser} from '../services/authenticated.user';
 import {MutationType} from './mutation.type';
 import {startCase} from 'lodash';
+import {map} from 'rxjs/operators';
 
 export interface SelectablePigeon extends Pigeon {
   selected: boolean;
@@ -48,11 +49,12 @@ export class DatatableComponent implements OnInit {
       }
     });
     this.subscribeToPigeonUpdates();
-    this.allPigeonsQuery.valueChanges
-      .subscribe((response) => {
-      this.selectablePigeons = response.data.allPigeons.map(pigeon => ({...pigeon, selected: false}));
+    this.allPigeonsQuery
+      .valueChanges
+      .pipe(map(response => response.data.allPigeons))
+      .subscribe(pigeons => {
+      this.selectablePigeons = pigeons.map(pigeon => ({...pigeon, selected: false}));
       this.dataSource = new MatTableDataSource(this.selectablePigeons);
-      this.loading = response.data.loading;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
