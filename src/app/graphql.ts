@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 import {Pigeon} from './pigeon';
-import {Image} from './pigeon';
 import {User} from './user';
 
 export const ALL_PIGEONS_QUERY = gql`
@@ -47,9 +46,10 @@ export const GET_PIGEON_BY_BAND_NO = gql`
 `;
 
 export const PIGEON_UPDATE_SUBSCRIPTION = gql`
-  subscription {
+  subscription($userId: ID) {
     Pigeon(filter: {
-      mutation_in: [CREATED, UPDATED, DELETED]
+      mutation_in: [CREATED, UPDATED, DELETED],
+      user: {id: $userId}
     }) {
       mutation
       node {

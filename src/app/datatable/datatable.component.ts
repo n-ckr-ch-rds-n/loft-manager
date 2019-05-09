@@ -52,19 +52,23 @@ export class DatatableComponent implements OnInit {
       .valueChanges
       .pipe(map(response => response.data.allPigeons))
       .subscribe(pigeons => {
-      this.selectablePigeons = pigeons.map(pigeon => ({...pigeon, selected: false}));
-      this.dataSource = new MatTableDataSource(this.selectablePigeons);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
+        this.selectablePigeons = pigeons.map(pigeon => ({...pigeon, selected: false}));
+        this.dataSource = new MatTableDataSource(this.selectablePigeons);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
   }
 
   subscribeToPigeonUpdates(): void {
     this.allPigeonsQuery.subscribeToMore({
       document: PIGEON_UPDATE_SUBSCRIPTION,
+      variables: {
+        userId: this.user.id
+      },
       updateQuery: (previous, { subscriptionData }) => {
         const mutationType = subscriptionData.data.Pigeon.mutation;
         if (mutationType === MutationType.Deleted) {
+          this.router.navigate(['/pigeon']);
           return { allPigeons: this.selectedPigeon
               ? previous.allPigeons.filter(pigeon => pigeon.id !== this.selectedPigeon.id) : previous.allPigeons};
         } else if (mutationType === MutationType.Created) {
