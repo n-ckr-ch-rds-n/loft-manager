@@ -9,6 +9,7 @@ import {HttpClient} from '@angular/common/http';
 import {Graphcool} from '../graphcool';
 import {PlaceholderImage} from '../placeholder.image';
 import {map} from 'rxjs/operators';
+import {FormType} from '../form.type';
 
 export interface ImageUploadResponse {
   url: string;
@@ -24,6 +25,7 @@ export class AddPigeonComponent implements OnInit {
   pigeon: Pigeon;
   imageFile: File;
   imageUrl: string;
+  FormType = FormType;
 
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,

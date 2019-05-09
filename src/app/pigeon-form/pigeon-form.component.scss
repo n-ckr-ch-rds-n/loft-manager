@@ -13,13 +13,18 @@
   margin: auto;
 }
 
-.image-preview {
+.image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 #preview {
+  margin-left: 10px;
+  max-width: 180px;
+}
+
+#currentImage {
   margin-left: 10px;
   max-width: 180px;
 }

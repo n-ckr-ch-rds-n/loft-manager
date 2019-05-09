@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Add Pigeon</h1>
 <div mat-dialog-content>
-  <app-pigeon-form [(pigeon)]="pigeon" (image)="imageFile=$event"></app-pigeon-form>
+  <app-pigeon-form [(pigeon)]="pigeon" (image)="imageFile=$event" [formType]="FormType.add"></app-pigeon-form>
 </div>
 
 <div class="button-container">

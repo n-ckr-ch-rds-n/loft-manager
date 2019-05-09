@@ -3,6 +3,7 @@ import {Pigeon} from '../pigeon';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Apollo} from 'apollo-angular';
 import {UPDATE_PIGEON_MUTATION} from '../graphql';
+import {FormType} from '../form.type';
 
 @Component({
   selector: 'app-edit-pigeon',
@@ -10,6 +11,7 @@ import {UPDATE_PIGEON_MUTATION} from '../graphql';
   styleUrls: ['./edit-pigeon.component.scss']
 })
 export class EditPigeonComponent {
+  FormType = FormType;
 
   constructor(
     public dialogRef: MatDialogRef<EditPigeonComponent>,
