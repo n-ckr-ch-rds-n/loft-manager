@@ -1,13 +1,6 @@
 <h1 mat-dialog-title>Add Pigeon</h1>
 <div mat-dialog-content>
-  <app-pigeon-form [(pigeon)]="pigeon"></app-pigeon-form>
-
-  <div class="image-preview">
-    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-    <img id="preview" [src]="imageSrc || '../../assets/placeholder.gif'" alt="your image" />
-    <button mat-button color="primary" (click)="fileInput.click()">Add an Image</button>
-  </div>
-
+  <app-pigeon-form [(pigeon)]="pigeon" (image)="imageFile=$event"></app-pigeon-form>
 </div>
 
 <div class="button-container">

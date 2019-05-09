@@ -6,7 +6,6 @@ import {Apollo} from 'apollo-angular';
 import {CREATE_PIGEON_MUTATION, CreatePigeonMutationResponse} from '../graphql';
 import {AuthService} from '../services/auth.service';
 import {HttpClient} from '@angular/common/http';
-import {HTMLInputEvent} from '../html.input.event';
 import {Graphcool} from '../graphcool';
 import {PlaceholderImage} from '../placeholder.image';
 import {map} from 'rxjs/operators';
@@ -23,7 +22,6 @@ export interface ImageUploadResponse {
 
 export class AddPigeonComponent implements OnInit {
   pigeon: Pigeon;
-  imageSrc: string;
   imageFile: File;
   imageUrl: string;
 
@@ -63,15 +61,6 @@ export class AddPigeonComponent implements OnInit {
       .subscribe(pigeon => {
       console.log(`Saved ${pigeon.name} to database`);
     });
-  }
-
-  onFileChanged(event: HTMLInputEvent): void {
-    if (event.target.files && event.target.files[0]) {
-      this.imageFile = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => this.imageSrc = reader.result as string;
-      reader.readAsDataURL(this.imageFile);
-    }
   }
 
   async uploadImage(imageFile: File): Promise<void> {
