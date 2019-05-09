@@ -17,8 +17,9 @@ export class LoadingComponent implements OnInit {
   ngOnInit() {
     setTimeout(async () => {
       if (!this.auth.authenticatedUser) {
-        this.snackBar.open('Unable to find user: please login', null, {duration: 5000});
+        const snackBarRef = this.snackBar.open('Unable to find user: please login', 'OK', {duration: 5000, panelClass: 'snackbar-panel'});
         await this.router.navigate(['/login']);
+        snackBarRef.onAction().subscribe(() => snackBarRef.dismiss());
       }
     }, 10000);
   }
