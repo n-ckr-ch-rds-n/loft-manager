@@ -5,6 +5,7 @@ import {FormType} from '../form.type';
 import {NavEvent} from '../nav.event';
 import {MatDialog} from '@angular/material';
 import {ImageCarouselComponent} from '../image-carousel/image-carousel.component';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-pigeon-form',
@@ -15,6 +16,7 @@ export class PigeonFormComponent implements OnInit {
   imageSrc: string;
   imageFile: File;
   FormType = FormType;
+  bandNo = new FormControl('', [Validators.required])
 
   @Input()
   pigeon: Pigeon;
@@ -50,6 +52,10 @@ export class PigeonFormComponent implements OnInit {
     openCarousel.afterClosed().subscribe(() => {
       console.log(`${this.pigeon} images updated`);
     });
+  }
+
+  getErrorMessage() {
+    return this.bandNo.hasError('required') ? 'You must enter a band number' : '';
   }
 
 }

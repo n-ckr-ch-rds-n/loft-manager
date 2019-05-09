@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import {defaultPigeon} from '../default.pigeon';
@@ -10,6 +10,7 @@ import {Graphcool} from '../graphcool';
 import {PlaceholderImage} from '../placeholder.image';
 import {map} from 'rxjs/operators';
 import {FormType} from '../form.type';
+import {PigeonFormComponent} from '../pigeon-form/pigeon-form.component';
 
 export interface ImageUploadResponse {
   url: string;
@@ -26,6 +27,9 @@ export class AddPigeonComponent implements OnInit {
   imageFile: File;
   imageUrl: string;
   FormType = FormType;
+
+  @ViewChild('pigeonForm')
+  form: PigeonFormComponent;
 
   constructor(
     public dialogRef: MatDialogRef<AddPigeonComponent>,

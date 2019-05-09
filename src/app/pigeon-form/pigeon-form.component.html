@@ -4,7 +4,8 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [(ngModel)]="pigeon.bandNo" placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
+    <input matInput [(ngModel)]="pigeon.bandNo" placeholder="Band Number" [formControl]="bandNo" required>
+    <mat-error *ngIf="bandNo.invalid">{{getErrorMessage()}}</mat-error>
   </mat-form-field>
 </div>
 

@@ -25,7 +25,7 @@ import { AddPigeonComponent } from './add-pigeon/add-pigeon.component';
 import { RemovePigeonComponent } from './remove-pigeon/remove-pigeon.component';
 import { EditPigeonComponent } from './edit-pigeon/edit-pigeon.component';
 import { GraphQLModule } from './apollo.config';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -82,6 +82,7 @@ import { PigeonFormComponent } from './pigeon-form/pigeon-form.component';
     MatSelectModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     SlideshowModule
   ],
   providers: [
