@@ -6,6 +6,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 import {getOperationAST} from '../../node_modules/graphql';
 import {ApolloLink} from 'apollo-link';
 import {WebSocketLink} from 'apollo-link-ws';
+import {Graphcool} from './graphcool';
 
 @NgModule({
   exports: [
@@ -22,11 +23,11 @@ export class GraphQLModule {
     const headers = new HttpHeaders();
     headers.append('Authorization', authorization);
 
-    const uri = 'https://api.graph.cool/simple/v1/cjrahl4l55q080115r0djemfn';
+    const uri = Graphcool.ApiEndpoint;
     const http = httpLink.create({ uri, headers });
 
     const ws = new WebSocketLink({
-      uri: 'wss://subscriptions.graph.cool/v1/cjrahl4l55q080115r0djemfn',
+      uri: Graphcool.SubscriptionsEndpoint,
       options: {
         reconnect: true,
         connectionParams: {
