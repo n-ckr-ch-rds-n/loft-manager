@@ -1,59 +1,11 @@
 <h1 mat-dialog-title>Add Pigeon</h1>
 <div mat-dialog-content>
-  <div class="form-row">
-    <mat-form-field>
-      <input matInput [(ngModel)]="pigeon.name" placeholder="Name">
-    </mat-form-field>
+  <app-pigeon-form [(pigeon)]="pigeon"></app-pigeon-form>
 
-    <mat-form-field>
-      <input matInput [(ngModel)]="pigeon.bandNo" placeholder="Band Number" required pattern="/([0-9]+)-([1-9][0-9]{3})/g">
-    </mat-form-field>
-  </div>
-
-  <div class="form-row">
-    <mat-form-field>
-      <input matInput [(ngModel)]="pigeon.color" placeholder="Colour">
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-select [(ngModel)]="pigeon.sex" placeholder="Sex">
-        <mat-option value="Cock">Cock</mat-option>
-        <mat-option value="Hen">Hen</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div class="form-row">
-    <mat-form-field>
-      <input matInput [(ngModel)]="pigeon.strain" placeholder="Strain">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput [(ngModel)]="pigeon.loft" placeholder="Loft">
-    </mat-form-field>
-  </div>
-
-  <div class="form-row">
-    <mat-form-field>
-      <input matInput [(ngModel)]="pigeon.sire" placeholder="Sire">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput [(ngModel)]="pigeon.dam" placeholder="Dam">
-    </mat-form-field>
-  </div>
-
-  <div class="form-row">
-    <mat-form-field>
-      <textarea matInput [(ngModel)]="pigeon.comments" placeholder="Comments"></textarea>
-    </mat-form-field>
-
-    <div class="image-preview">
-      <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-      <img id="preview" [src]="imageSrc || '../../assets/placeholder.gif'" alt="your image" />
-      <button mat-button color="primary" (click)="fileInput.click()">Add an Image</button>
-    </div>
-
+  <div class="image-preview">
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+    <img id="preview" [src]="imageSrc || '../../assets/placeholder.gif'" alt="your image" />
+    <button mat-button color="primary" (click)="fileInput.click()">Add an Image</button>
   </div>
 
 </div>

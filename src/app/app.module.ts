@@ -35,6 +35,7 @@ import { ImageCarouselComponent } from './image-carousel/image-carousel.componen
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { CarouselOptionsComponent } from './carousel-options/carousel-options.component';
 import { PedigreeComponent } from './pedigree/pedigree.component';
+import { PigeonFormComponent } from './pigeon-form/pigeon-form.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PedigreeComponent } from './pedigree/pedigree.component';
     LoadingComponent,
     ImageCarouselComponent,
     CarouselOptionsComponent,
-    PedigreeComponent
+    PedigreeComponent,
+    PigeonFormComponent
   ],
   entryComponents: [
     AddPigeonComponent,

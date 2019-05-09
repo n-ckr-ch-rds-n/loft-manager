@@ -8,7 +8,7 @@ import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 import {AuthenticatedUser} from '../services/authenticated.user';
 import {MutationType} from './mutation.type';
-import {startCase} from 'lodash';
+import {startCase, remove} from 'lodash';
 import {map} from 'rxjs/operators';
 
 export interface SelectablePigeon extends Pigeon {
@@ -66,7 +66,7 @@ export class DatatableComponent implements OnInit {
         const mutationType = subscriptionData.data.Pigeon.mutation;
         if (mutationType === MutationType.Deleted) {
           return { allPigeons: this.selectedPigeon
-              ? previous.allPigeons.filter((pigeon) => pigeon.id !== this.selectedPigeon.id) : previous.allPigeons};
+              ? previous.allPigeons.filter(pigeon => pigeon.id !== this.selectedPigeon.id) : previous.allPigeons};
         } else if (mutationType === MutationType.Created) {
           const newPigeon = subscriptionData.data.Pigeon.node;
           return previous.allPigeons.find(pigeon => pigeon.id === newPigeon.id)
