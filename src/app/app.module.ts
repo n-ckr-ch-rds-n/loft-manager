@@ -16,7 +16,7 @@ import {
   MatFormFieldModule,
   MAT_DIALOG_DEFAULT_OPTIONS,
   MatOptionModule,
-  MatSelectModule, MatInputModule, MatPaginatorModule
+  MatSelectModule, MatInputModule, MatPaginatorModule, MatSnackBarModule
 } from '@angular/material';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
@@ -83,7 +83,8 @@ import { PigeonFormComponent } from './pigeon-form/pigeon-form.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    SlideshowModule
+    SlideshowModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
