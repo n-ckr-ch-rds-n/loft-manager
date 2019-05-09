@@ -2,7 +2,7 @@
   <img style="width: 400px" [src]="data.image.url" alt="">
 </div>
 
-<mat-form-field class="example-full-width">
+<mat-form-field class="example-full-width" style="width: 100%; margin-top: 5px;">
   <textarea matInput [(ngModel)]="data.image.caption" (change)="captionChanged=true"  placeholder="Caption">{{data.image.caption}}</textarea>
 </mat-form-field>
 

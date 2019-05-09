@@ -8,7 +8,7 @@ import {PigeonDetailsComponent} from '../pigeon-details/pigeon-details.component
 import {AddPigeonComponent} from '../add-pigeon/add-pigeon.component';
 import {AuthenticatedUser} from '../services/authenticated.user';
 import {MutationType} from './mutation.type';
-import {startCase, remove} from 'lodash';
+import {startCase} from 'lodash';
 import {map} from 'rxjs/operators';
 
 export interface SelectablePigeon extends Pigeon {
