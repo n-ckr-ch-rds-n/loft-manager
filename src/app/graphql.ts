@@ -46,10 +46,9 @@ export const GET_PIGEON_BY_BAND_NO = gql`
 `;
 
 export const PIGEON_UPDATE_SUBSCRIPTION = gql`
-  subscription($userId: ID) {
+  subscription {
     Pigeon(filter: {
-      mutation_in: [CREATED, UPDATED, DELETED],
-      user: {id: $userId}
+      mutation_in: [CREATED, UPDATED, DELETED]
     }) {
       mutation
       node {

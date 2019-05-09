@@ -62,9 +62,6 @@ export class DatatableComponent implements OnInit {
   subscribeToPigeonUpdates(): void {
     this.allPigeonsQuery.subscribeToMore({
       document: PIGEON_UPDATE_SUBSCRIPTION,
-      variables: {
-        userId: this.user.id
-      },
       updateQuery: (previous, { subscriptionData }) => {
         const mutationType = subscriptionData.data.Pigeon.mutation;
         if (mutationType === MutationType.Deleted) {
