@@ -1,0 +1,13 @@
+.container {
+  background: black url("../../assets/page-not-found.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.not-found-message {
+  color: rgb(255, 64, 129);
+}
