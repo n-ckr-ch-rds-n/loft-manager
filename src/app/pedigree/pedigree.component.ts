@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Compiler, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Pigeon} from '../pigeon';
 import mermaid from 'mermaid';
@@ -20,7 +20,8 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   constructor(public dialogRef: MatDialogRef<PedigreeComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {selectedPigeon: Pigeon},
               public dialog: MatDialog,
-              private apollo: Apollo) { }
+              private apollo: Apollo,
+              private compiler: Compiler) { }
 
   @ViewChild('mermaid')
   public mermaidDiv;
@@ -38,6 +39,7 @@ export class PedigreeComponent implements OnInit, AfterContentInit {
   };
 
   async ngOnInit() {
+    this.compiler.clearCacheFor(PedigreeComponent);
     await this.buildPedigreeObject();
     this.drawFlowchart();
   }

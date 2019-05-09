@@ -14,7 +14,7 @@ export class PageNotFoundComponent implements OnInit {
 
   ngOnInit() {
     const snackBarRef = this.snackBar.open('I\'m sorry, that page doesn\'t exist', 'OK');
-    snackBarRef.onAction().subscribe(async () => await this.router.navigate(['/login']))
+    snackBarRef.onAction().subscribe(async () => await this.router.navigate(['/login']));
   }
 
 }
