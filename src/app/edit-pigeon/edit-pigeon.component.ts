@@ -1,9 +1,10 @@
-import {Component, Inject } from '@angular/core';
+import {Component, Inject, ViewChild} from '@angular/core';
 import {Pigeon} from '../pigeon';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Apollo} from 'apollo-angular';
 import {UPDATE_PIGEON_MUTATION} from '../graphql';
 import {FormType} from '../form.type';
+import {PigeonFormComponent} from '../pigeon-form/pigeon-form.component';
 
 @Component({
   selector: 'app-edit-pigeon',
@@ -12,6 +13,9 @@ import {FormType} from '../form.type';
 })
 export class EditPigeonComponent {
   FormType = FormType;
+
+  @ViewChild('pigeonForm')
+  form: PigeonFormComponent;
 
   constructor(
     public dialogRef: MatDialogRef<EditPigeonComponent>,

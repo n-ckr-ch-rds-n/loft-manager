@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>Edit Pigeon</h1>
 <div mat-dialog-content>
-  <app-pigeon-form [(pigeon)]="data.selectedPigeon" [formType]="FormType.update"></app-pigeon-form>
+  <app-pigeon-form #pigeonForm [pigeon]="data.selectedPigeon" [formType]="FormType.update"></app-pigeon-form>
 </div>
 
 <div class="buttons">
   <div mat-dialog-actions>
     <button mat-flat-button color="accent" (click)="onNoClick()">Cancel</button>
-    <button mat-flat-button color="primary" [mat-dialog-close]="" (click)="editPigeon()" cdkFocusInitial>Save</button>
+    <button mat-flat-button color="primary" [disabled]="form.bandNo.invalid" [mat-dialog-close]="" (click)="editPigeon()" cdkFocusInitial>Save</button>
   </div>
 </div>
