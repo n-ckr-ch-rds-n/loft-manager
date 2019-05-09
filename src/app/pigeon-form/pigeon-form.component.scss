@@ -1,0 +1,25 @@
+.form-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-form-field {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.mat-dialog-actions {
+  display: inline-block;
+  margin: auto;
+}
+
+.image-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#preview {
+  margin-left: 10px;
+  max-width: 180px;
+}
