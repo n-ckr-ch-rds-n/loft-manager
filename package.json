@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build && cp dist/loft-manager/index.html dist/loft-manager/200.html",
+    "deploy": "cd dist/loft-manager && surge --domain loft-manager.surge.sh",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
