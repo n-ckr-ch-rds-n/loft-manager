@@ -1,7 +1,6 @@
 <div class="container">
   <h1 class="login-header">Loft<br>Manager</h1>
   <button class="login-button" mat-flat-button color="primary"
-          *ngIf="!auth.isAuthenticated()"
           (click)="auth.login()" type="button">
     Log In
   </button>

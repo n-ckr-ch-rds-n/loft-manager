@@ -7,5 +7,5 @@ interface AuthConfig {
 export const AUTH_CONFIG: AuthConfig = {
   clientID: '50_eCAWYM0eDxZWfN3oAVKAatyl3XguG',
   domain: 'loft-manager.eu.auth0.com',
-  callbackURL: `${location.origin}/pigeon`
+  callbackURL: `http://loft-manager.surge.sh/pigeon`
 };
